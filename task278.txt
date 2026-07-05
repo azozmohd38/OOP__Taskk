@@ -1,0 +1,1526 @@
+
+Task 278: Veterinary Clinic 
+
+
+ 
+CLASS VETERINARY_CLINIC
+    ATTRIBUTES
+        OWNERS: LIST<OWNER>
+        VETS: LIST<VET>
+        VISITS: LIST<VISIT>
+
+    CONSTRUCTOR()
+        SET OWNERS TO EMPTY LIST
+        SET VETS TO EMPTY LIST
+        SET VISITS TO EMPTY LIST
+    END CONSTRUCTOR
+
+    METHODS
+        ADD_OWNER(owner: OWNER)
+            ADD owner TO OWNERS
+        END METHOD
+
+        ADD_VET(vet: VET)
+            ADD vet TO VETS
+        END METHOD
+
+        ADD_VISIT(visit: VISIT)
+            ADD visit TO VISITS
+        END METHOD
+END CLASS
+
+
+CLASS OWNER
+    ATTRIBUTES
+        OWNER_ID: NUMBER
+        NAME: TEXT
+        PHONE_NUMBER: TEXT
+        ADDRESS: TEXT
+        PETS: LIST<PET>
+
+    CONSTRUCTOR(id: NUMBER, name: TEXT, phone: TEXT, address: TEXT)
+        SET OWNER_ID TO id
+        SET NAME TO name
+        SET PHONE_NUMBER TO phone
+        SET ADDRESS TO address
+        SET PETS TO EMPTY LIST
+    END CONSTRUCTOR
+
+    METHODS
+        ADD_PET(pet: PET)
+            ADD pet TO PETS
+        END METHOD
+END CLASS
+
+
+CLASS SPECIES
+    ATTRIBUTES
+        SPECIES_NAME: TEXT
+        CARE_REQUIREMENTS: TEXT
+
+    CONSTRUCTOR(name: TEXT, care: TEXT)
+        SET SPECIES_NAME TO name
+        SET CARE_REQUIREMENTS TO care
+    END CONSTRUCTOR
+END CLASS
+
+
+CLASS MEDICAL_HISTORY
+    ATTRIBUTES
+        RECORDS: LIST<EXAMINATION>
+
+    CONSTRUCTOR()
+        SET RECORDS TO EMPTY LIST
+    END CONSTRUCTOR
+
+    METHODS
+        ADD_RECORD(exam: EXAMINATION)
+            ADD exam TO RECORDS
+        END METHOD
+END CLASS
+
+
+CLASS PET
+    ATTRIBUTES
+        PET_ID: NUMBER
+        NAME: TEXT
+        DATE_OF_BIRTH: DATE
+        SPECIES: SPECIES
+        MEDICAL_HISTORY: MEDICAL_HISTORY
+
+    CONSTRUCTOR(id: NUMBER, name: TEXT, dob: DATE, species: SPECIES)
+        SET PET_ID TO id
+        SET NAME TO name
+        SET DATE_OF_BIRTH TO dob
+        SET SPECIES TO species
+        SET MEDICAL_HISTORY TO NEW MEDICAL_HISTORY()
+      END CONSTRUCTOR
+
+    METHODS
+        GET_AGE()
+            DISPLAY CURRENT_DATE - DATE_OF_BIRTH
+        END METHOD
+
+        ADD_MEDICAL_RECORD(exam: EXAMINATION)
+            CALL MEDICAL_HISTORY.ADD_RECORD(exam)
+      END METHOD
+    END CLASS
+
+
+CLASS VITAL_SIGNS
+    ATTRIBUTES
+        TEMPERATURE: NUMBER
+        HEART_RATE: NUMBER
+        WEIGHT: NUMBER
+
+    CONSTRUCTOR(temp: NUMBER, rate: NUMBER, weight: NUMBER)
+        SET TEMPERATURE TO temp
+        SET HEART_RATE TO rate
+        SET WEIGHT TO weight
+      END CONSTRUCTOR
+
+    METHODS
+        CHECK_SAFE_RANGE()
+            IF TEMPERATURE LESS THAN 36 OR TEMPERATURE GREATER THAN 39 THEN
+                DISPLAY "URGENT"
+ ELSE
+            IF HEART_RATE LESS THAN 60 OR HEART_RATE GREATER 160 THEN
+                DISPLAY "URGENT"
+           END IF
+      END METHOD
+   END CLASS
+
+
+CLASS EXAMINATION
+    ATTRIBUTES
+        EXAM_ID: NUMBER
+        DIAGNOSIS: TEXT
+        VITAL_SIGNS: VITAL_SIGNS
+
+    CONSTRUCTOR(id: NUMBER, diagnosis: TEXT, vitals: VITAL_SIGNS)
+        SET EXAM_ID TO id
+        SET DIAGNOSIS TO diagnosis
+        SET VITAL_SIGNS TO vitals
+      END CONSTRUCTOR
+
+    METHODS
+        IS_URGENT()
+            CALL VITAL_SIGNS.CHECK_SAFE_RANGE()
+        END METHOD
+     END CLASS
+
+
+CLASS TREATMENT
+    ATTRIBUTES
+        TREATMENT_ID: NUMBER
+        NAME: TEXT
+        COST: NUMBER
+
+    CONSTRUCTOR(id: NUMBER, name: TEXT, cost: NUMBER)
+        SET TREATMENT_ID TO id
+        SET NAME TO name
+        SET COST TO cost
+      END CONSTRUCTOR
+   END CLASS
+
+
+CLASS VET
+    ATTRIBUTES
+        VET_ID: NUMBER
+        NAME: TEXT
+        SPECIALIZATION: TEXT
+
+    CONSTRUCTOR(id: NUMBER, name: TEXT, specialization: TEXT)
+        SET VET_ID TO id
+        SET NAME TO name
+        SET SPECIALIZATION TO specialization
+      END CONSTRUCTOR
+   END CLASS
+
+
+CLASS VISIT
+    ATTRIBUTES
+        VISIT_ID: NUMBER
+        VISIT_DATE: DATE
+        OWNER: OWNER
+        PET: PET
+        VET: VET
+        EXAMINATION: EXAMINATION
+        TREATMENTS: LIST<TREATMENT>
+
+    CONSTRUCTOR(id: NUMBER, date: DATE, owner: OWNER, pet: PET, vet: VET)
+        SET VISIT_ID TO id
+        SET VISIT_DATE TO date
+        SET OWNER TO owner
+        SET PET TO pet
+        SET VET TO vet
+        SET TREATMENTS TO EMPTY LIST
+      END CONSTRUCTOR
+
+    METHODS
+        SET_EXAMINATION(exam: EXAMINATION)
+            SET EXAMINATION TO exam
+            CALL PET.ADD_MEDICAL_RECORD(exam)
+        END METHOD
+
+        ADD_TREATMENT(treatment: TREATMENT)
+            ADD treatment TO TREATMENTS
+        END METHOD
+
+        CALCULATE_TOTAL_COST()
+            SET TOTAL TO 0
+            SET I TO 0
+
+            REPEAT
+                SET TOTAL TO TOTAL + TREATMENTS[I].COST
+                SET I TO I + 1
+            UNTIL I EQUALS TO LENGTH(TREATMENTS)
+
+            DISPLAY TOTAL
+         END METHOD
+       END CLASS
+
+
+
+Task 279: Movie Theater 
+
+
+
+
+
+CLASS CINEMA
+    ATTRIBUTES
+        FILMS: LIST<FILM>
+        SCREENS: LIST<SCREEN>
+        SHOWTIMES: LIST<SHOWTIME>
+
+    CONSTRUCTOR()
+        SET FILMS TO EMPTY LIS
+        SET SCREENS TO EMPTY LIST
+        SET SHOWTIMES TO EMPTY LIST
+      END CONSTRUCTOR
+
+    METHODS
+        ADD_FILM(film)
+        ADD film TO FILMS
+      END METHOD
+
+        ADD_SCREEN(screen)
+        ADD screen TO SCREENS
+       END METHOD
+
+        ADD_SHOWTIME(showtime)
+        ADD showtime TO SHOWTIMES
+      END METHOD
+    END CLASS
+
+
+CLASS FILM
+    ATTRIBUTES
+        FILM_ID: NUMBER
+        TITLE: TEXT
+        DURATION: NUMBER
+        GENRE: TEXT
+        SHOWTIMES: LIST<SHOWTIME>
+
+    CONSTRUCTOR(id, title, duration, genre)
+        SET FILM_ID TO id
+        SET TITLE TO title
+        SET DURATION TO duration
+        SET GENRE TO genre
+        SET SHOWTIMES TO EMPTY LIST
+      END CONSTRUCTOR
+
+    METHODS
+        ADD_SHOWTIME(showtime)
+        ADD showtime TO SHOWTIMES
+      END METHOD
+   END CLASS
+
+
+CLASS SCREEN
+    ATTRIBUTES
+        SCREEN_ID: NUMBER
+        CAPACITY: NUMBER
+        SEATING_LAYOUT: TEXT
+
+    CONSTRUCTOR(id, capacity, layout)
+        SET SCREEN_ID TO id
+        SET CAPACITY TO capacity
+        SET SEATING_LAYOUT TO layout
+      END CONSTRUCTOR
+   END CLASS
+
+
+CLASS SHOWTIME
+    ATTRIBUTES
+        SHOWTIME_ID: NUMBER
+        START_TIME: TIME
+        END_TIME: TIME
+        FILM: FILM
+        SCREEN: SCREEN
+        TICKETS: LIST<TICKET>
+
+    CONSTRUCTOR(id, start, finish, film, screen)
+        SET SHOWTIME_ID TO id
+        SET START_TIME TO start
+        SET END_TIME TO finish
+        SET FILM TO film
+        SET SCREEN TO screen
+        SET TICKETS TO EMPTY LIST
+      END CONSTRUCTOR
+
+    METHODS
+        CHECK_OVERLAP(existingShowtimes)
+            DISPLAY "CHECK IF SHOWTIME OVERLAPS ON SAME SCREEN BEFORE ADDING"
+       END METHOD
+
+        ADD_TICKET(ticket)
+        ADD ticket TO TICKETS
+        END METHOD
+
+        AVAILABLE_SEATS()
+          SET REMAINING TO SCREEN.CAPACITY
+          SET i TO 0
+
+         REPEAT
+           SET REMAINING TO REMAINING - 1
+           SET i TO i + 1
+           UNTIL i EQUALS TO LENGTH(TICKETS)
+
+            DISPLAY REMAINING
+       END METHOD
+   END CLASS
+
+
+CLASS CUSTOMER
+    ATTRIBUTES
+        CUSTOMER_ID: NUMBER
+        NAME: TEXT
+
+    CONSTRUCTOR(id, name)
+        SET CUSTOMER_ID TO id
+        SET NAME TO name
+      END CONSTRUCTOR
+    END CLASS
+
+
+CLASS TICKET
+    ATTRIBUTES
+        TICKET_ID: NUMBER
+        SEAT_NUMBER: NUMBER
+        CUSTOMER: CUSTOMER
+        SHOWTIME: SHOWTIME
+
+    CONSTRUCTOR(id, seat, customer, showtime)
+        SET TICKET_ID TO id
+        SET SEAT_NUMBER TO seat
+        SET CUSTOMER TO customer
+        SET SHOWTIME TO showtime
+      END CONSTRUCTOR
+
+    METHODS
+        BOOK_SEAT()
+        DISPLAY "BOOK SEAT ONLY IF NOT ALREADY BOOKED"
+       END METHOD
+     END CLASS
+
+
+Task 280: Warehouse Inventory 
+
+
+
+
+
+CLASS WAREHOUSE
+    ATTRIBUTES
+        PRODUCTS: LIST<PRODUCT>
+        VENDORS: LIST<VENDOR>
+        MOVEMENTS: LIST<STOCK_MOVEMENT>
+
+    CONSTRUCTOR()
+        SET PRODUCTS TO EMPTY LIST
+        SET VENDORS TO EMPTY LIST
+        SET MOVEMENTS TO EMPTY LIST
+      END CONSTRUCTOR
+
+    METHODS
+        ADD_PRODUCT(product)
+        ADD product TO PRODUCTS
+      END METHOD
+
+        ADD_VENDOR(vendor)
+        ADD vendor TO VENDORS
+      END METHOD
+
+        ADD_MOVEMENT(movement)
+        ADD movement TO MOVEMENTS
+     END METHOD
+   END CLASS
+
+
+CLASS VENDOR
+    ATTRIBUTES
+        VENDOR_ID: NUMBER
+        NAME: TEXT
+        PHONE: TEXT
+        RELIABILITY: NUMBER
+
+    CONSTRUCTOR(id, name, phone)
+        SET VENDOR_ID TO id
+        SET NAME TO name
+        SET PHONE TO phone
+        SET RELIABILITY TO 100
+     END CONSTRUCTOR
+
+    METHODS
+        UPDATE_RELIABILITY(late)
+            IF late EQUALS TRUE THEN
+            SET RELIABILITY TO RELIABILITY - 5
+ELSE
+            SET RELIABILITY TO RELIABILITY + 1
+          END IF
+      END METHOD
+  END CLASS
+
+
+CLASS PRODUCT
+    ATTRIBUTES
+        PRODUCT_ID: NUMBER
+        NAME: TEXT
+        CATEGORY: TEXT
+        BINS: LIST<STORAGE_BIN>
+
+    CONSTRUCTOR(id, name, category)
+        SET PRODUCT_ID TO id
+        SET NAME TO name
+        SET CATEGORY TO category
+        SET BINS TO EMPTY LIST
+    END CONSTRUCTOR
+
+    METHODS
+        ADD_BIN(bin)
+        ADD bin TO BINS
+        END METHOD
+
+        CALCULATE_STOCK()
+         SET TOTAL TO 0
+         SET i TO 0
+
+        REPEAT
+          SET TOTAL TO TOTAL + BINS[i].QUANTITY
+          SET i TO i + 1
+          UNTIL i EQUALS TO LENGTH(BINS)
+
+      END METHOD
+
+        OUTGOING_STOCK(quantity)
+        IF quantity LESS THAN CALCULATE_STOCK() THEN
+        DISPLAY "REJECT MOVEMENT"
+ELSE
+        DISPLAY "ALLOW MOVEMENT"
+      END IF
+    END METHOD
+  END CLASS
+
+
+CLASS STORAGE_BIN
+    ATTRIBUTES
+        BIN_ID: NUMBER
+        QUANTITY: NUMBER
+
+    CONSTRUCTOR(id, quantity)
+       SET BIN_ID TO id
+       SET QUANTITY TO quantity
+  END CONSTRUCTOR
+
+    METHODS
+        ADD_STOCK(amount)
+        SET QUANTITY TO QUANTITY + amount
+   END METHOD
+
+        REMOVE_STOCK(amount)
+        IF amount LESS THAN OR EQUALS THAN QUANTITY THEN
+          SET QUANTITY TO QUANTITY - amount
+        END IF
+      END METHOD
+   END CLASS
+
+
+CLASS STOCK_MOVEMENT
+    ATTRIBUTES
+        MOVEMENT_ID: NUMBER
+        TYPE: TEXT
+        QUANTITY: NUMBER
+        PRODUCT: PRODUCT
+        DATE: DATE
+
+    CONSTRUCTOR(id, type, quantity, product, date)
+        SET MOVEMENT_ID TO id
+        SET TYPE TO type
+        SET QUANTITY TO quantity
+        SET PRODUCT TO product
+        SET DATE TO date
+    END CONSTRUCTOR
+
+    METHODS
+        APPLY()
+            IF TYPE EQUALS TO "IN" THEN
+           CALL PRODUCT.ADD_BIN(NEW STORAGE_BIN(0, QUANTITY))
+ELSE
+            CALL PRODUCT.OUTGOING_STOCK(QUANTITY)
+          END IF
+        END METHOD
+    END CLASS
+
+
+
+
+Task 281: School Classroom 
+
+
+
+
+CLASS SCHOOL
+    ATTRIBUTES
+        CLASSES: LIST<CLASS_ROOM>
+        STUDENTS: LIST<STUDENT>
+        TEACHERS: LIST<TEACHER>
+
+    CONSTRUCTOR()
+        SET CLASSES TO EMPTY LIST
+        SET STUDENTS TO EMPTY LIST
+        SET TEACHERS TO EMPTY LIST
+    END CONSTRUCTOR
+
+    METHODS
+        ADD_CLASS(classRoom)
+        ADD classRoom TO CLASSES
+    END METHOD
+
+        ADD_STUDENT(student)
+        ADD student TO STUDENTS
+    END METHOD
+
+        ADD_TEACHER(teacher)
+        ADD teacher TO TEACHERS
+     END METHOD
+   END CLASS
+
+
+CLASS CLASS_ROOM
+    ATTRIBUTES
+        CLASS_ID: NUMBER
+        TEACHER: TEACHER
+        SUBJECT: SUBJECT
+        STUDENTS: LIST<STUDENT>
+        MAX_SIZE: NUMBER
+        SCHEDULE_TIME: TIME
+
+    CONSTRUCTOR(id, teacher, subject, maxSize, time)
+        SET CLASS_ID TO id
+        SET TEACHER TO teacher
+        SET SUBJECT TO subject
+        SET MAX_SIZE TO maxSize
+        SET SCHEDULE_TIME TO time
+        SET STUDENTS TO EMPTY LIST
+  END CONSTRUCTOR
+
+    METHODS
+        ENROLL_STUDENT(student)
+            IF LENGTH(STUDENTS) GRATER THAN OR EQUALS MAX_SIZE THEN
+            DISPLAY "CLASS FULL"
+ELSE
+            ADD student TO STUDENTS
+         END IF
+       END METHOD
+   END CLASS
+
+
+CLASS STUDENT
+    ATTRIBUTES
+        STUDENT_ID: NUMBER
+        NAME: TEXT
+        CLASSES: LIST<CLASS_ROOM>
+        GRADES: LIST<GRADE>
+
+    CONSTRUCTOR(id, name)
+        SET STUDENT_ID TO id
+        SET NAME TO name
+        SET CLASSES TO EMPTY LIST
+        SET GRADES TO EMPTY LIST
+    END CONSTRUCTOR
+
+    METHODS
+        ENROLL(classRoom)
+        ADD classRoom TO CLASSES
+     END METHOD
+
+        ADD_GRADE(grade)
+        ADD grade TO GRADES
+     END METHOD
+
+        CALCULATE_AVERAGE()
+            SET TOTAL TO 0
+            SET WEIGHT_SUM TO 0
+            SET i TO 0
+
+         REPEAT
+                SET TOTAL TO TOTAL + (GRADES[i].MARK * GRADES[i].WEIGHT)
+                SET WEIGHT_SUM TO WEIGHT_SUM + GRADES[i].WEIGHT
+                SET i TO i + 1
+            UNTIL i = LENGTH(GRADES)
+
+           DISPLAY TOTAL / WEIGHT_SUM
+       END METHOD
+     END CLASS
+
+
+CLASS GRADE
+    ATTRIBUTES
+        MARK: NUMBER
+        WEIGHT: NUMBER
+        ASSESSMENT: TEXT
+
+    CONSTRUCTOR(mark, weight, assessment)
+        SET MARK TO mark
+        SET WEIGHT TO weight
+        SET ASSESSMENT TO assessment
+    END CONSTRUCTOR
+END CLASS
+
+
+CLASS TEACHER
+    ATTRIBUTES
+        TEACHER_ID: NUMBER
+        NAME: TEXT
+
+    CONSTRUCTOR(id, name)
+        SET TEACHER_ID TO id
+        SET NAME TO name
+    END CONSTRUCTOR
+END CLASS
+
+
+CLASS SUBJECT
+    ATTRIBUTES
+        SUBJECT_NAME: TEXT
+        SYLLABUS: TEXT
+
+    CONSTRUCTOR(name, syllabus)
+        SET SUBJECT_NAME TO name
+        SET SYLLABUS TO syllabus
+     END CONSTRUCTOR
+  END CLASS
+
+
+
+
+
+Task 282: Insurance Policy 
+
+
+
+
+
+CLASS INSURANCE_COMPANY
+    ATTRIBUTES
+        POLICYHOLDERS: LIST<POLICYHOLDER>
+        POLICIES: LIST<POLICY>
+
+    CONSTRUCTOR()
+        SET POLICYHOLDERS TO EMPTY LIST
+        SET POLICIES TO EMPTY LIST
+    END CONSTRUCTOR
+
+    METHODS
+        ADD_POLICYHOLDER(p)
+        ADD p TO POLICYHOLDERS
+     END METHOD
+
+        ADD_POLICY(policy)
+        ADD policy TO POLICIES
+      END METHOD
+   END CLASS
+
+
+CLASS POLICYHOLDER
+    ATTRIBUTES
+        HOLDER_ID: NUMBER
+        NAME: TEXT
+        POLICIES: LIST<POLICY>
+
+    CONSTRUCTOR(id, name)
+        SET HOLDER_ID TO id
+        SET NAME TO name
+        SET POLICIES TO EMPTY LIST
+  END CONSTRUCTOR
+
+    METHODS
+        ADD_POLICY(policy)
+        ADD policy TO POLICIES
+      END METHOD
+END CLASS
+
+
+CLASS POLICY
+    ATTRIBUTES
+        POLICY_ID: NUMBER
+        POLICYHOLDER: POLICYHOLDER
+        COVERAGES: LIST<COVERAGE>
+        CLAIMS: LIST<CLAIM>
+
+    CONSTRUCTOR(id, holder)
+        SET POLICY_ID TO id
+        SET POLICYHOLDER TO holder
+        SET COVERAGES TO EMPTY LIST
+        SET CLAIMS TO EMPTY LIST
+  END CONSTRUCTOR
+
+    METHODS
+        ADD_COVERAGE(c)
+        ADD c TO COVERAGES
+        END METHOD
+
+        ADD_CLAIM(claim)
+        ADD claim TO CLAIMS
+     END METHOD
+
+        CALCULATE_REMAINING_COVERAGE()
+            SET TOTAL_LIMIT TO 0
+            SET TOTAL_CLAIMS TO 0
+            SET i TO 0
+
+           REPEAT
+            SET TOTAL_LIMIT TO TOTAL_LIMIT + COVERAGES[i].LIMIT
+             SET i TO i + 1
+           UNTIL i EQUALS TO LENGTH(COVERAGES)
+            SET i TO 0
+            REPEAT
+              SET TOTAL_CLAIMS TO TOTAL_CLAIMS + CLAIMS[i].AMOUNT
+              SET i TO i + 1
+            UNTIL i = LENGTH(CLAIMS)
+            DISPLAY TOTAL_LIMIT - TOTAL_CLAIMS
+         END METHOD
+    END CLASS
+
+
+CLASS COVERAGE
+    ATTRIBUTES
+        COVERAGE_TYPE: TEXT
+        LIMIT: NUMBER
+
+    CONSTRUCTOR(type, limit)
+        SET COVERAGE_TYPE TO type
+        SET LIMIT TO limit
+    END CONSTRUCTOR
+END CLASS
+
+
+CLASS CLAIM
+    ATTRIBUTES
+        CLAIM_ID: NUMBER
+        DETAILS: TEXT
+        AMOUNT: NUMBER
+        STATUS: TEXT
+
+    CONSTRUCTOR(id, details, amount)
+        SET CLAIM_ID TO id
+        SET DETAILS TO details
+        SET AMOUNT TO amount
+        SET STATUS TO "FILED"
+    END CONSTRUCTOR
+
+    METHODS
+        ADVANCE_STATUS()
+            IF STATUS EQUALS TO  FILED THEN
+            SET STATUS TO "UNDER_REVIEW"
+ELSE 
+            IF STATUS EQUALS TO "UNDER_REVIEW" THEN
+            SET STATUS TO "APPROVED"
+ELSE
+            IF STATUS EQUALS TO "APPROVED" THEN
+            SET STATUS TO "PAID"
+         END IF
+      END METHOD
+    END CLASS
+
+
+
+Task 283: Car Dealership 
+
+
+
+CLASS DEALERSHIP
+    ATTRIBUTES
+        VEHICLES: LIST<VEHICLE>
+        CUSTOMERS: LIST<CUSTOMER>
+        SALES: LIST<SALE>
+
+    CONSTRUCTOR()
+        SET VEHICLES TO EMPTY LIST
+        SET CUSTOMERS TO EMPTY LIST
+        SET SALES TO EMPTY LIST
+    END CONSTRUCTOR
+
+    METHODS
+        ADD_VEHICLE(vehicle)
+        ADD vehicle TO VEHICLES
+     END METHOD
+
+        ADD_CUSTOMER(customer)
+        ADD customer TO CUSTOMERS
+     END METHOD
+
+        ADD_SALE(sale)
+        ADD sale TO SALES
+      END METHOD
+   END CLASS
+
+
+CLASS MODEL
+    ATTRIBUTES
+        NAME: TEXT
+        BASE_PRICE: NUMBER
+
+    CONSTRUCTOR(name, basePrice)
+        SET NAME TO name
+        SET BASE_PRICE TO basePrice
+      END CONSTRUCTOR
+   END CLASS
+
+
+CLASS VEHICLE
+    ATTRIBUTES
+        VEHICLE_ID: NUMBER
+        SPECIFICATIONS: TEXT
+        MODEL: MODEL
+        LISTED_PRICE: NUMBER
+        AVAILABLE: BOOLEAN
+
+    CONSTRUCTOR(id, specs, model, price)
+        SET VEHICLE_ID TO id
+        SET SPECIFICATIONS TO specs
+        SET MODEL TO model
+        SET AVAILABLE TO TRUE
+
+        IF price LESS THAN MODEL.BASE_PRICE THEN
+        SET LISTED_PRICE TO MODEL.BASE_PRICE
+ELSE
+        SET LISTED_PRICE TO price
+       END IF
+     END CONSTRUCTOR
+
+    METHODS
+        MARK_SOLD()
+            SET AVAILABLE TO FALSE
+        END METHOD
+
+        UPDATE_PRICE(newPrice)
+            IF newPrice GREATER THAN OR EQUALS TO MODEL.BASE_PRICE THEN
+            SET LISTED_PRICE TO newPrice
+          END IF
+       END METHOD
+    END CLASS
+
+
+CLASS CUSTOMER
+    ATTRIBUTES
+        CUSTOMER_ID: NUMBER
+        NAME: TEXT
+
+    CONSTRUCTOR(id, name)
+        SET CUSTOMER_ID TO id
+        SET NAME TO name
+      END CONSTRUCTOR
+   END CLASS
+
+
+CLASS SALE
+    ATTRIBUTES
+        SALE_ID: NUMBER
+        CUSTOMER: CUSTOMER
+        VEHICLE: VEHICLE
+        BASE_PRICE: NUMBER
+        ADDONS: LIST<ADDON>
+
+    CONSTRUCTOR(id, customer, vehicle)
+        SET SALE_ID TO id
+        SET CUSTOMER TO customer
+        SET VEHICLE TO vehicle
+        SET BASE_PRICE TO vehicle.LISTED_PRICE
+        SET ADDONS TO EMPTY LIST
+
+        CALL vehicle.MARK_SOLD()
+    END CONSTRUCTOR
+
+    METHODS
+        ADD_ADDON(addon)
+        ADD addon TO ADDONS
+     END METHOD
+
+        CALCULATE_TOTAL_PRICE()
+            SET TOTAL TO BASE_PRICE
+            SET i TO 0
+
+        REPEAT
+           SET TOTAL TO TOTAL + ADDONS[i].COST
+           SET i TO i + 1
+           IF i EQUALS TO LENGTH(ADDONS)
+
+         DISPLAY TOTAL
+     END METHOD
+   END CLASS
+
+
+CLASS ADDON
+    ATTRIBUTES
+        NAME: TEXT
+        COST: NUMBER
+
+    CONSTRUCTOR(name, cost)
+        SET NAME TO name
+        SET COST TO cost
+    END CONSTRUCTOR
+END CLASS
+
+
+
+Task 284:  Wedding Planning
+
+
+
+
+CLASS WEDDING_COMPANY
+    ATTRIBUTES
+        EVENTS: LIST<EVENT>
+        VENDORS: LIST<VENDOR>
+
+    CONSTRUCTOR()
+        SET EVENTS TO EMPTY LIST
+        SET VENDORS TO EMPTY LIST
+    END CONSTRUCTOR
+
+    METHODS
+        ADD_EVENT(event)
+        ADD event TO EVENTS
+     END METHOD
+
+        ADD_VENDOR(vendor)
+        ADD vendor TO VENDORS
+     END METHOD
+   END CLASS
+
+
+CLASS COUPLE
+    ATTRIBUTES
+        COUPLE_ID: NUMBER
+        PARTNER1_NAME: TEXT
+        PARTNER2_NAME: TEXT
+
+    CONSTRUCTOR(id, p1, p2)
+        SET COUPLE_ID TO id
+        SET PARTNER1_NAME TO p1
+        SET PARTNER2_NAME TO p2
+      END CONSTRUCTOR
+   END CLASS
+
+
+CLASS GUEST
+    ATTRIBUTES
+        GUEST_ID: NUMBER
+        NAME: TEXT
+
+    CONSTRUCTOR(id, name)
+        SET GUEST_ID TO id
+        SET NAME TO name
+    END CONSTRUCTOR
+  END CLASS
+
+
+CLASS VENDOR
+    ATTRIBUTES
+        VENDOR_ID: NUMBER
+        NAME: TEXT
+        CONTACT: TEXT
+        SPECIALTY: TEXT
+        BOOKED_DATES: LIST<DATE>
+
+    CONSTRUCTOR(id, name, contact, specialty)
+        SET VENDOR_ID TO id
+        SET NAME TO name
+        SET CONTACT TO contact
+        SET SPECIALTY TO specialty
+        SET BOOKED_DATES TO EMPTY LIST
+    END CONSTRUCTOR
+
+    METHODS
+        IS_AVAILABLE(date)
+            SET i TO 0
+
+            REPEAT
+             IF BOOKED_DATES[i] EQUALS TO date THEN
+             RETURN FALSE
+      END IF
+             SET i TO i + 1
+             IF i EQUALS TO LENGTH(BOOKED_DATES)
+
+           RETURN TRUE
+      END METHOD
+
+        BOOK_DATE(date)
+            ADD date TO BOOKED_DATES
+        END METHOD
+END CLASS
+
+
+CLASS EVENT
+    ATTRIBUTES
+        EVENT_ID: NUMBER
+        COUPLE: COUPLE
+        TASKS: LIST<TASK>
+        GUESTS: LIST<GUEST>
+        BUDGET: NUMBER
+        SPENT: NUMBER
+
+    CONSTRUCTOR(id, couple, budget)
+        SET EVENT_ID TO id
+        SET COUPLE TO couple
+        SET TASKS TO EMPTY LIST
+        SET GUESTS TO EMPTY LIST
+        SET BUDGET TO budget
+        SET SPENT TO 0
+    END CONSTRUCTOR
+
+    METHODS
+        ADD_GUEST(guest)
+        ADD guest TO GUESTS
+     END METHOD
+
+        ADD_TASK(task)
+            IF SPENT + task.COST LESS THAN BUDGET THEN
+            DISPLAY "REJECT TASK (BUDGET EXCEEDED)"
+ELSE
+           ADD task TO TASKS
+           SET SPENT TO SPENT + task.COST
+         END IF
+       END METHOD
+
+        CALCULATE_COMPLETION()
+            SET DONE TO 0
+            SET i TO 0
+
+            REPEAT
+            IF TASKS[i].STATUS EQUALS TO "DONE" THEN
+            SET DONE TO DONE + 1
+          END IF
+            SET i TO i + 1
+            IF i EQUAL TO LENGTH(TASKS)
+
+            DISPLAY (DONE / LENGTH(TASKS)) * 100
+         END METHOD
+    END CLASS
+
+
+CLASS TASK
+    ATTRIBUTES
+        TASK_ID: NUMBER
+        NAME: TEXT
+        COST: NUMBER
+        STATUS: TEXT
+        VENDOR: VENDOR
+        EVENT_DATE: DATE
+
+    CONSTRUCTOR(id, name, cost, vendor, date)
+        SET TASK_ID TO id
+        SET NAME TO name
+        SET COST TO cost
+        SET VENDOR TO vendor
+        SET EVENT_DATE TO date
+        SET STATUS TO "PENDING"
+    END CONSTRUCTOR
+
+    METHODS
+        MARK_DONE()
+        SET STATUS TO "DONE"
+    END METHOD
+
+        ASSIGN_VENDOR()
+         IF VENDOR.IS_AVAILABLE(EVENT_DATE) THEN
+         CALL VENDOR.BOOK_DATE(EVENT_DATE)
+ELSE
+        DISPLAY "VENDOR NOT AVAILABLE"
+      END IF
+    END METHOD
+  END CLASS
+
+
+
+Task 285: Concert Ticketing
+
+
+
+
+CLASS TICKETING_PLATFORM
+    ATTRIBUTES
+        CONCERTS: LIST<CONCERT>
+        VENUES: LIST<VENUE>
+        ARTISTS: LIST<ARTIST>
+
+    CONSTRUCTOR()
+        SET CONCERTS TO EMPTY LIST
+        SET VENUES TO EMPTY LIST
+        SET ARTISTS TO EMPTY LIST
+    END CONSTRUCTOR
+
+    METHODS
+        ADD_CONCERT(concert)
+        ADD concert TO CONCERTS
+    END METHOD
+
+        ADD_VENUE(venue)
+        ADD venue TO VENUES
+    END METHOD
+
+        ADD_ARTIST(artist)
+        ADD artist TO ARTISTS
+      END METHOD
+   END CLASS
+
+
+CLASS ARTIST
+    ATTRIBUTES
+        ARTIST_ID: NUMBER
+        NAME: TEXT
+
+    CONSTRUCTOR(id, name)
+        SET ARTIST_ID TO id
+        SET NAME TO name
+      END CONSTRUCTOR
+   END CLASS
+
+
+CLASS VENUE
+    ATTRIBUTES
+        VENUE_ID: NUMBER
+        NAME: TEXT
+        SEATING_CHART: TEXT
+        BOOKED_DATES: LIST<DATE>
+
+    CONSTRUCTOR(id, name, chart)
+        SET VENUE_ID TO id
+        SET NAME TO name
+        SET SEATING_CHART TO chart
+        SET BOOKED_DATES TO EMPTY LIST
+    END CONSTRUCTOR
+
+    METHODS
+        IS_AVAILABLE(date)
+            SET i TO 0
+
+      REPEAT
+             IF BOOKED_DATES[i] EQUALS TO date THEN
+             RETURN FALSE
+         END IF
+             SET i TO i + 1
+        IF i EQUALS TO LENGTH(BOOKED_DATES)
+        RETURN TRUE
+    END METHOD
+
+        BOOK_DATE(date)
+        ADD date TO BOOKED_DATES
+     END METHOD
+   END CLASS
+
+
+CLASS CONCERT
+    ATTRIBUTES
+        CONCERT_ID: NUMBER
+        ARTIST: ARTIST
+        VENUE: VENUE
+        DATE: DATE
+        SEATS: LIST<SEAT>
+        TICKETS: LIST<TICKET>
+        TIERED_PRICES: LIST<TICKET_TIER>
+
+    CONSTRUCTOR(id, artist, venue, date)
+        SET CONCERT_ID TO id
+        SET ARTIST TO artist
+        SET VENUE TO venue
+        SET DATE TO date
+        SET SEATS TO EMPTY LIST
+        SET TICKETS TO EMPTY LIST
+        SET TIERED_PRICES TO EMPTY LIST
+    END CONSTRUCTOR
+
+    METHODS
+        ADD_TIER(tier)
+            ADD tier TO TIERED_PRICES
+        END METHOD
+
+        IS_SEAT_AVAILABLE(seatNumber)
+        SET i TO 0
+
+       REPEAT
+        IF TICKETS[i].SEAT_NUMBER EQUALS TO seatNumber THEN
+        RETURN FALSE
+      END IF
+    SET i TO i + 1
+        IF i EQUALS TO LENGTH(TICKETS)
+
+     RETURN TRUE
+  END METHOD
+
+        ADD_TICKET(ticket)
+        IF CALL IS_SEAT_AVAILABLE(ticket.SEAT_NUMBER) THEN
+        ADD ticket TO TICKETS
+ELSE
+         DISPLAY "SEAT ALREADY SOLD"
+      END IF
+  END METHOD
+
+        REMAINING_TICKETS()
+        SET SOLD TO LENGTH(TICKETS)
+        DISPLAY TOTAL_CAPACITY - SOLD
+      END METHOD
+   END CLASS
+
+
+CLASS TICKET
+    ATTRIBUTES
+        TICKET_ID: NUMBER
+        SEAT_NUMBER: NUMBER
+        PRICE: NUMBER
+        CONCERT: CONCERT
+        TIER: TICKET_TIER
+
+    CONSTRUCTOR(id, seat, tier, concert)
+        SET TICKET_ID TO id
+        SET SEAT_NUMBER TO seat
+        SET TIER TO tier
+        SET CONCERT TO concert
+        SET PRICE TO tier.PRICE
+    END CONSTRUCTOR
+END CLASS
+
+
+CLASS TICKET_TIER
+    ATTRIBUTES
+        NAME: TEXT
+        PRICE: NUMBER
+
+    CONSTRUCTOR(name, price)
+        SET NAME TO name
+        SET PRICE TO price
+    END CONSTRUCTOR
+END CLASS
+
+
+
+Task 286: Software Sprint 
+
+
+
+
+CLASS BACKLOG
+    ATTRIBUTES
+        TASKS: LIST<TASK>
+
+    CONSTRUCTOR()
+        SET TASKS TO EMPTY LIST
+    END CONSTRUCTOR
+
+    METHODS
+        ADD_TASK(task)
+        ADD task TO TASKS
+   END METHOD
+
+       REMOVE_TASK(task)
+       REMOVE task FROM TASKS
+    END METHOD
+  END CLASS
+
+
+CLASS DEVELOPER
+    ATTRIBUTES
+        DEVELOPER_ID: NUMBER
+        NAME: TEXT
+        CAPACITY: NUMBER
+        ASSIGNED_TASKS: LIST<TASK>
+
+    CONSTRUCTOR(id, name, capacity)
+        SET DEVELOPER_ID TO id
+        SET NAME TO name
+        SET CAPACITY TO capacity
+        SET ASSIGNED_TASKS TO EMPTY LIST
+    END CONSTRUCTOR
+
+    METHODS
+        CAN_ASSIGN()
+            IF LENGTH(ASSIGNED_TASKS) < CAPACITY THEN
+            RETURN TRUE
+ELSE
+            RETURN FALSE
+      END IF
+   END METHOD
+
+        ASSIGN_TASK(task)
+        IF LENGTH(ASSIGNED_TASKS) < CAPACITY THEN
+        ADD task TO ASSIGNED_TASKS
+ELSE
+        DISPLAY "CAPACITY EXCEEDED"
+      END IF
+    END METHOD
+  END CLASS
+
+
+CLASS TASK
+    ATTRIBUTES
+        TASK_ID: NUMBER
+        NAME: TEXT
+        STATUS: TEXT
+        DEVELOPER: DEVELOPER
+
+    CONSTRUCTOR(id, name, developer)
+        SET TASK_ID TO id
+        SET NAME TO name
+        SET DEVELOPER TO developer
+        SET STATUS TO "TO_DO"
+    END CONSTRUCTOR
+
+    METHODS
+        ADVANCE_STATUS()
+            IF STATUS = "TO_DO" THEN
+            SET STATUS TO "IN_PROGRESS"
+ELSE 
+            IF STATUS EQUALS TO "IN_PROGRESS" THEN
+            SET STATUS TO "REVIEW"
+ELSE
+            IF STATUS EQUALS TO "REVIEW" THEN
+            SET STATUS TO "DONE"
+         END IF
+      END METHOD
+
+        MARK_COMPLETE()
+            IF STATUS EQUALS TO "DONE" THEN
+            DISPLAY "TASK COMPLETED"
+ELSE
+            DISPLAY "CANNOT COMPLETE YET"
+         END IF
+     END METHOD
+  END CLASS
+
+
+CLASS SPRINT
+    ATTRIBUTES
+        SPRINT_ID: NUMBER
+        TASKS: LIST<TASK>
+
+    CONSTRUCTOR(id)
+        SET SPRINT_ID TO id
+        SET TASKS TO EMPTY LIST
+   END CONSTRUCTOR
+
+    METHODS
+        ADD_TASK(task)
+        ADD task TO TASKS
+     END METHOD
+
+        CALCULATE_PROGRESS()
+            SET DONE TO 0
+            SET i TO 0
+
+           REPEAT
+             IF TASKS[i].STATUS EQUALS TO "DONE" THEN
+             SET DONE TO DONE + 1
+        END IF 
+             SET i TO i + 1
+             IF i EQUALS TO LENGTH(TASKS)
+
+            DISPLAY (DONE / LENGTH(TASKS)) * 100
+        END METHOD
+    END CLASS
+
+
+
+Task 287: Farm Management 
+
+
+
+
+
+CLASS FARM
+    ATTRIBUTES
+        FIELDS: LIST<FIELD>
+        WORKERS: LIST<WORKER>
+
+    CONSTRUCTOR()
+        SET FIELDS TO EMPTY LIST
+        SET WORKERS TO EMPTY LIST
+    END CONSTRUCTOR
+
+    METHODS
+        ADD_FIELD(field)
+        ADD field TO FIELDS
+     END METHOD
+
+        ADD_WORKER(worker)
+        ADD worker TO WORKERS
+      END METHOD
+    END CLASS
+
+
+CLASS WORKER
+    ATTRIBUTES
+        WORKER_ID: NUMBER
+        NAME: TEXT
+        DAILY_LIMIT: NUMBER
+        ASSIGNED_ACTIVITIES: LIST<ACTIVITY>
+
+    CONSTRUCTOR(id, name, limit)
+        SET WORKER_ID TO id
+        SET NAME TO name
+        SET DAILY_LIMIT TO limit
+        SET ASSIGNED_ACTIVITIES TO EMPTY LIST
+    END CONSTRUCTOR
+
+    METHODS
+        CAN_ASSIGN()
+            IF LENGTH(ASSIGNED_ACTIVITIES) < DAILY_LIMIT THEN
+            RETURN TRUE
+ELSE
+           RETURN FALSE
+       END IF
+     END METHOD
+
+        ASSIGN_ACTIVITY(activity)
+            IF LENGTH(ASSIGNED_ACTIVITIES) LESS THAN DAILY_LIMIT THEN
+            ADD activity TO ASSIGNED_ACTIVITIES
+ELSE
+           DISPLAY "DAILY LIMIT EXCEEDED"
+        END IF
+     END METHOD
+  END CLASS
+
+
+CLASS CROP
+    ATTRIBUTES
+        CROP_NAME: TEXT
+        WATER_NEED: NUMBER
+        EXPECTED_OUTPUT: NUMBER
+
+    CONSTRUCTOR(name, waterNeed, output)
+        SET CROP_NAME TO name
+        SET WATER_NEED TO waterNeed
+        SET EXPECTED_OUTPUT TO output
+    END CONSTRUCTOR
+END CLASS
+
+
+CLASS FIELD
+    ATTRIBUTES
+        FIELD_ID: NUMBER
+        CROP: CROP
+        ACTIVITIES: LIST<ACTIVITY>
+
+    CONSTRUCTOR(id, crop)
+        SET FIELD_ID TO id
+        SET CROP TO crop
+        SET ACTIVITIES TO EMPTY LIST
+    END CONSTRUCTOR
+
+    METHODS
+        ADD_ACTIVITY(activity)
+        ADD activity TO ACTIVITIES
+    END METHOD
+
+        CHECK_WATERING(activity)
+            IF activity.TYPE EQUALS TO "WATERING" AND activity.AMOUNT < CROP.WATER_NEED THEN
+            DISPLAY "INSUFFICIENT WATER"
+         END IF
+      END METHOD
+
+        ESTIMATE_YIELD()
+            SET SCORE TO 0
+            SET TOTAL TO LENGTH(ACTIVITIES)
+            SET i TO 0
+
+         REPEAT
+            IF ACTIVITIES[i].STATUS = "DONE" THEN
+            SET SCORE TO SCORE + 1
+        END IF
+            SET i TO i + 1
+            IF  i EQUALS TO TOTAL
+
+         DISPLAY CROP.EXPECTED_OUTPUT * (SCORE / TOTAL)
+     END METHOD
+  END CLASS
+
+
+CLASS ACTIVITY
+    ATTRIBUTES
+        ACTIVITY_ID: NUMBER
+        TYPE: TEXT
+        STATUS: TEXT
+        AMOUNT: NUMBER
+        WORKER: WORKER
+
+    CONSTRUCTOR(id, type, amount, worker)
+        SET ACTIVITY_ID TO id
+        SET TYPE TO type
+        SET AMOUNT TO amount
+        SET WORKER TO worker
+        SET STATUS TO "PENDING"
+    END CONSTRUCTOR
+
+    METHODS
+        MARK_DONE()
+        SET STATUS TO "DONE"
+     END METHOD
+   END CLASS
+
+
+
+
+
+
