@@ -1,0 +1,177 @@
+CLASS OWNER
+    ATTRIBUTES
+        OWNER_ID: NUMBER
+        NAME: TEXT
+        PHONE_NUMBER: TEXT
+        ADDRESS: TEXT
+        PETS: LIST<PET>
+
+    CONSTRUCTOR(id, name, phone, address)
+        SET OWNER_ID TO id
+        SET NAME TO name
+        SET PHONE_NUMBER TO phone
+        SET ADDRESS TO address
+        SET PETS TO EMPTY LIST
+    END CONSTRUCTOR
+
+    METHODS
+        ADD_PET(pet)
+            ADD pet TO PETS
+        END METHOD
+END CLASS
+
+CLASS PET
+    ATTRIBUTES
+        PET_ID: NUMBER
+        NAME: TEXT
+        DATE_OF_BIRTH: DATE
+        SPECIES: SPECIES
+        MEDICAL_HISTORY: MEDICAL_HISTORY
+
+    CONSTRUCTOR(id, name, dob, species)
+        SET PET_ID TO id
+        SET NAME TO name
+        SET DATE_OF_BIRTH TO dob
+        SET SPECIES TO species
+        SET MEDICAL_HISTORY TO NEW MEDICAL_HISTORY()
+    END CONSTRUCTOR
+
+    METHODS
+        GET_AGE()
+            DISPLAY CURRENT_DATE - DATE_OF_BIRTH
+        END METHOD
+
+        ADD_MEDICAL_RECORD(exam)
+            CALL MEDICAL_HISTORY.ADD_RECORD(exam)
+        END METHOD
+END CLASS
+
+
+CLASS MEDICAL_HISTORY
+    ATTRIBUTES
+        RECORDS: LIST<EXAMINATION>
+
+    CONSTRUCTOR()
+        SET RECORDS TO EMPTY LIST
+    END CONSTRUCTOR
+
+    METHODS
+        ADD_RECORD(exam)
+            ADD exam TO RECORDS
+        END METHOD
+END CLASS
+
+
+CLASS EXAMINATION
+    ATTRIBUTES
+        EXAM_ID: NUMBER
+        DIAGNOSIS: TEXT
+        VITAL_SIGNS: VITAL_SIGNS
+
+    CONSTRUCTOR(id, diagnosis, vitals)
+        SET EXAM_ID TO id
+        SET DIAGNOSIS TO diagnosis
+        SET VITAL_SIGNS TO vitals
+    END CONSTRUCTOR
+
+    METHODS
+        IS_URGENT()
+            CALL VITAL_SIGNS.CHECK_SAFE_RANGE()
+        END METHOD
+END CLASS
+
+
+CLASS VITAL_SIGNS
+    ATTRIBUTES
+        TEMPERATURE: NUMBER
+        HEART_RATE: NUMBER
+        WEIGHT: NUMBER
+
+    CONSTRUCTOR(temp, rate, weight)
+        SET TEMPERATURE TO temp
+        SET HEART_RATE TO rate
+        SET WEIGHT TO weight
+    END CONSTRUCTOR
+
+    METHODS
+        CHECK_SAFE_RANGE()
+            IF TEMPERATURE < 36 OR TEMPERATURE > 39 THEN
+                DISPLAY "URGENT"
+            END IF
+
+            IF HEART_RATE < 60 OR HEART_RATE > 160 THEN
+                DISPLAY "URGENT"
+            END IF
+        END METHOD
+END CLASS
+
+
+CLASS TREATMENT
+    ATTRIBUTES
+        TREATMENT_ID: NUMBER
+        NAME: TEXT
+        COST: NUMBER
+
+    CONSTRUCTOR(id, name, cost)
+        SET TREATMENT_ID TO id
+        SET NAME TO name
+        SET COST TO cost
+    END CONSTRUCTOR
+END CLASS
+
+
+CLASS VET
+    ATTRIBUTES
+        VET_ID: NUMBER
+        NAME: TEXT
+        SPECIALIZATION: TEXT
+
+    CONSTRUCTOR(id, name, specialization)
+        SET VET_ID TO id
+        SET NAME TO name
+        SET SPECIALIZATION TO specialization
+    END CONSTRUCTOR
+END CLASS
+
+CLASS VISIT
+    ATTRIBUTES
+        VISIT_ID: NUMBER
+        VISIT_DATE: DATE
+        OWNER: OWNER
+        PET: PET
+        VET: VET
+        EXAMINATION: EXAMINATION
+        TREATMENTS: LIST<TREATMENT>
+
+    CONSTRUCTOR(id, date, owner, pet, vet)
+        SET VISIT_ID TO id
+        SET VISIT_DATE TO date
+        SET OWNER TO owner
+        SET PET TO pet
+        SET VET TO vet
+        SET TREATMENTS TO EMPTY LIST
+    END CONSTRUCTOR
+
+    METHODS
+        ADD_TREATMENT(treatment)
+            ADD treatment TO TREATMENTS
+        END METHOD
+
+        CALCULATE_TOTAL_COST()
+            SET TOTAL TO 0
+
+            FOR EACH treatment IN TREATMENTS
+                SET TOTAL TO TOTAL + treatment.COST
+            END FOR
+
+            DISPLAY TOTAL
+        END METHOD
+END CLASS
+
+
+
+
+
+
+
+
