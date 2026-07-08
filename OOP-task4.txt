@@ -1,0 +1,839 @@
+
+Task 288: Bookshop 
+
+
+
+CLASS BOOKSHOP
+    ATTRIBUTES
+        BOOKS: LIST<BOOK>
+        CUSTOMERS: LIST<CUSTOMER>
+        SALES: LIST<SALE>
+
+
+    CONSTRUCTOR()
+
+        SET BOOKS TO EMPTY LIST
+        SET CUSTOMERS TO EMPTY LIST
+        SET SALES TO EMPTY LIST
+    END CONSTRUCTOR
+    METHODS
+        ADD_BOOK(book: BOOK)
+        ADD book TO BOOKS
+
+     END METHOD
+        ADD_CUSTOMER(customer: CUSTOMER)
+        ADD customer TO CUSTOMERS
+     END METHOD
+        ADD_SALE(sale: SALE)
+        ADD sale TO SALES
+     END METHOD
+   END METHODS
+END CLASS
+
+
+
+CLASS GENRE
+    ATTRIBUTES
+        GENRE_NAME: TEXT
+
+
+    CONSTRUCTOR(name: TEXT)
+
+        SET GENRE_NAME TO name
+    END CONSTRUCTOR
+END CLASS
+
+
+
+CLASS BOOK
+    ATTRIBUTES
+        BOOK_ID: NUMBER
+        TITLE: TEXT
+        AUTHOR: TEXT
+        PRICE: NUMBER
+        GENRE: GENRE
+
+
+    CONSTRUCTOR(id: NUMBER, title: TEXT, author: TEXT, price: NUMBER, genre: GENRE)
+
+        SET BOOK_ID TO id
+        SET TITLE TO title
+        SET AUTHOR TO author
+        SET PRICE TO price
+        SET GENRE TO genre
+
+    END CONSTRUCTOR
+
+END CLASS
+
+
+
+CLASS CUSTOMER
+    ATTRIBUTES
+        CUSTOMER_ID: NUMBER
+        NAME: TEXT
+        PURCHASE_HISTORY: LIST<SALE>
+
+
+    CONSTRUCTOR(id: NUMBER, name: TEXT)
+
+        SET CUSTOMER_ID TO id
+        SET NAME TO name
+        SET PURCHASE_HISTORY TO EMPTY LIST
+
+    END CONSTRUCTOR
+
+
+
+    METHODS
+
+
+        ADD_PURCHASE(sale: SALE)
+        ADD sale TO PURCHASE_HISTORY
+     END METHOD
+   END METHODS
+END CLASS
+
+
+
+CLASS SALE
+    ATTRIBUTES
+        SALE_ID: NUMBER
+        CUSTOMER: CUSTOMER
+        BOOK: BOOK
+        SOLD_PRICE: NUMBER
+
+
+    CONSTRUCTOR(id: NUMBER, customer: CUSTOMER, book: BOOK)
+
+        SET SALE_ID TO id
+        SET CUSTOMER TO customer
+        SET BOOK TO book
+        SET SOLD_PRICE TO book.PRICE
+
+        CALL customer.ADD_PURCHASE(SELF)
+
+    END CONSTRUCTOR
+
+
+
+    METHODS
+
+
+        GET_TOTAL()
+
+        RETURN SOLD_PRICE
+     END METHOD
+  END METHODS
+END CLASS
+
+
+Task 289: Online Exam Platform 
+
+
+CLASS ONLINE_PLATFORM
+    ATTRIBUTES
+        EXAMS: LIST<EXAM>
+        STUDENTS: LIST<STUDENT>
+        ATTEMPTS: LIST<ATTEMPT>
+
+
+    CONSTRUCTOR()
+
+        SET EXAMS TO EMPTY LIST
+        SET STUDENTS TO EMPTY LIST
+        SET ATTEMPTS TO EMPTY LIST
+
+    END CONSTRUCTOR
+
+
+
+    METHODS
+
+
+        ADD_EXAM(exam: EXAM)
+        ADD exam TO EXAMS
+    END METHOD
+        ADD_STUDENT(student: STUDENT)
+        ADD student TO STUDENTS
+    END METHOD
+
+        ADD_ATTEMPT(attempt: ATTEMPT)
+        ADD attempt TO ATTEMPTS
+    END METHOD
+  END METHODS
+END CLASS
+
+
+
+CLASS EXAM
+    ATTRIBUTES
+        EXAM_ID: NUMBER
+        TITLE: TEXT
+        TIME_LIMIT: NUMBER
+        QUESTIONS: LIST<QUESTION>
+
+
+    CONSTRUCTOR(id: NUMBER, title: TEXT, timeLimit: NUMBER)
+
+        SET EXAM_ID TO id
+        SET TITLE TO title
+        SET TIME_LIMIT TO timeLimit
+        SET QUESTIONS TO EMPTY LIST
+
+    END CONSTRUCTOR
+
+
+
+    METHODS
+
+
+        ADD_QUESTION(question: QUESTION)
+        ADD question TO QUESTIONS
+     END METHOD
+   END METHODS
+END CLASS
+
+
+
+CLASS QUESTION
+    ATTRIBUTES
+        QUESTION_ID: NUMBER
+        TEXT: TEXT
+        CORRECT_ANSWER: TEXT
+        POINTS: NUMBER
+
+
+    CONSTRUCTOR(id: NUMBER, text: TEXT, answer: TEXT, points: NUMBER)
+
+        SET QUESTION_ID TO id
+        SET TEXT TO text
+        SET CORRECT_ANSWER TO answer
+        SET POINTS TO points
+    END CONSTRUCTOR
+END CLASS
+
+
+
+CLASS STUDENT
+    ATTRIBUTES
+        STUDENT_ID: NUMBER
+        NAME: TEXT
+        ATTEMPTS: LIST<ATTEMPT>
+
+
+    CONSTRUCTOR(id: NUMBER, name: TEXT)
+
+        SET STUDENT_ID TO id
+        SET NAME TO name
+        SET ATTEMPTS TO EMPTY LIST
+
+    END CONSTRUCTOR
+
+
+
+    METHODS
+
+        ADD_ATTEMPT(attempt: ATTEMPT)
+        ADD attempt TO ATTEMPTS
+      END METHOD
+   END METHODS
+END CLASS
+
+
+
+CLASS ATTEMPT
+    ATTRIBUTES
+        ATTEMPT_ID: NUMBER
+        STUDENT: STUDENT
+        EXAM: EXAM
+        ANSWERS: LIST<ANSWER>
+        START_TIME: TIME
+        SCORE: NUMBER
+
+
+    CONSTRUCTOR(id: NUMBER, student: STUDENT, exam: EXAM, startTime: TIME)
+
+        SET ATTEMPT_ID TO id
+        SET STUDENT TO student
+        SET EXAM TO exam
+        SET ANSWERS TO EMPTY LIST
+        SET START_TIME TO startTime
+        SET SCORE TO 0
+
+        CALL student.ADD_ATTEMPT(SELF)
+
+    END CONSTRUCTOR
+
+
+
+    METHODS
+
+
+        ADD_ANSWER(answer: ANSWER, currentTime: TIME)
+
+            IF currentTime - START_TIME GREATER THAN EXAM.TIME_LIMIT THEN
+            DISPLAY "TIME LIMIT EXCEEDED"
+ELSE
+
+           ADD answer TO ANSWERS
+        END IF
+     END METHOD
+
+
+
+        CALCULATE_SCORE()
+            SET TOTAL TO 0
+            SET i TO 0
+            REPEAT
+
+            IF ANSWERS[i].SELECTED_ANSWER EQUALS EXAM.QUESTIONS[i].CORRECT_ANSWER THEN
+            SET TOTAL TO TOTAL + EXAM.QUESTIONS[i].POINTS
+        END IF
+            SET i TO i + 1
+            IF i EQUALS LENGTH(ANSWERS)
+            RETURN TOTAL
+        END METHOD
+            GET_SCORE()
+            SET SCORE TO CALCULATE_SCORE()
+            RETURN SCORE
+       END METHOD
+   END METHODS
+END CLASS
+
+
+
+CLASS ANSWER
+    ATTRIBUTES
+        QUESTION: QUESTION
+        SELECTED_ANSWER: TEXT
+
+
+    CONSTRUCTOR(question: QUESTION, selected: TEXT)
+
+        SET QUESTION TO question
+        SET SELECTED_ANSWER TO selected
+
+    END CONSTRUCTOR
+
+END CLASS
+
+
+
+Task 290: Taxi Company 
+
+
+
+CLASS TAXI_COMPANY
+    ATTRIBUTES
+        DRIVERS: LIST<DRIVER>
+        PASSENGERS: LIST<PASSENGER>
+        TRIPS: LIST<TRIP>
+
+
+    CONSTRUCTOR()
+
+        SET DRIVERS TO EMPTY LIST
+        SET PASSENGERS TO EMPTY LIST
+        SET TRIPS TO EMPTY LIST
+
+    END CONSTRUCTOR
+
+
+
+    METHODS
+
+
+        ADD_DRIVER(driver: DRIVER)
+        ADD driver TO DRIVERS
+      END METHOD
+
+        ADD_PASSENGER(passenger: PASSENGER)
+        ADD passenger TO PASSENGERS
+     END METHOD
+        ADD_TRIP(trip: TRIP)
+        ADD trip TO TRIPS
+     END METHOD
+   END METHODS
+END CLASS
+
+
+
+CLASS VEHICLE
+    ATTRIBUTES
+        VEHICLE_ID: NUMBER
+        MODEL: TEXT
+        PLATE_NUMBER: TEXT
+
+
+    CONSTRUCTOR(id: NUMBER, model: TEXT, plate: TEXT)
+
+        SET VEHICLE_ID TO id
+        SET MODEL TO model
+        SET PLATE_NUMBER TO plate
+    END CONSTRUCTOR
+END CLASS
+
+
+
+CLASS DRIVER
+    ATTRIBUTES
+        DRIVER_ID: NUMBER
+        NAME: TEXT
+        PHONE: TEXT
+        VEHICLE: VEHICLE
+        TRIPS: LIST<TRIP>
+
+
+    CONSTRUCTOR(id: NUMBER, name: TEXT, phone: TEXT, vehicle: VEHICLE)
+
+        SET DRIVER_ID TO id
+        SET NAME TO name
+        SET PHONE TO phone
+        SET VEHICLE TO vehicle
+        SET TRIPS TO EMPTY LIST
+
+    END CONSTRUCTOR
+
+
+
+    METHODS
+
+
+        ADD_TRIP(trip: TRIP)
+        ADD trip TO TRIPS
+     END METHOD
+
+        CALCULATE_TOTAL_EARNINGS()
+
+            SET TOTAL TO 0
+            SET i TO 0
+            REPEAT
+            SET TOTAL TO TOTAL + TRIPS[i].FARE
+            SET i TO i + 1
+            IF i EQUALS LENGTH(TRIPS)
+         RETURN TOTAL
+     END METHOD
+  END METHODS
+END CLASS
+
+
+
+CLASS PASSENGER
+    ATTRIBUTES
+        PASSENGER_ID: NUMBER
+        NAME: TEXT
+        PHONE: TEXT
+        TRIPS: LIST<TRIP>
+
+
+    CONSTRUCTOR(id: NUMBER, name: TEXT, phone: TEXT)
+
+        SET PASSENGER_ID TO id
+        SET NAME TO name
+        SET PHONE TO phone
+        SET TRIPS TO EMPTY LIST
+
+    END CONSTRUCTOR
+
+
+
+    METHODS
+
+
+        ADD_TRIP(trip: TRIP)
+        ADD trip TO TRIPS
+     END METHOD
+   END METHODS
+END CLASS
+
+
+
+CLASS TRIP
+    ATTRIBUTES
+        TRIP_ID: NUMBER
+        DRIVER: DRIVER
+        PASSENGER: PASSENGER
+        PICKUP_LOCATION: TEXT
+        DROP_OFF_LOCATION: TEXT
+        FARE: NUMBER
+
+
+    CONSTRUCTOR(id: NUMBER, driver: DRIVER, passenger: PASSENGER, pickup: TEXT, dropOff: TEXT, fare: NUMBER)
+
+        SET TRIP_ID TO id
+        SET DRIVER TO driver
+        SET PASSENGER TO passenger
+        SET PICKUP_LOCATION TO pickup
+        SET DROP_OFF_LOCATION TO dropOff
+        SET FARE TO fare
+
+        CALL driver.ADD_TRIP(SELF)
+        CALL passenger.ADD_TRIP(SELF)
+
+    END CONSTRUCTOR
+
+
+
+    METHODS
+       GET_FARE()
+       RETURN FARE
+      END METHOD
+   END METHODS
+END CLASS
+
+
+Task 291: Co-working Space 
+
+
+CLASS CO_WORKING_SPACE
+    ATTRIBUTES
+        MEMBERS: LIST<MEMBER>
+        ROOMS: LIST<ROOM>
+        BOOKINGS: LIST<BOOKING>
+
+
+    CONSTRUCTOR()
+
+        SET MEMBERS TO EMPTY LIST
+        SET ROOMS TO EMPTY LIST
+        SET BOOKINGS TO EMPTY LIST
+
+    END CONSTRUCTOR
+
+
+
+    METHODS
+
+        ADD_MEMBER(member: MEMBER)
+        ADD member TO MEMBERS
+     END METHOD
+        ADD_ROOM(room: ROOM)
+        ADD room TO ROOMS
+     END METHOD
+
+        ADD_BOOKING(booking: BOOKING)
+        ADD booking TO BOOKINGS
+     END METHOD
+   END METHODS
+END CLASS
+
+
+
+CLASS MEMBERSHIP_PLAN
+    ATTRIBUTES
+        PLAN_ID: NUMBER
+        PLAN_NAME: TEXT
+        MONTHLY_QUOTA: NUMBER
+
+
+    CONSTRUCTOR(id: NUMBER, name: TEXT, quota: NUMBER)
+
+        SET PLAN_ID TO id
+        SET PLAN_NAME TO name
+        SET MONTHLY_QUOTA TO quota
+    END CONSTRUCTOR
+END CLASS
+
+
+
+CLASS MEMBER
+    ATTRIBUTES
+        MEMBER_ID: NUMBER
+        NAME: TEXT
+        PLAN: MEMBERSHIP_PLAN
+        BOOKINGS: LIST<BOOKING>
+
+
+    CONSTRUCTOR(id: NUMBER, name: TEXT, plan: MEMBERSHIP_PLAN)
+
+        SET MEMBER_ID TO id
+        SET NAME TO name
+        SET PLAN TO plan
+        SET BOOKINGS TO EMPTY LIST
+
+    END CONSTRUCTOR
+
+
+
+    METHODS
+
+
+        ADD_BOOKING(booking: BOOKING)
+        ADD booking TO BOOKINGS
+     END METHOD
+        CALCULATE_USED_HOURS()
+        SET TOTAL TO 0
+        SET i TO 0
+        REPEAT
+        SET TOTAL TO TOTAL + BOOKINGS[i].DURATION
+        SET i TO i + 1
+        IF i EQUALS LENGTH(BOOKINGS)
+        RETURN TOTAL
+     END METHOD
+        REMAINING_HOURS()
+        RETURN PLAN.MONTHLY_QUOTA - CALCULATE_USED_HOURS()
+     END METHOD
+
+
+
+        CAN_BOOK(hours: NUMBER)
+            IF CALCULATE_USED_HOURS() + hours LESS THAN OR EQUAL TO PLAN.MONTHLY_QUOTA THEN
+                RETURN TRUE
+ ELSE
+                RETURN FALSE
+            END IF
+        END METHOD
+    END METHODS
+END CLASS
+
+
+
+CLASS ROOM
+    ATTRIBUTES
+        ROOM_ID: NUMBER
+        NAME: TEXT
+        BOOKINGS: LIST<BOOKING>
+
+
+    CONSTRUCTOR(id: NUMBER, name: TEXT)
+
+        SET ROOM_ID TO id
+        SET NAME TO name
+        SET BOOKINGS TO EMPTY LIST
+
+    END CONSTRUCTOR
+
+
+
+    METHODS
+
+
+        IS_AVAILABLE(startTime: TIME, endTime: TIME)
+        SET i TO 0
+
+
+        REPEAT
+        IF startTime LESS THAN BOOKINGS[i].END_TIME AND endTime GREATER THAN BOOKINGS[i].START_TIME THEN
+        RETURN FALSE
+      END IF
+        SET i TO i + 1
+        IF i EQUALS LENGTH(BOOKINGS)
+        RETURN TRUE
+     END METHOD
+        ADD_BOOKING(booking: BOOKING)
+        ADD booking TO BOOKINGS
+    END METHOD
+  END METHODS
+END CLASS
+
+
+
+CLASS BOOKING
+    ATTRIBUTES
+        BOOKING_ID: NUMBER
+        MEMBER: MEMBER
+        ROOM: ROOM
+        START_TIME: TIME
+        END_TIME: TIME
+        DURATION: NUMBER
+
+
+    CONSTRUCTOR(id: NUMBER, member: MEMBER, room: ROOM, startTime: TIME, endTime: TIME)
+
+        SET BOOKING_ID TO id
+        SET MEMBER TO member
+        SET ROOM TO room
+        SET START_TIME TO startTime
+        SET END_TIME TO endTime
+        SET DURATION TO endTime - startTime
+
+    END CONSTRUCTOR
+
+
+
+    METHODS
+
+
+        CONFIRM_BOOKING()
+
+            IF MEMBER.CAN_BOOK(DURATION) EQUALS TRUE AND ROOM.IS_AVAILABLE(START_TIME, END_TIME) EQUALS TRUE THEN
+            CALL MEMBER.ADD_BOOKING(SELF)
+            CALL ROOM.ADD_BOOKING(SELF)
+
+                RETURN TRUE
+
+
+ELSE
+
+            RETURN FALSE
+         END IF
+      END METHOD
+   END METHODS
+END CLASS
+
+
+
+Task 292: Personal Trainer Bookings 
+
+
+CLASS FITNESS_CENTER
+    ATTRIBUTES
+        TRAINERS: LIST<TRAINER>
+        CLIENTS: LIST<CLIENT>
+        SESSIONS: LIST<SESSION>
+
+
+    CONSTRUCTOR()
+
+        SET TRAINERS TO EMPTY LIST
+        SET CLIENTS TO EMPTY LIST
+        SET SESSIONS TO EMPTY LIST
+
+    END CONSTRUCTOR
+
+
+
+    METHODS
+
+
+        ADD_TRAINER(trainer: TRAINER)
+        ADD trainer TO TRAINERS
+     END METHOD
+       ADD_CLIENT(client: CLIENT)
+       ADD client TO CLIENTS
+   END METHOD
+
+
+
+        ADD_SESSION(session: SESSION)
+        ADD session TO SESSIONS
+
+    END METHOD
+   END METHODS
+END CLASS
+
+
+
+CLASS TRAINER
+    ATTRIBUTES
+        TRAINER_ID: NUMBER
+        NAME: TEXT
+        PHONE: TEXT
+        SESSIONS: LIST<SESSION>
+
+
+    CONSTRUCTOR(id: NUMBER, name: TEXT, phone: TEXT)
+
+        SET TRAINER_ID TO id
+        SET NAME TO name
+        SET PHONE TO phone
+        SET SESSIONS TO EMPTY LIST
+
+    END CONSTRUCTOR
+
+
+
+    METHODS
+
+
+        ADD_SESSION(session: SESSION)
+        ADD session TO SESSIONS
+
+     END METHOD
+        GET_TOTAL_SESSIONS()
+        RETURN LENGTH(SESSIONS)
+    END METHOD
+  END METHODS
+END CLASS
+
+
+
+CLASS CLIENT
+    ATTRIBUTES
+        CLIENT_ID: NUMBER
+        NAME: TEXT
+        PHONE: TEXT
+        EMAIL: TEXT
+        SESSIONS: LIST<SESSION>
+
+
+    CONSTRUCTOR(id: NUMBER, name: TEXT, phone: TEXT, email: TEXT)
+
+        SET CLIENT_ID TO id
+        SET NAME TO name
+        SET PHONE TO phone
+        SET EMAIL TO email
+        SET SESSIONS TO EMPTY LIST
+
+    END CONSTRUCTOR
+
+
+
+    METHODS
+
+
+        BOOK_SESSION(session: SESSION)
+        ADD session TO SESSIONS
+
+     END METHOD
+        GET_TOTAL_BOOKED_SESSIONS()
+        RETURN LENGTH(SESSIONS)
+    END METHOD
+  END METHODS
+END CLASS
+
+
+
+CLASS SESSION
+    ATTRIBUTES
+        SESSION_ID: NUMBER
+        CLIENT: CLIENT
+        TRAINER: TRAINER
+        SESSION_DATE: DATE
+        DURATION: NUMBER
+        WORKOUT_TYPE: TEXT
+
+
+    CONSTRUCTOR(id: NUMBER, client: CLIENT, trainer: TRAINER, date: DATE, duration: NUMBER, workout: TEXT)
+
+        SET SESSION_ID TO id
+        SET CLIENT TO client
+        SET TRAINER TO trainer
+        SET SESSION_DATE TO date
+        SET DURATION TO duration
+        SET WORKOUT_TYPE TO workout
+
+        CALL client.BOOK_SESSION(SELF)
+        CALL trainer.ADD_SESSION(SELF)
+
+    END CONSTRUCTOR
+
+
+
+    METHODS
+        GET_DURATION()
+        RETURN DURATION
+     END METHOD
+   END METHODS
+END CLASS
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
