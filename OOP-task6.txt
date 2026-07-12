@@ -1,0 +1,557 @@
+
+Task 303: Musical Instruments Store  
+
+
+
+CLASS MUSIC_STORE
+    ATTRIBUTES
+        INSTRUMENTS: LIST<INSTRUMENT>
+    CONSTRUCTOR()
+        SET INSTRUMENTS TO EMPTY LIST
+    END CONSTRUCTOR
+    METHODS
+        ADD_INSTRUMENT(instrument: INSTRUMENT)
+        ADD instrument TO INSTRUMENTS
+      END METHOD
+   END METHODS
+END CLASS
+
+
+
+CLASS INSTRUMENT
+    ATTRIBUTES
+        BRAND: TEXT
+        PRICE: NUMBER
+    CONSTRUCTOR(brand: TEXT, price: NUMBER)
+        SET BRAND TO brand
+        SET PRICE TO price
+    END CONSTRUCTOR
+    METHODS
+        PLAY_DESCRIPTION()
+        RETURN "Instrument is played."
+      END METHOD
+    END METHODS
+END CLASS
+
+
+
+CLASS GUITAR EXTENDS INSTRUMENT
+    ATTRIBUTES
+        STRINGS: NUMBER
+    CONSTRUCTOR(brand: TEXT, price: NUMBER, strings: NUMBER)
+        CALL INSTRUMENT.CONSTRUCTOR(brand, price)
+        SET STRINGS TO strings
+    END CONSTRUCTOR
+    METHODS
+        PLAY_DESCRIPTION()
+        RETURN "Strummed or plucked."
+      END METHOD
+   END METHODS
+END CLASS
+
+
+
+CLASS DRUM_KIT EXTENDS INSTRUMENT
+    ATTRIBUTES
+        DRUM_PIECES: NUMBER
+    CONSTRUCTOR(brand: TEXT, price: NUMBER, drumPieces: NUMBER)
+        CALL INSTRUMENT.CONSTRUCTOR(brand, price)
+        SET DRUM_PIECES TO drumPieces
+    END CONSTRUCTOR
+    METHODS
+        PLAY_DESCRIPTION()
+        RETURN "Struck."
+      END METHOD
+   END METHODS
+END CLASS
+
+
+
+CLASS KEYBOARD EXTENDS INSTRUMENT
+    ATTRIBUTES
+        KEYS: NUMBER
+    CONSTRUCTOR(brand: TEXT, price: NUMBER, keys: NUMBER)
+        CALL INSTRUMENT.CONSTRUCTOR(brand, price)
+        SET KEYS TO keys
+    END CONSTRUCTOR
+    METHODS
+
+        PLAY_DESCRIPTION()
+        RETURN "Pressed."
+      END METHOD
+   END METHODS
+END CLASS
+
+
+
+Task 304: Fitness App Workouts  
+
+
+
+CLASS FITNESS_LOG
+    ATTRIBUTES
+        WORKOUTS: LIST<WORKOUT>
+    CONSTRUCTOR()
+        SET WORKOUTS TO EMPTY LIST
+    END CONSTRUCTOR
+    METHODS
+        ADD_WORKOUT(workout: WORKOUT)
+        ADD workout TO WORKOUTS
+     END METHOD
+  END METHODS
+END CLASS
+
+
+
+CLASS WORKOUT
+    ATTRIBUTES
+        DATE: DATE
+        DURATION: NUMBER
+    CONSTRUCTOR(date: DATE, duration: NUMBER)
+        SET DATE TO date
+        SET DURATION TO duration
+    END CONSTRUCTOR
+    METHODS
+        CALCULATE_CALORIES()
+        RETURN 0
+     END METHOD
+   END METHODS
+END CLASS
+
+
+
+CLASS RUNNING_WORKOUT EXTENDS WORKOUT
+    ATTRIBUTES
+        DISTANCE: NUMBER
+        PACE: NUMBER
+    CONSTRUCTOR(date: DATE, duration: NUMBER, distance: NUMBER, pace: NUMBER)
+        CALL WORKOUT.CONSTRUCTOR(date, duration)
+        SET DISTANCE TO distance
+        SET PACE TO pace
+    END CONSTRUCTOR
+    METHODS
+        CALCULATE_CALORIES()
+        RETURN DISTANCE * PACE
+        END METHOD
+    END METHODS
+END CLASS
+
+
+
+CLASS CYCLING_WORKOUT EXTENDS WORKOUT
+    ATTRIBUTES
+        DISTANCE: NUMBER
+        RESISTANCE_LEVEL: NUMBER
+    CONSTRUCTOR(date: DATE, duration: NUMBER, distance: NUMBER, resistanceLevel: NUMBER)
+        CALL WORKOUT.CONSTRUCTOR(date, duration)
+        SET DISTANCE TO distance
+        SET RESISTANCE_LEVEL TO resistanceLevel
+    END CONSTRUCTOR
+    METHODS
+        CALCULATE_CALORIES()
+        RETURN DISTANCE * RESISTANCE_LEVEL
+      END METHOD
+   END METHODS
+END CLASS
+
+
+
+CLASS WEIGHT_TRAINING_WORKOUT EXTENDS WORKOUT
+    ATTRIBUTES
+        SETS: NUMBER
+        REPS: NUMBER
+    CONSTRUCTOR(date: DATE, duration: NUMBER, sets: NUMBER, reps: NUMBER)
+        CALL WORKOUT.CONSTRUCTOR(date, duration)
+        SET SETS TO sets
+        SET REPS TO reps
+    END CONSTRUCTOR
+    METHODS
+        CALCULATE_CALORIES()
+        RETURN SETS * REPS
+      END METHOD
+   END METHODS
+END CLASS
+
+
+
+
+Task 305: Video Game Characters  
+
+
+
+
+CLASS INVENTORY
+    ATTRIBUTES
+        ITEMS: LIST<ITEM>
+    CONSTRUCTOR()
+        SET ITEMS TO EMPTY LIST
+    END CONSTRUCTOR
+    METHODS
+        ADD_ITEM(item: ITEM)
+        ADD item TO ITEMS
+      END METHOD
+   END METHODS
+END CLASS
+
+
+
+CLASS ITEM
+    ATTRIBUTES
+        ITEM_NAME: TEXT
+    CONSTRUCTOR(itemName: TEXT)
+        SET ITEM_NAME TO itemName
+    END CONSTRUCTOR
+    METHODS
+        GET_NAME()
+        RETURN ITEM_NAME
+      END METHOD
+   END METHODS
+END CLASS
+
+
+
+CLASS CHARACTER
+    ATTRIBUTES
+        NAME: TEXT
+        HEALTH: NUMBER
+        INVENTORY: INVENTORY
+    CONSTRUCTOR(name: TEXT, health: NUMBER)
+        SET NAME TO name
+        SET HEALTH TO health
+        SET INVENTORY TO NEW INVENTORY()
+    END CONSTRUCTOR
+    METHODS
+        ATTACK()
+        RETURN "CHARACTER ATTACKS"
+      END METHOD
+   END METHODS
+END CLASS
+
+
+
+CLASS WARRIOR EXTENDS CHARACTER
+    ATTRIBUTES
+        HEAVY_ARMOR: TEXT
+    CONSTRUCTOR(name: TEXT, health: NUMBER, heavyArmor: TEXT)
+        CALL CHARACTER.CONSTRUCTOR(name, health)
+        SET HEAVY_ARMOR TO heavyArmor
+    END CONSTRUCTOR
+    METHODS
+        ATTACK()
+        RETURN "ATTACK USING MELEE STRENGTH"
+      END METHOD
+   END METHODS
+END CLASS
+
+
+
+CLASS MAGE EXTENDS CHARACTER
+    ATTRIBUTES
+        MANA: NUMBER
+    CONSTRUCTOR(name: TEXT, health: NUMBER, mana: NUMBER)
+        CALL CHARACTER.CONSTRUCTOR(name, health)
+        SET MANA TO mana
+    END CONSTRUCTOR
+    METHODS
+        ATTACK()
+            IF MANA GREATER THAN 0 THEN
+            SET MANA TO MANA - 1
+            RETURN "ATTACK USING MAGIC SPELL"
+ELSE
+            RETURN "NO MANA"
+         END IF
+     END METHOD
+  END METHODS
+END CLASS
+
+
+
+CLASS ARCHER EXTENDS CHARACTER
+    ATTRIBUTES
+        ARROWS: NUMBER
+    CONSTRUCTOR(name: TEXT, health: NUMBER, arrows: NUMBER)
+        CALL CHARACTER.CONSTRUCTOR(name, health)
+        SET ARROWS TO arrows
+    END CONSTRUCTOR
+    METHODS
+        ATTACK()
+            IF ARROWS GREATER THAN 0 THEN
+            SET ARROWS TO ARROWS - 1
+            RETURN "ATTACK USING ARROW"
+ELSE
+            RETURN "NO ARROWS"
+        END IF
+     END METHOD
+  END METHODS
+END CLASS
+
+
+Task 306: Utility Billing System  
+
+
+
+
+
+CLASS CUSTOMER_ACCOUNT
+    ATTRIBUTES
+        BILLS: LIST<BILL>
+    CONSTRUCTOR()
+        SET BILLS TO EMPTY LIST
+    END CONSTRUCTOR
+    METHODS
+        ADD_BILL(bill: BILL)
+        ADD bill TO BILLS
+     END METHOD
+  END METHODS
+END CLASS
+
+
+
+CLASS METER_READING
+    ATTRIBUTES
+        START_READING: NUMBER
+        END_READING: NUMBER
+    CONSTRUCTOR(startReading: NUMBER, endReading: NUMBER)
+        SET START_READING TO startReading
+        SET END_READING TO endReading
+    END CONSTRUCTOR
+    METHODS
+        GET_CONSUMPTION()
+        RETURN END_READING - START_READING
+      END METHOD
+  END METHODS
+END CLASS
+
+
+
+CLASS BILL
+    ATTRIBUTES
+        BILLING_PERIOD: TEXT
+        DUE_DATE: DATE
+        METER_READING: METER_READING
+    CONSTRUCTOR(billingPeriod: TEXT, dueDate: DATE, meterReading: METER_READING)
+        SET BILLING_PERIOD TO billingPeriod
+        SET DUE_DATE TO dueDate
+        SET METER_READING TO meterReading
+    END CONSTRUCTOR
+    METHODS
+        CALCULATE_AMOUNT()
+        RETURN 0
+      END METHOD
+   END METHODS
+END CLASS
+
+
+
+CLASS ELECTRICITY_BILL EXTENDS BILL
+    ATTRIBUTES
+        POWER_UNITS: NUMBER
+        RATE: NUMBER
+    CONSTRUCTOR(billingPeriod: TEXT, dueDate: DATE, meterReading: METER_READING, powerUnits: NUMBER, rate: NUMBER)
+        CALL BILL.CONSTRUCTOR(billingPeriod, dueDate, meterReading)
+        SET POWER_UNITS TO powerUnits
+        SET RATE TO rate
+    END CONSTRUCTOR
+
+
+
+    METHODS
+        CALCULATE_AMOUNT()
+        RETURN POWER_UNITS * RATE
+      END METHOD
+   END METHODS
+END CLASS
+
+
+
+CLASS WATER_BILL EXTENDS BILL
+    ATTRIBUTES
+        LITERS_CONSUMED: NUMBER
+        FLAT_RATE: NUMBER
+        STANDING_CHARGE: NUMBER
+
+
+        CONSTRUCTOR(billingPeriod: TEXT, dueDate: DATE, meterReading: METER_READING, litersConsumed: NUMBER,    \
+        flatRate:  
+        NUMBER, standingCharge: NUMBER)
+        CALL BILL.CONSTRUCTOR(billingPeriod, dueDate, meterReading)
+        SET LITERS_CONSUMED TO litersConsumed
+        SET FLAT_RATE TO flatRate
+        SET STANDING_CHARGE TO standingCharge
+    END CONSTRUCTOR
+    
+        CALCULATE_AMOUNT()
+        RETURN (LITERS_CONSUMED * FLAT_RATE) + STANDING_CHARGE
+     END METHOD
+  END METHODS
+END CLASS
+
+
+
+CLASS GAS_BILL EXTENDS BILL
+    ATTRIBUTES
+        UNITS_CONSUMED: NUMBER
+        RATE: NUMBER
+        SEASON: TEXT
+    CONSTRUCTOR(billingPeriod: TEXT, dueDate: DATE, meterReading: METER_READING, unitsConsumed: NUMBER, rate: NUMBER, season: TEXT)
+        CALL BILL.CONSTRUCTOR(billingPeriod, dueDate, meterReading)
+        SET UNITS_CONSUMED TO unitsConsumed
+        SET RATE TO rate
+        SET SEASON TO season
+    END CONSTRUCTOR
+    METHODS
+        CALCULATE_AMOUNT()
+            SET TOTAL TO UNITS_CONSUMED * RATE
+            IF SEASON EQUALS "WINTER" THEN
+            SET TOTAL TO TOTAL + (TOTAL * 0.10)
+         END IF
+            RETURN TOTAL
+       END METHOD
+    END METHODS
+END CLASS
+
+
+
+Task 307: Ride-Sharing Vehicle Tiers  
+
+
+
+
+CLASS ROUTE
+    ATTRIBUTES
+        WAYPOINTS: LIST<WAYPOINT>
+    CONSTRUCTOR()
+        SET WAYPOINTS TO EMPTY LIST
+    END CONSTRUCTOR
+    METHODS
+        ADD_WAYPOINT(waypoint: WAYPOINT)
+        ADD waypoint TO WAYPOINTS
+      END METHOD
+  END METHODS
+END CLASS
+
+
+
+CLASS WAYPOINT
+    ATTRIBUTES
+        LOCATION: TEXT
+    CONSTRUCTOR(location: TEXT)
+        SET LOCATION TO location
+    END CONSTRUCTOR
+    METHODS
+        GET_LOCATION()
+        RETURN LOCATION
+      END METHOD
+  END METHODS
+END CLASS
+
+
+
+CLASS RIDE
+    ATTRIBUTES
+        PICKUP_LOCATION: TEXT
+        DROP_OFF_LOCATION: TEXT
+        ROUTE: ROUTE
+    CONSTRUCTOR(pickupLocation: TEXT, dropOffLocation: TEXT, route: ROUTE)
+        SET PICKUP_LOCATION TO pickupLocation
+        SET DROP_OFF_LOCATION TO dropOffLocation
+        SET ROUTE TO route
+    END CONSTRUCTOR
+    METHODS
+        CALCULATE_FARE()
+        RETURN 0
+      END METHOD
+   END METHODS
+END CLASS
+
+
+
+CLASS STANDARD_RIDE EXTENDS RIDE
+    ATTRIBUTES
+        DISTANCE: NUMBER
+        BASE_RATE: NUMBER
+    CONSTRUCTOR(pickupLocation: TEXT, dropOffLocation: TEXT, route: ROUTE, distance: NUMBER, baseRate: NUMBER)
+        CALL RIDE.CONSTRUCTOR(pickupLocation, dropOffLocation, route)
+        SET DISTANCE TO distance
+        SET BASE_RATE TO baseRate
+    END CONSTRUCTOR
+    METHODS
+        CALCULATE_FARE()
+        RETURN DISTANCE * BASE_RATE
+      END METHOD
+   END METHODS
+END CLASS
+
+
+
+CLASS PREMIUM_RIDE EXTENDS RIDE
+    ATTRIBUTES
+        DISTANCE: NUMBER
+        BASE_RATE: NUMBER
+        COMFORT_SURCHARGE: NUMBER
+        CONSTRUCTOR(pickupLocation: TEXT, dropOffLocation: TEXT, route: ROUTE, distance: NUMBER, baseRate: NUMBER, 
+        comfortSurcharge: NUMBER)
+        CALL RIDE.CONSTRUCTOR(pickupLocation, dropOffLocation, route)
+        SET DISTANCE TO distance
+        SET BASE_RATE TO baseRate
+        SET COMFORT_SURCHARGE TO comfortSurcharge
+    END CONSTRUCTOR
+    METHODS
+        CALCULATE_FARE()
+        RETURN (DISTANCE * BASE_RATE) + COMFORT_SURCHARGE
+      END METHOD
+   END METHODS
+END CLASS
+
+
+
+CLASS SHARED_RIDE EXTENDS STANDARD_RIDE
+    ATTRIBUTES
+        PASSENGERS: NUMBER
+    CONSTRUCTOR(pickupLocation: TEXT, dropOffLocation: TEXT, route: ROUTE, distance: NUMBER, baseRate: NUMBER, passengers: NUMBER)
+        CALL STANDARD_RIDE.CONSTRUCTOR(pickupLocation, dropOffLocation, route, distance, baseRate)
+        SET PASSENGERS TO passengers
+    END CONSTRUCTOR
+    METHODS
+        CALCULATE_FARE()
+            SET TOTAL TO CALL STANDARD_RIDE.CALCULATE_FARE()
+            RETURN TOTAL / PASSENGERS
+     END METHOD
+  END METHODS
+END CLASS
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
