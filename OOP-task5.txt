@@ -1,4 +1,3 @@
-
 Task 293: Shape Drawing App  
 
 
@@ -6,96 +5,181 @@ Task 293: Shape Drawing App
 CLASS CANVAS
     ATTRIBUTES
         SHAPES: LIST<SHAPE>
+
     CONSTRUCTOR()
-        SET SHAPES TO EMPTY LIST
+
+        SET THIS.SHAPES TO EMPTY LIST
+
     END CONSTRUCTOR
+
+
     METHODS
+
         ADD_SHAPE(shape: SHAPE)
-        ADD shape TO SHAPES
-      END METHOD
-   END METHODS
+
+            ADD shape TO THIS.SHAPES
+
+        END METHOD
+
+    END METHODS
 END CLASS
+
 
 
 
 CLASS SHAPE
+
     ATTRIBUTES
         COLOR: TEXT
         POSITION: TEXT
+
+
     CONSTRUCTOR(color: TEXT, position: TEXT)
-        SET COLOR TO color
-        SET POSITION TO position
+
+        SET THIS.COLOR TO color
+        SET THIS.POSITION TO position
+
     END CONSTRUCTOR
+
+
     METHODS
+
         CALCULATE_AREA()
-   END METHOD
+
+            RETURN 0
+
+        END METHOD
+
+
         CALCULATE_PERIMETER()
-     END METHOD
-   END METHODS
+
+            RETURN 0
+
+        END METHOD
+
+    END METHODS
+
 END CLASS
+
 
 
 
 CLASS CIRCLE INHERITS SHAPE
+
     ATTRIBUTES
         RADIUS: NUMBER
+
+
     CONSTRUCTOR(color: TEXT, position: TEXT, radius: NUMBER)
-        CALL SHAPE.CONSTRUCTOR(color, position)
-        SET RADIUS TO radius
+
+        CALL SUPER(color, position)
+
+        SET THIS.RADIUS TO radius
+
     END CONSTRUCTOR
+
+
     METHODS
+
         CALCULATE_AREA()
-        RETURN 3.14 * RADIUS * RADIUS
-     END METHOD
+
+            RETURN 3.14 * THIS.RADIUS * THIS.RADIUS
+
+        END METHOD
+
+
         CALCULATE_PERIMETER()
-        RETURN 2 * 3.14 * RADIUS
-     END METHOD
-  END METHODS
+
+            RETURN 2 * 3.14 * THIS.RADIUS
+
+        END METHOD
+
+    END METHODS
+
 END CLASS
+
 
 
 
 CLASS RECTANGLE INHERITS SHAPE
+
     ATTRIBUTES
         WIDTH: NUMBER
         HEIGHT: NUMBER
+
+
     CONSTRUCTOR(color: TEXT, position: TEXT, width: NUMBER, height: NUMBER)
-        CALL SHAPE.CONSTRUCTOR(color, position)
-        SET WIDTH TO width
-        SET HEIGHT TO height
+
+        CALL SUPER(color, position)
+
+        SET THIS.WIDTH TO width
+        SET THIS.HEIGHT TO height
+
     END CONSTRUCTOR
+
+
     METHODS
+
         CALCULATE_AREA()
-        RETURN WIDTH * HEIGHT
-    END METHOD
+
+            RETURN THIS.WIDTH * THIS.HEIGHT
+
+        END METHOD
+
+
         CALCULATE_PERIMETER()
-        RETURN 2 * (WIDTH + HEIGHT)
-     END METHOD
-   END METHODS
+
+            RETURN 2 * (THIS.WIDTH + THIS.HEIGHT)
+
+        END METHOD
+
+    END METHODS
+
 END CLASS
+
 
 
 
 CLASS TRIANGLE INHERITS SHAPE
+
     ATTRIBUTES
         SIDE1: NUMBER
         SIDE2: NUMBER
         SIDE3: NUMBER
-    CONSTRUCTOR(color: TEXT, position: TEXT, side1: NUMBER, side2: NUMBER, side3: NUMBER)
-        CALL SHAPE.CONSTRUCTOR(color, position)
-        SET SIDE1 TO side1
-        SET SIDE2 TO side2
-        SET SIDE3 TO side3
-    END CONSTRUCTOR
-    METHODS
-        CALCULATE_AREA()
-     END METHOD
-        CALCULATE_PERIMETER()
-        RETURN SIDE1 + SIDE2 + SIDE3
-     END METHOD
-   END METHODS
-END CLASS
 
+
+    CONSTRUCTOR(color: TEXT, position: TEXT, side1: NUMBER, side2: NUMBER, side3: NUMBER)
+
+        CALL SUPER(color, position)
+
+        SET THIS.SIDE1 TO side1
+        SET THIS.SIDE2 TO side2
+        SET THIS.SIDE3 TO side3
+
+    END CONSTRUCTOR
+
+
+    METHODS
+
+        CALCULATE_AREA()
+
+            SET S TO (THIS.SIDE1 + THIS.SIDE2 + THIS.SIDE3) / 2
+
+            RETURN SQRT(S * (S - THIS.SIDE1) * (S - THIS.SIDE2) * (S - THIS.SIDE3))
+
+        END METHOD
+
+
+        CALCULATE_PERIMETER()
+
+            RETURN THIS.SIDE1 + THIS.SIDE2 + THIS.SIDE3
+
+        END METHOD
+
+    END METHODS
+
+END CLASS
+-------------------------------------------------------------------------------------------------------------------
 
 
 
@@ -106,193 +190,381 @@ Task 294: Employee Payroll
 
 
 CLASS PAYROLL
+
     ATTRIBUTES
         EMPLOYEES: LIST<EMPLOYEE>
+
+
     CONSTRUCTOR()
-        SET EMPLOYEES TO EMPTY LIST
+
+        SET THIS.EMPLOYEES TO EMPTY LIST
+
     END CONSTRUCTOR
+
+
+
     METHODS
+
         ADD_EMPLOYEE(employee: EMPLOYEE)
-        ADD employee TO EMPLOYEES
-     END METHOD
-   END METHODS
+
+            ADD employee TO THIS.EMPLOYEES
+
+        END METHOD
+
+
+
+        CALCULATE_TOTAL_PAYROLL()
+
+            SET TOTAL TO 0
+            SET i TO 0
+
+            REPEAT
+
+                SET TOTAL TO TOTAL + THIS.EMPLOYEES[i].CALCULATE_MONTHLY_PAY()
+                SET i TO i + 1
+
+            UNTIL i = LENGTH(THIS.EMPLOYEES)
+
+            RETURN TOTAL
+
+        END METHOD
+
+
+    END METHODS
+
 END CLASS
+
 
 
 
 CLASS EMPLOYEE
+
     ATTRIBUTES
         NAME: TEXT
         EMPLOYEE_ID: NUMBER
         HIRE_DATE: TEXT
+
+
     CONSTRUCTOR(name: TEXT, id: NUMBER, hireDate: TEXT)
-        SET NAME TO name
-        SET EMPLOYEE_ID TO id
-        SET HIRE_DATE TO hireDate
+
+        SET THIS.NAME TO name
+        SET THIS.EMPLOYEE_ID TO id
+        SET THIS.HIRE_DATE TO hireDate
+
     END CONSTRUCTOR
+
+
+
     METHODS
+
         CALCULATE_MONTHLY_PAY()
-      END METHOD
-   END METHODS
+
+            RETURN 0
+
+        END METHOD
+
+
+    END METHODS
+
 END CLASS
+
 
 
 
 CLASS SALARIED_EMPLOYEE INHERITS EMPLOYEE
+
     ATTRIBUTES
         MONTHLY_SALARY: NUMBER
+
+
     CONSTRUCTOR(name: TEXT, id: NUMBER, hireDate: TEXT, salary: NUMBER)
-        CALL EMPLOYEE.CONSTRUCTOR(name, id, hireDate)
-        SET MONTHLY_SALARY TO salary
+
+        CALL SUPER(name, id, hireDate)
+
+        SET THIS.MONTHLY_SALARY TO salary
+
     END CONSTRUCTOR
+
+
+
     METHODS
+
         CALCULATE_MONTHLY_PAY()
-        RETURN MONTHLY_SALARY
-      END METHOD
-   END METHODS
+
+            RETURN THIS.MONTHLY_SALARY
+
+        END METHOD
+
+
+    END METHODS
+
 END CLASS
+
 
 
 
 CLASS HOURLY_EMPLOYEE INHERITS EMPLOYEE
+
     ATTRIBUTES
         HOURS_WORKED: NUMBER
         HOURLY_RATE: NUMBER
+
+
     CONSTRUCTOR(name: TEXT, id: NUMBER, hireDate: TEXT, hours: NUMBER, rate: NUMBER)
-        CALL EMPLOYEE.CONSTRUCTOR(name, id, hireDate)
-        SET HOURS_WORKED TO hours
-        SET HOURLY_RATE TO rate
+
+        CALL SUPER(name, id, hireDate)
+
+        SET THIS.HOURS_WORKED TO hours
+        SET THIS.HOURLY_RATE TO rate
+
     END CONSTRUCTOR
+
+
+
     METHODS
+
         CALCULATE_MONTHLY_PAY()
-        RETURN HOURS_WORKED * HOURLY_RATE
-     END METHOD
-  END METHODS
+
+            RETURN THIS.HOURS_WORKED * THIS.HOURLY_RATE
+
+        END METHOD
+
+
+    END METHODS
+
 END CLASS
+
 
 
 
 CLASS COMMISSION_EMPLOYEE INHERITS EMPLOYEE
+
     ATTRIBUTES
         BASE_PAY: NUMBER
         SALES: NUMBER
         COMMISSION_RATE: NUMBER
+
+
     CONSTRUCTOR(name: TEXT, id: NUMBER, hireDate: TEXT, basePay: NUMBER, sales: NUMBER, rate: NUMBER)
-        CALL EMPLOYEE.CONSTRUCTOR(name, id, hireDate)
-        SET BASE_PAY TO basePay
-        SET SALES TO sales
-        SET COMMISSION_RATE TO rate
+
+        CALL SUPER(name, id, hireDate)
+
+        SET THIS.BASE_PAY TO basePay
+        SET THIS.SALES TO sales
+        SET THIS.COMMISSION_RATE TO rate
+
     END CONSTRUCTOR
+
+
+
     METHODS
+
         CALCULATE_MONTHLY_PAY()
-        RETURN BASE_PAY + (SALES * COMMISSION_RATE)
-     END METHOD
-  END METHODS
+
+            RETURN THIS.BASE_PAY + (THIS.SALES * THIS.COMMISSION_RATE)
+
+        END METHOD
+
+
+    END METHODS
+
 END CLASS
-
-
-
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Task 295: Zoo Animal Enclosures  
 
 
 
 
+
 CLASS ENCLOSURE
+
     ATTRIBUTES
         ANIMALS: LIST<ANIMAL>
         TEMPERATURE: NUMBER
+
+
     CONSTRUCTOR(temperature: NUMBER)
-        SET ANIMALS TO EMPTY LIST
-        SET TEMPERATURE TO temperature
+
+        SET THIS.ANIMALS TO EMPTY LIST
+        SET THIS.TEMPERATURE TO temperature
+
     END CONSTRUCTOR
+
+
+
     METHODS
+
         ADD_ANIMAL(animal: ANIMAL)
-        ADD animal TO ANIMALS
-     END METHOD
-   END METHODS
+
+            ADD animal TO THIS.ANIMALS
+
+        END METHOD
+
+    END METHODS
+
 END CLASS
+
 
 
 
 CLASS ANIMAL
+
     ATTRIBUTES
         NAME: TEXT
         AGE: NUMBER
         DIET_TYPE: TEXT
+
+
     CONSTRUCTOR(name: TEXT, age: NUMBER, dietType: TEXT)
-        SET NAME TO name
-        SET AGE TO age
-        SET DIET_TYPE TO dietType
+
+        SET THIS.NAME TO name
+        SET THIS.AGE TO age
+        SET THIS.DIET_TYPE TO dietType
+
     END CONSTRUCTOR
+
+
+
     METHODS
+
         MAKE_SOUND()
-     END METHOD
+
+            RETURN "UNKNOWN SOUND"
+
+        END METHOD
+
+
         DESCRIBE_MOVEMENT()
-      END METHOD
-   END METHODS
+
+            RETURN "UNKNOWN MOVEMENT"
+
+        END METHOD
+
+    END METHODS
+
 END CLASS
+
 
 
 
 CLASS BIRD INHERITS ANIMAL
+
     ATTRIBUTES
         CAN_FLY: BOOLEAN
         LAYS_EGGS: BOOLEAN
+
+
     CONSTRUCTOR(name: TEXT, age: NUMBER, dietType: TEXT, canFly: BOOLEAN, laysEggs: BOOLEAN)
-        CALL ANIMAL.CONSTRUCTOR(name, age, dietType)
-        SET CAN_FLY TO canFly
-        SET LAYS_EGGS TO laysEggs
+
+        CALL SUPER(name, age, dietType)
+
+        SET THIS.CAN_FLY TO canFly
+        SET THIS.LAYS_EGGS TO laysEggs
+
     END CONSTRUCTOR
+
+
+
     METHODS
+
         MAKE_SOUND()
-     END METHOD
+
+            RETURN "CHIRP"
+
+        END METHOD
+
+
         DESCRIBE_MOVEMENT()
-        RETURN "FLIES"
-     END METHOD
-   END METHODS
+
+            RETURN "FLIES"
+
+        END METHOD
+
+    END METHODS
+
 END CLASS
+
 
 
 
 CLASS FISH INHERITS ANIMAL
+
     ATTRIBUTES
         CAN_SWIM: BOOLEAN
         HAS_GILLS: BOOLEAN
+
+
     CONSTRUCTOR(name: TEXT, age: NUMBER, dietType: TEXT, canSwim: BOOLEAN, hasGills: BOOLEAN)
-        CALL ANIMAL.CONSTRUCTOR(name, age, dietType)
-        SET CAN_SWIM TO canSwim
-        SET HAS_GILLS TO hasGills
+
+        CALL SUPER(name, age, dietType)
+
+        SET THIS.CAN_SWIM TO canSwim
+        SET THIS.HAS_GILLS TO hasGills
+
     END CONSTRUCTOR
+
+
+
     METHODS
+
         MAKE_SOUND()
-      END METHOD
+
+            RETURN "BUBBLE"
+
+        END METHOD
+
+
         DESCRIBE_MOVEMENT()
-        RETURN "SWIMS"
-      END METHOD
-   END METHODS
+
+            RETURN "SWIMS"
+
+        END METHOD
+
+    END METHODS
+
 END CLASS
+
 
 
 
 CLASS MAMMAL INHERITS ANIMAL
+
     ATTRIBUTES
         HAS_FUR: BOOLEAN
         LIVE_BIRTH: BOOLEAN
-    CONSTRUCTOR(name: TEXT, age: NUMBER, dietType: TEXT, hasFur: BOOLEAN, liveBirth: BOOLEAN)
-        CALL ANIMAL.CONSTRUCTOR(name, age, dietType)
-        SET HAS_FUR TO hasFur
-        SET LIVE_BIRTH TO liveBirth
-    END CONSTRUCTOR
-    METHODS
-        MAKE_SOUND()
-     END METHOD
-        DESCRIBE_MOVEMENT()
-        RETURN "WALKS"
-     END METHOD
-   END METHODS
-END CLASS
 
+
+    CONSTRUCTOR(name: TEXT, age: NUMBER, dietType: TEXT, hasFur: BOOLEAN, liveBirth: BOOLEAN)
+
+        CALL SUPER(name, age, dietType)
+
+        SET THIS.HAS_FUR TO hasFur
+        SET THIS.LIVE_BIRTH TO liveBirth
+
+    END CONSTRUCTOR
+
+
+
+    METHODS
+
+        MAKE_SOUND()
+
+            RETURN "ROAR"
+
+        END METHOD
+
+
+        DESCRIBE_MOVEMENT()
+
+            RETURN "WALKS"
+
+        END METHOD
+
+    END METHODS
+
+END CLASS
+-------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 Task 296: Online Payment Methods 
@@ -300,210 +572,469 @@ Task 296: Online Payment Methods
 
 
 
+
 CLASS ORDER
+
     ATTRIBUTES
         ITEMS: LIST<ITEM>
         PAYMENT: PAYMENT_METHOD
+
+
     CONSTRUCTOR()
-        SET ITEMS TO EMPTY LIST
-        SET PAYMENT TO NULL
+
+        SET THIS.ITEMS TO EMPTY LIST
+        SET THIS.PAYMENT TO NULL
+
     END CONSTRUCTOR
+
+
+
     METHODS
+
+
         ADD_ITEM(item: ITEM)
-        ADD item TO ITEMS
-      END METHOD
+
+            ADD item TO THIS.ITEMS
+
+        END METHOD
+
+
+
         SET_PAYMENT(payment: PAYMENT_METHOD)
-        SET PAYMENT TO payment
-     END METHOD
-   END METHODS
+
+            SET THIS.PAYMENT TO payment
+
+        END METHOD
+
+
+
+        CALCULATE_TOTAL()
+
+            SET TOTAL TO 0
+            SET i TO 0
+
+            REPEAT
+
+                SET TOTAL TO TOTAL + THIS.ITEMS[i].PRICE
+                SET i TO i + 1
+
+            UNTIL i = LENGTH(THIS.ITEMS)
+
+            RETURN TOTAL
+
+        END METHOD
+
+
+    END METHODS
+
 END CLASS
+
 
 
 
 CLASS ITEM
+
     ATTRIBUTES
         ITEM_NAME: TEXT
         PRICE: NUMBER
+
+
     CONSTRUCTOR(name: TEXT, price: NUMBER)
-        SET ITEM_NAME TO name
-        SET PRICE TO price
+
+        SET THIS.ITEM_NAME TO name
+        SET THIS.PRICE TO price
+
     END CONSTRUCTOR
+
 END CLASS
+
 
 
 
 CLASS PAYMENT_METHOD
+
     ATTRIBUTES
         AMOUNT: NUMBER
         STATUS: TEXT
+
+
     CONSTRUCTOR(amount: NUMBER)
-        SET AMOUNT TO amount
-        SET STATUS TO "PENDING"
+
+        SET THIS.AMOUNT TO amount
+        SET THIS.STATUS TO "PENDING"
+
     END CONSTRUCTOR
+
+
+
     METHODS
+
         PROCESS_PAYMENT()
-      END METHOD
-   END METHODS
+
+            ABSTRACT
+
+        END METHOD
+
+
+    END METHODS
+
 END CLASS
+
 
 
 
 CLASS CREDIT_CARD_PAYMENT INHERITS PAYMENT_METHOD
+
     ATTRIBUTES
         CARD_NUMBER: TEXT
         EXPIRY_DATE: TEXT
+
+
     CONSTRUCTOR(amount: NUMBER, cardNumber: TEXT, expiryDate: TEXT)
-        CALL PAYMENT_METHOD.CONSTRUCTOR(amount)
-        SET CARD_NUMBER TO cardNumber
-        SET EXPIRY_DATE TO expiryDate
+
+        CALL SUPER(amount)
+
+        SET THIS.CARD_NUMBER TO cardNumber
+        SET THIS.EXPIRY_DATE TO expiryDate
+
     END CONSTRUCTOR
+
+
+
     METHODS
+
         PROCESS_PAYMENT()
-        SET STATUS TO "COMPLETED"
-      END METHOD
-   END METHODS
+
+            IF THIS.AMOUNT GREATER THAN 0 THEN
+
+                SET THIS.STATUS TO "COMPLETED"
+
+            ELSE
+
+                SET THIS.STATUS TO "FAILED"
+
+            END IF
+
+            RETURN THIS.STATUS
+
+        END METHOD
+
+
+    END METHODS
+
 END CLASS
+
 
 
 
 CLASS BANK_TRANSFER_PAYMENT INHERITS PAYMENT_METHOD
+
     ATTRIBUTES
-    ACCOUNT_NUMBER: TEXT
+        ACCOUNT_NUMBER: TEXT
+
+
     CONSTRUCTOR(amount: NUMBER, accountNumber: TEXT)
-        CALL PAYMENT_METHOD.CONSTRUCTOR(amount)
-        SET ACCOUNT_NUMBER TO accountNumber
+
+        CALL SUPER(amount)
+
+        SET THIS.ACCOUNT_NUMBER TO accountNumber
+
     END CONSTRUCTOR
+
+
+
     METHODS
+
         PROCESS_PAYMENT()
-        SET STATUS TO "COMPLETED"
-      END METHOD
-   END METHODS
+
+            IF THIS.AMOUNT GREATER THAN 0 THEN
+
+                SET THIS.STATUS TO "COMPLETED"
+
+            ELSE
+
+                SET THIS.STATUS TO "FAILED"
+
+            END IF
+
+            RETURN THIS.STATUS
+
+        END METHOD
+
+
+    END METHODS
+
 END CLASS
+
 
 
 
 CLASS WALLET_PAYMENT INHERITS PAYMENT_METHOD
+
     ATTRIBUTES
         WALLET_BALANCE: NUMBER
+
+
     CONSTRUCTOR(amount: NUMBER, balance: NUMBER)
-        CALL PAYMENT_METHOD.CONSTRUCTOR(amount)
-        SET WALLET_BALANCE TO balance
+
+        CALL SUPER(amount)
+
+        SET THIS.WALLET_BALANCE TO balance
+
     END CONSTRUCTOR
+
+
+
     METHODS
+
         PROCESS_PAYMENT()
-        SET STATUS TO "COMPLETED"
-     END METHOD
-   END METHODS
+
+            IF THIS.WALLET_BALANCE GREATER THAN OR EQUAL TO THIS.AMOUNT THEN
+
+                SET THIS.WALLET_BALANCE TO THIS.WALLET_BALANCE - THIS.AMOUNT
+                SET THIS.STATUS TO "COMPLETED"
+
+            ELSE
+
+                SET THIS.STATUS TO "FAILED"
+
+            END IF
+
+
+            RETURN THIS.STATUS
+
+        END METHOD
+
+
+    END METHODS
+
 END CLASS
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-
-
+ 
 Task 297: Streaming Service Subscriptions  
 
 
 
 
+
 CLASS USER_ACCOUNT
+
     ATTRIBUTES
         SUBSCRIPTION: SUBSCRIPTION
         WATCH_HISTORY: LIST<WATCH_RECORD>
+
+
     CONSTRUCTOR(subscription: SUBSCRIPTION)
-        SET SUBSCRIPTION TO subscription
-        SET WATCH_HISTORY TO EMPTY LIST
+
+        SET THIS.SUBSCRIPTION TO subscription
+        SET THIS.WATCH_HISTORY TO EMPTY LIST
+
     END CONSTRUCTOR
+
+
+
     METHODS
+
         ADD_WATCH_RECORD(record: WATCH_RECORD)
-        ADD record TO WATCH_HISTORY
-     END METHOD
+
+            ADD record TO THIS.WATCH_HISTORY
+
+        END METHOD
+
+
+
         SET_SUBSCRIPTION(subscription: SUBSCRIPTION)
-        SET SUBSCRIPTION TO subscription
-     END METHOD
-  END METHODS
+
+            SET THIS.SUBSCRIPTION TO subscription
+
+        END METHOD
+
+
+    END METHODS
+
 END CLASS
+
 
 
 
 CLASS WATCH_RECORD
+
     ATTRIBUTES
         TITLE: TEXT
         WATCH_DATE: TEXT
+
+
     CONSTRUCTOR(title: TEXT, date: TEXT)
-        SET TITLE TO title
-        SET WATCH_DATE TO date
+
+        SET THIS.TITLE TO title
+        SET THIS.WATCH_DATE TO date
+
     END CONSTRUCTOR
+
 END CLASS
+
 
 
 
 CLASS SUBSCRIPTION
+
     ATTRIBUTES
         START_DATE: TEXT
         MONTHLY_PRICE: NUMBER
+
+
     CONSTRUCTOR(startDate: TEXT, price: NUMBER)
-        SET START_DATE TO startDate
-        SET MONTHLY_PRICE TO price
+
+        SET THIS.START_DATE TO startDate
+        SET THIS.MONTHLY_PRICE TO price
+
     END CONSTRUCTOR
+
+
+
     METHODS
-        CHECK_ACTIVE()
-     END METHOD
-   END METHODS
+
+        CHECK_ACTIVE(currentDate: TEXT)
+
+            ABSTRACT
+
+        END METHOD
+
+
+    END METHODS
+
 END CLASS
+
 
 
 
 CLASS BASIC_PLAN INHERITS SUBSCRIPTION
+
     ATTRIBUTES
         QUALITY: TEXT
         DEVICE_LIMIT: NUMBER
+
+
     CONSTRUCTOR(startDate: TEXT, price: NUMBER)
-        CALL SUBSCRIPTION.CONSTRUCTOR(startDate, price)
-        SET QUALITY TO "STANDARD-DEFINITION"
-        SET DEVICE_LIMIT TO 1
+
+        CALL SUPER(startDate, price)
+
+        SET THIS.QUALITY TO "STANDARD-DEFINITION"
+        SET THIS.DEVICE_LIMIT TO 1
+
     END CONSTRUCTOR
+
+
+
     METHODS
-        CHECK_ACTIVE()
-     END METHOD
-   END METHODS
+
+        CHECK_ACTIVE(currentDate: TEXT)
+
+            IF currentDate GREATER THAN OR EQUAL TO THIS.START_DATE THEN
+
+                RETURN TRUE
+
+            ELSE
+
+                RETURN FALSE
+
+            END IF
+
+        END METHOD
+
+
+    END METHODS
+
 END CLASS
+
 
 
 
 CLASS STANDARD_PLAN INHERITS SUBSCRIPTION
+
     ATTRIBUTES
         QUALITY: TEXT
         DEVICE_LIMIT: NUMBER
+
+
     CONSTRUCTOR(startDate: TEXT, price: NUMBER)
-        CALL SUBSCRIPTION.CONSTRUCTOR(startDate, price)
-        SET QUALITY TO "HIGH-DEFINITION"
-        SET DEVICE_LIMIT TO 2
+
+        CALL SUPER(startDate, price)
+
+        SET THIS.QUALITY TO "HIGH-DEFINITION"
+        SET THIS.DEVICE_LIMIT TO 2
+
     END CONSTRUCTOR
+
+
+
     METHODS
-        CHECK_ACTIVE()
-     END METHOD
-   END METHODS
+
+        CHECK_ACTIVE(currentDate: TEXT)
+
+            IF currentDate GREATER THAN OR EQUAL TO THIS.START_DATE THEN
+
+                RETURN TRUE
+
+            ELSE
+
+                RETURN FALSE
+
+            END IF
+
+        END METHOD
+
+
+    END METHODS
+
 END CLASS
+
 
 
 
 CLASS PREMIUM_PLAN INHERITS SUBSCRIPTION
+
     ATTRIBUTES
         QUALITY: TEXT
         DEVICE_LIMIT: NUMBER
         OFFLINE_DOWNLOADS: BOOLEAN
+
+
     CONSTRUCTOR(startDate: TEXT, price: NUMBER)
-        CALL SUBSCRIPTION.CONSTRUCTOR(startDate, price)
-        SET QUALITY TO "ULTRA-HIGH-DEFINITION"
-        SET DEVICE_LIMIT TO 4
-        SET OFFLINE_DOWNLOADS TO TRUE
+
+        CALL SUPER(startDate, price)
+
+        SET THIS.QUALITY TO "ULTRA-HIGH-DEFINITION"
+        SET THIS.DEVICE_LIMIT TO 4
+        SET THIS.OFFLINE_DOWNLOADS TO TRUE
+
     END CONSTRUCTOR
+
+
+
     METHODS
-        CHECK_ACTIVE()
-     END METHOD
-  END METHODS
+
+        CHECK_ACTIVE(currentDate: TEXT)
+
+            IF currentDate GREATER THAN OR EQUAL TO THIS.START_DATE THEN
+
+                RETURN TRUE
+
+            ELSE
+
+                RETURN FALSE
+
+            END IF
+
+        END METHOD
+
+
+    END METHODS
+
 END CLASS
-
-
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
@@ -512,121 +1043,231 @@ Task 298: Delivery Vehicles Fleet
 
 
 
+
 CLASS DELIVERY_ROUTE
+
     ATTRIBUTES
         STOPS: LIST<STOP>
-    CONSTRUCTOR()
-        SET STOPS TO EMPTY LIST
+        DISTANCE: NUMBER
+
+
+    CONSTRUCTOR(distance: NUMBER)
+
+        SET THIS.STOPS TO EMPTY LIST
+        SET THIS.DISTANCE TO distance
+
     END CONSTRUCTOR
+
+
+
     METHODS
+
         ADD_STOP(stop: STOP)
-        ADD stop TO STOPS
-     END METHOD
-  END METHODS
+
+            ADD stop TO THIS.STOPS
+
+        END METHOD
+
+
+
+        GET_DISTANCE()
+
+            RETURN THIS.DISTANCE
+
+        END METHOD
+
+
+    END METHODS
+
 END CLASS
+
 
 
 
 CLASS STOP
+
     ATTRIBUTES
         ADDRESS: TEXT
         PACKAGE: PACKAGE
+
+
     CONSTRUCTOR(address: TEXT, package: PACKAGE)
-        SET ADDRESS TO address
-        SET PACKAGE TO package
+
+        SET THIS.ADDRESS TO address
+        SET THIS.PACKAGE TO package
+
     END CONSTRUCTOR
+
 END CLASS
+
 
 
 
 CLASS PACKAGE
+
     ATTRIBUTES
         PACKAGE_ID: NUMBER
         WEIGHT: NUMBER
+
+
     CONSTRUCTOR(id: NUMBER, weight: NUMBER)
-        SET PACKAGE_ID TO id
-        SET WEIGHT TO weight
+
+        SET THIS.PACKAGE_ID TO id
+        SET THIS.WEIGHT TO weight
+
     END CONSTRUCTOR
+
 END CLASS
+
 
 
 
 CLASS ENGINE
+
     ATTRIBUTES
         HORSEPOWER: NUMBER
         FUEL_EFFICIENCY: NUMBER
+
+
     CONSTRUCTOR(horsepower: NUMBER, efficiency: NUMBER)
-        SET HORSEPOWER TO horsepower
-        SET FUEL_EFFICIENCY TO efficiency
+
+        SET THIS.HORSEPOWER TO horsepower
+        SET THIS.FUEL_EFFICIENCY TO efficiency
+
     END CONSTRUCTOR
+
 END CLASS
+
 
 
 
 CLASS VEHICLE
+
     ATTRIBUTES
         LICENCE_PLATE: TEXT
         FUEL_LEVEL: NUMBER
         ENGINE: ENGINE
+
+
     CONSTRUCTOR(plate: TEXT, fuel: NUMBER, engine: ENGINE)
-        SET LICENCE_PLATE TO plate
-        SET FUEL_LEVEL TO fuel
-        SET ENGINE TO engine
+
+        SET THIS.LICENCE_PLATE TO plate
+        SET THIS.FUEL_LEVEL TO fuel
+        SET THIS.ENGINE TO engine
+
     END CONSTRUCTOR
+
+
+
     METHODS
+
         CALCULATE_DELIVERY_TIME(route: DELIVERY_ROUTE)
-     END METHOD
-  END METHODS
+
+            ABSTRACT
+
+        END METHOD
+
+
+    END METHODS
+
 END CLASS
+
 
 
 
 CLASS VAN INHERITS VEHICLE
+
     ATTRIBUTES
         CARGO_CAPACITY: NUMBER
+
+
     CONSTRUCTOR(plate: TEXT, fuel: NUMBER, engine: ENGINE, capacity: NUMBER)
-        CALL VEHICLE.CONSTRUCTOR(plate, fuel, engine)
-        SET CARGO_CAPACITY TO capacity
+
+        CALL SUPER(plate, fuel, engine)
+
+        SET THIS.CARGO_CAPACITY TO capacity
+
     END CONSTRUCTOR
+
+
+
     METHODS
+
         CALCULATE_DELIVERY_TIME(route: DELIVERY_ROUTE)
-        RETURN "TIME BASED ON CITY DRIVING SPEED"
-     END METHOD
-   END METHODS
+
+            RETURN route.GET_DISTANCE() / 50
+
+        END METHOD
+
+
+    END METHODS
+
 END CLASS
+
 
 
 
 CLASS MOTORBIKE INHERITS VEHICLE
+
     ATTRIBUTES
         PACKAGE_LIMIT: NUMBER
+
+
     CONSTRUCTOR(plate: TEXT, fuel: NUMBER, engine: ENGINE, limit: NUMBER)
-        CALL VEHICLE.CONSTRUCTOR(plate, fuel, engine)
-        SET PACKAGE_LIMIT TO limit
+
+        CALL SUPER(plate, fuel, engine)
+
+        SET THIS.PACKAGE_LIMIT TO limit
+
     END CONSTRUCTOR
+
+
+
     METHODS
+
         CALCULATE_DELIVERY_TIME(route: DELIVERY_ROUTE)
-        RETURN "TIME BASED ON FAST AVERAGE SPEED"
-      END METHOD
-   END METHODS
+
+            RETURN route.GET_DISTANCE() / 80
+
+        END METHOD
+
+
+    END METHODS
+
 END CLASS
+
 
 
 
 CLASS TRUCK INHERITS VEHICLE
+
     ATTRIBUTES
         LOAD_CAPACITY: NUMBER
-    CONSTRUCTOR(plate: TEXT, fuel: NUMBER, engine: ENGINE, capacity: NUMBER)
-        CALL VEHICLE.CONSTRUCTOR(plate, fuel, engine)
-        SET LOAD_CAPACITY TO capacity
-    END CONSTRUCTOR
-    METHODS
-        CALCULATE_DELIVERY_TIME(route: DELIVERY_ROUTE)
-        RETURN "TIME BASED ON SLOW AVERAGE SPEED"
-     END METHOD
-  END METHODS
-END CLASS
 
+
+    CONSTRUCTOR(plate: TEXT, fuel: NUMBER, engine: ENGINE, capacity: NUMBER)
+
+        CALL SUPER(plate, fuel, engine)
+
+        SET THIS.LOAD_CAPACITY TO capacity
+
+    END CONSTRUCTOR
+
+
+
+    METHODS
+
+        CALCULATE_DELIVERY_TIME(route: DELIVERY_ROUTE)
+
+            RETURN route.GET_DISTANCE() / 40
+
+        END METHOD
+
+
+    END METHODS
+
+END CLASS
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
@@ -635,102 +1276,228 @@ Task 299: Bank Cards
 
 
 
-
 CLASS CARD
+
     ATTRIBUTES
         CARD_NUMBER: TEXT
         EXPIRY_DATE: TEXT
         STATUS: TEXT
         CHIP: CHIP
+
+
     CONSTRUCTOR(cardNumber: TEXT, expiryDate: TEXT, chip: CHIP)
-        SET CARD_NUMBER TO cardNumber
-        SET EXPIRY_DATE TO expiryDate
-        SET STATUS TO "ACTIVE"
-        SET CHIP TO chip
+
+        SET THIS.CARD_NUMBER TO cardNumber
+        SET THIS.EXPIRY_DATE TO expiryDate
+        SET THIS.STATUS TO "ACTIVE"
+        SET THIS.CHIP TO chip
+
     END CONSTRUCTOR
+
+
+
     METHODS
+
+
         AUTHORIZE_PURCHASE(amount: NUMBER)
-     END METHOD
-  END METHODS
+
+            ABSTRACT
+
+        END METHOD
+
+
+
+        BLOCK_CARD()
+
+            SET THIS.STATUS TO "BLOCKED"
+
+        END METHOD
+
+
+
+        UNBLOCK_CARD()
+
+            SET THIS.STATUS TO "ACTIVE"
+
+        END METHOD
+
+
+    END METHODS
+
 END CLASS
+
 
 
 
 CLASS CHIP
+
     ATTRIBUTES
         ENCRYPTED_SECURITY_DATA: TEXT
+
+
     CONSTRUCTOR(data: TEXT)
-        SET ENCRYPTED_SECURITY_DATA TO data
+
+        SET THIS.ENCRYPTED_SECURITY_DATA TO data
+
     END CONSTRUCTOR
+
 END CLASS
+
 
 
 
 CLASS ACCOUNT
+
     ATTRIBUTES
         ACCOUNT_NUMBER: NUMBER
         BALANCE: NUMBER
+
+
     CONSTRUCTOR(accountNumber: NUMBER, balance: NUMBER)
-        SET ACCOUNT_NUMBER TO accountNumber
-        SET BALANCE TO balance
+
+        SET THIS.ACCOUNT_NUMBER TO accountNumber
+        SET THIS.BALANCE TO balance
+
     END CONSTRUCTOR
+
 END CLASS
+
 
 
 
 CLASS DEBIT_CARD INHERITS CARD
+
     ATTRIBUTES
         LINKED_ACCOUNT: ACCOUNT
+
+
     CONSTRUCTOR(cardNumber: TEXT, expiryDate: TEXT, chip: CHIP, account: ACCOUNT)
-        CALL CARD.CONSTRUCTOR(cardNumber, expiryDate, chip)
-        SET LINKED_ACCOUNT TO account
+
+        CALL SUPER(cardNumber, expiryDate, chip)
+
+        SET THIS.LINKED_ACCOUNT TO account
+
     END CONSTRUCTOR
+
+
+
     METHODS
+
+
         AUTHORIZE_PURCHASE(amount: NUMBER)
-            IF LINKED_ACCOUNT.BALANCE GREATER THAN OR EQUALS amount
-            RETURN "AUTHORIZED"
-ELSE
-            RETURN "DECLINED"
-      END IF
-    END METHOD
-  END METHODS
+
+            IF THIS.STATUS EQUALS "ACTIVE" AND amount GREATER THAN 0 AND THIS.LINKED_ACCOUNT.BALANCE GREATER THAN OR EQUAL TO amount THEN
+
+                SET THIS.LINKED_ACCOUNT.BALANCE TO THIS.LINKED_ACCOUNT.BALANCE - amount
+
+                RETURN "AUTHORIZED"
+
+            ELSE
+
+                RETURN "DECLINED"
+
+            END IF
+
+        END METHOD
+
+
+    END METHODS
+
 END CLASS
+
 
 
 
 CLASS CREDIT_CARD INHERITS CARD
+
     ATTRIBUTES
         CREDIT_LIMIT: NUMBER
         PURCHASES: LIST<NUMBER>
+
+
     CONSTRUCTOR(cardNumber: TEXT, expiryDate: TEXT, chip: CHIP, limit: NUMBER)
-        CALL CARD.CONSTRUCTOR(cardNumber, expiryDate, chip)
-        SET CREDIT_LIMIT TO limit
-        SET PURCHASES TO EMPTY LIST
+
+        CALL SUPER(cardNumber, expiryDate, chip)
+
+        SET THIS.CREDIT_LIMIT TO limit
+        SET THIS.PURCHASES TO EMPTY LIST
 
     END CONSTRUCTOR
 
+
+
     METHODS
 
+
         AUTHORIZE_PURCHASE(amount: NUMBER)
-            IF CALCULATE_OUTSTANDING_BALANCE() + amount LESS THAN OR EQUALS CREDIT_LIMIT
-            ADD amount TO PURCHASES
-            RETURN "AUTHORIZED"
-  ELSE
-            RETURN "DECLINED"
-          END IF
+
+            IF THIS.STATUS EQUALS "ACTIVE" AND amount GREATER THAN 0 AND THIS.CALCULATE_OUTSTANDING_BALANCE() + amount LESS THAN OR EQUAL TO THIS.CREDIT_LIMIT THEN
+
+                ADD amount TO THIS.PURCHASES
+
+                RETURN "AUTHORIZED"
+
+            ELSE
+
+                RETURN "DECLINED"
+
+            END IF
+
         END METHOD
 
+
+
         CALCULATE_OUTSTANDING_BALANCE()
+
             SET TOTAL TO 0
             SET i TO 0
+
             REPEAT
-            SET TOTAL TO TOTAL + PURCHASES[i]
-            SET i TO i + 1
-            IF i EQUAL THE LENGTH(PURCHASES)
+
+                SET TOTAL TO TOTAL + THIS.PURCHASES[i]
+                SET i TO i + 1
+
+            UNTIL i EQUALS SIZE OF THIS.PURCHASES
+
             RETURN TOTAL
-    END METHOD
-  END METHODS
+
+        END METHOD
+
+
+
+        MAKE_PAYMENT(amount: NUMBER)
+
+            IF amount GREATER THAN 0 THEN
+
+                SET REMAINING_PAYMENT TO amount
+
+                REPEAT
+
+                    IF SIZE OF THIS.PURCHASES GREATER THAN 0 THEN
+
+                        REMOVE FIRST ITEM FROM THIS.PURCHASES
+
+                    ELSE
+
+                        BREAK
+
+                    END IF
+
+                    SET REMAINING_PAYMENT TO REMAINING_PAYMENT - amount
+
+                UNTIL REMAINING_PAYMENT LESS THAN OR EQUAL TO 0 OR SIZE OF THIS.PURCHASES EQUALS 0
+
+            END IF
+
+        END METHOD
+
+
+    END METHODS
+
 END CLASS
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
 
 
 
@@ -739,19 +1506,21 @@ Task 300: Hospital Staff Scheduling (Medium)
 
 
 
+
 CLASS WARD
     ATTRIBUTES
         SHIFTS: LIST<SHIFT>
+
     CONSTRUCTOR()
         SET SHIFTS TO EMPTY LIST
     END CONSTRUCTOR
+
     METHODS
         ADD_SHIFT(shift: SHIFT)
-        ADD shift TO SHIFTS
-     END METHOD
-  END METHODS
+            ADD shift TO SHIFTS
+        END METHOD
+    END METHODS
 END CLASS
-
 
 
 CLASS SHIFT
@@ -759,6 +1528,7 @@ CLASS SHIFT
         START_TIME: TEXT
         END_TIME: TEXT
         WARD: WARD
+
     CONSTRUCTOR(startTime: TEXT, endTime: TEXT, ward: WARD)
         SET START_TIME TO startTime
         SET END_TIME TO endTime
@@ -767,63 +1537,94 @@ CLASS SHIFT
 END CLASS
 
 
-
 CLASS STAFF_MEMBER
     ATTRIBUTES
         NAME: TEXT
         EMPLOYEE_ID: NUMBER
+        ASSIGNED_SHIFTS: LIST<SHIFT>
+
     CONSTRUCTOR(name: TEXT, id: NUMBER)
         SET NAME TO name
         SET EMPLOYEE_ID TO id
+        SET ASSIGNED_SHIFTS TO EMPTY LIST
     END CONSTRUCTOR
+
     METHODS
         ASSIGN_SHIFT(shift: SHIFT)
-     END METHOD
-  END METHODS
-END CLASS
+            FOR EACH currentShift IN ASSIGNED_SHIFTS
+                IF currentShift.START_TIME = shift.START_TIME AND
+                   currentShift.END_TIME = shift.END_TIME THEN
+                    RETURN
+                END IF
+            END FOR
 
+            ADD shift TO ASSIGNED_SHIFTS
+        END METHOD
+
+        ABSTRACT METHOD
+            CALCULATE_PAY()
+        END METHOD
+    END METHODS
+END CLASS
 
 
 CLASS DOCTOR INHERITS STAFF_MEMBER
     ATTRIBUTES
+
     CONSTRUCTOR(name: TEXT, id: NUMBER)
-        CALL STAFF_MEMBER.CONSTRUCTOR(name, id)
+        CALL SUPER(name, id)
     END CONSTRUCTOR
+
     METHODS
         APPROVE_TREATMENT()
-     END METHO
-        APPROVE_DIAGNOSIS()
-     END METHOD
-END CLASS
+        END METHOD
 
+        APPROVE_DIAGNOSIS()
+        END METHOD
+
+        CALCULATE_PAY()
+        END METHOD
+    END METHODS
+END CLASS
 
 
 CLASS NURSE INHERITS STAFF_MEMBER
     ATTRIBUTES
+
     CONSTRUCTOR(name: TEXT, id: NUMBER)
-        CALL STAFF_MEMBER.CONSTRUCTOR(name, id)
+        CALL SUPER(name, id)
     END CONSTRUCTOR
+
     METHODS
         ADMINISTER_MEDICATION()
-     END METHOD
-        RECORD_VITAL_SIGNS()
-     END METHOD
-   END METHODS
-END CLASS
+        END METHOD
 
+        RECORD_VITAL_SIGNS()
+        END METHOD
+
+        CALCULATE_PAY()
+        END METHOD
+    END METHODS
+END CLASS
 
 
 CLASS SURGEON INHERITS DOCTOR
     ATTRIBUTES
+
     CONSTRUCTOR(name: TEXT, id: NUMBER)
-        CALL DOCTOR.CONSTRUCTOR(name, id)
+        CALL SUPER(name, id)
     END CONSTRUCTOR
+
     METHODS
         PERFORM_OPERATION()
-     END METHOD
-  END METHODS
+        END METHOD
 
+        CALCULATE_PAY()
+        END METHOD
+    END METHODS
+END CLASS
 
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
@@ -832,19 +1633,22 @@ Task 301: E-book Reader App (Medium)
 
 
 
+
+
 CLASS LIBRARY
     ATTRIBUTES
         PUBLICATIONS: LIST<PUBLICATION>
+
     CONSTRUCTOR()
         SET PUBLICATIONS TO EMPTY LIST
     END CONSTRUCTOR
+
     METHODS
         ADD_PUBLICATION(publication: PUBLICATION)
-        ADD publication TO PUBLICATIONS
-     END METHOD
-  END METHODS
+            ADD publication TO PUBLICATIONS
+        END METHOD
+    END METHODS
 END CLASS
-
 
 
 CLASS COVER_IMAGE
@@ -852,6 +1656,7 @@ CLASS COVER_IMAGE
         FILE_PATH: TEXT
         WIDTH: NUMBER
         HEIGHT: NUMBER
+
     CONSTRUCTOR(path: TEXT, width: NUMBER, height: NUMBER)
         SET FILE_PATH TO path
         SET WIDTH TO width
@@ -860,47 +1665,54 @@ CLASS COVER_IMAGE
 END CLASS
 
 
-
 CLASS PUBLICATION
     ATTRIBUTES
         TITLE: TEXT
         AUTHOR: TEXT
-        TOTAL_PAGES: NUMBER
         COVER_IMAGE: COVER_IMAGE
-    CONSTRUCTOR(title: TEXT, author: TEXT, pages: NUMBER, cover: COVER_IMAGE)
+
+    CONSTRUCTOR(title: TEXT, author: TEXT, cover: COVER_IMAGE)
         SET TITLE TO title
         SET AUTHOR TO author
-        SET TOTAL_PAGES TO pages
         SET COVER_IMAGE TO cover
     END CONSTRUCTOR
-    METHODS
-        REPORT_READING_PROGRESS()
-     END METHOD
-  END METHODS
-END CLASS
 
+    METHODS
+        ABSTRACT METHOD
+            REPORT_READING_PROGRESS()
+        END METHOD
+    END METHODS
+END CLASS
 
 
 CLASS NOVEL INHERITS PUBLICATION
     ATTRIBUTES
+        TOTAL_PAGES: NUMBER
         PAGES_READ: NUMBER
+
     CONSTRUCTOR(title: TEXT, author: TEXT, pages: NUMBER, cover: COVER_IMAGE)
-        CALL PUBLICATION.CONSTRUCTOR(title, author, pages, cover)
+        CALL SUPER(title, author, cover)
+        SET TOTAL_PAGES TO pages
         SET PAGES_READ TO 0
     END CONSTRUCTOR
-    METHODS
-        REPORT_READING_PROGRESS()
-        RETURN (PAGES_READ / TOTAL_PAGES) * 100
-     END METHOD
-  END METHODS
-END CLASS
 
+    METHODS
+        SET_PAGES_READ(pages: NUMBER)
+            SET PAGES_READ TO pages
+        END METHOD
+
+        REPORT_READING_PROGRESS()
+            RETURN (PAGES_READ / TOTAL_PAGES) * 100
+        END METHOD
+    END METHODS
+END CLASS
 
 
 CLASS ARTICLE
     ATTRIBUTES
         ARTICLE_TITLE: TEXT
         OPENED: BOOLEAN
+
     CONSTRUCTOR(title: TEXT)
         SET ARTICLE_TITLE TO title
         SET OPENED TO FALSE
@@ -908,46 +1720,58 @@ CLASS ARTICLE
 END CLASS
 
 
-
 CLASS MAGAZINE INHERITS PUBLICATION
     ATTRIBUTES
         ARTICLES: LIST<ARTICLE>
-    CONSTRUCTOR(title: TEXT, author: TEXT, pages: NUMBER, cover: COVER_IMAGE)
-        CALL PUBLICATION.CONSTRUCTOR(title, author, pages, cover)
+
+    CONSTRUCTOR(title: TEXT, author: TEXT, cover: COVER_IMAGE)
+        CALL SUPER(title, author, cover)
         SET ARTICLES TO EMPTY LIST
     END CONSTRUCTOR
-    METHODS
-        REPORT_READING_PROGRESS()
-        SET OPENED_COUNT TO 0
-        SET i TO 0
-        REPEAT
-        IF ARTICLES[i].OPENED EQUAL TRUE
-        SET OPENED_COUNT TO OPENED_COUNT + 1
-     END IF
-        SET i TO i + 1
-        IF i EQUAL LENGTH(ARTICLES)
-        RETURN (OPENED_COUNT / LENGTH(ARTICLES)) * 100
-     END METHOD
-  END METHODS
-END CLASS
 
+    METHODS
+        OPEN_ARTICLE(index: NUMBER)
+            SET ARTICLES[index].OPENED TO TRUE
+        END METHOD
+
+        REPORT_READING_PROGRESS()
+            SET OPENED_COUNT TO 0
+
+            FOR EACH article IN ARTICLES
+                IF article.OPENED = TRUE THEN
+                    SET OPENED_COUNT TO OPENED_COUNT + 1
+                END IF
+            END FOR
+
+            RETURN (OPENED_COUNT / SIZE OF ARTICLES) * 100
+        END METHOD
+    END METHODS
+END CLASS
 
 
 CLASS AUDIOBOOK INHERITS PUBLICATION
     ATTRIBUTES
         LISTENING_TIME: NUMBER
         TOTAL_TIME: NUMBER
-    CONSTRUCTOR(title: TEXT, author: TEXT, pages: NUMBER, cover: COVER_IMAGE, totalTime: NUMBER)
-        CALL PUBLICATION.CONSTRUCTOR(title, author, pages, cover)
+
+    CONSTRUCTOR(title: TEXT, author: TEXT, cover: COVER_IMAGE, totalTime: NUMBER)
+        CALL SUPER(title, author, cover)
         SET LISTENING_TIME TO 0
         SET TOTAL_TIME TO totalTime
     END CONSTRUCTOR
+
     METHODS
+        SET_LISTENED_TIME(time: NUMBER)
+            SET LISTENING_TIME TO time
+        END METHOD
+
         REPORT_READING_PROGRESS()
-        RETURN (LISTENING_TIME / TOTAL_TIME) * 100
-     END METHOD
-  END METHODS
+            RETURN (LISTENING_TIME / TOTAL_TIME) * 100
+        END METHOD
+    END METHODS
 END CLASS
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 
 
@@ -956,40 +1780,45 @@ Task 302: Smart Home Devices (Medium)
 
 
 
+
 CLASS ROOM
     ATTRIBUTES
         DEVICES: LIST<DEVICE>
+
     CONSTRUCTOR()
         SET DEVICES TO EMPTY LIST
     END CONSTRUCTOR
+
     METHODS
         ADD_DEVICE(device: DEVICE)
-        ADD device TO DEVICES
+            ADD device TO DEVICES
         END METHOD
     END METHODS
 END CLASS
-
 
 
 CLASS STORAGE_UNIT
     ATTRIBUTES
         USED_SPACE: NUMBER
         MAX_SPACE: NUMBER
+
     CONSTRUCTOR(maxSpace: NUMBER)
         SET USED_SPACE TO 0
         SET MAX_SPACE TO maxSpace
     END CONSTRUCTOR
+
     METHODS
         CHECK_SPACE()
-        IF USED_SPACE LESS THAN MAX_SPACE
-        RETURN TRUE
-ELSE
-        RETURN FALSE
-       END IF
-     END METHOD
-   END METHODS
-END CLASS
+            RETURN USED_SPACE < MAX_SPACE
+        END METHOD
 
+        ADD_DATA(size: NUMBER)
+            IF USED_SPACE + size <= MAX_SPACE THEN
+                SET USED_SPACE TO USED_SPACE + size
+            END IF
+        END METHOD
+    END METHODS
+END CLASS
 
 
 CLASS DEVICE
@@ -997,76 +1826,92 @@ CLASS DEVICE
         NAME: TEXT
         ROOM_LOCATION: TEXT
         STATUS: TEXT
+
     CONSTRUCTOR(name: TEXT, location: TEXT)
         SET NAME TO name
         SET ROOM_LOCATION TO location
         SET STATUS TO "OFF"
     END CONSTRUCTOR
-    METHODS
-        REPORT_POWER_USAGE()
-     END METHOD
-  END METHODS
-END CLASS
 
+    METHODS
+        TURN_ON()
+            SET STATUS TO "ON"
+        END METHOD
+
+        TURN_OFF()
+            SET STATUS TO "OFF"
+        END METHOD
+
+        ABSTRACT METHOD
+            REPORT_POWER_USAGE()
+        END METHOD
+    END METHODS
+END CLASS
 
 
 CLASS SMART_LIGHT INHERITS DEVICE
     ATTRIBUTES
         BRIGHTNESS_LEVEL: NUMBER
+
     CONSTRUCTOR(name: TEXT, location: TEXT, brightness: NUMBER)
-        CALL DEVICE.CONSTRUCTOR(name, location)
+        CALL SUPER(name, location)
         SET BRIGHTNESS_LEVEL TO brightness
     END CONSTRUCTOR
+
     METHODS
         REPORT_POWER_USAGE()
-        RETURN BRIGHTNESS_LEVEL
-     END METHOD
-  END METHODS
+            RETURN BRIGHTNESS_LEVEL * 2
+        END METHOD
+    END METHODS
 END CLASS
-
 
 
 CLASS SMART_THERMOSTAT INHERITS DEVICE
     ATTRIBUTES
         TARGET_TEMPERATURE: NUMBER
         HEATING_COOLING_LEVEL: NUMBER
+
     CONSTRUCTOR(name: TEXT, location: TEXT, target: NUMBER, level: NUMBER)
-        CALL DEVICE.CONSTRUCTOR(name, location)
+        CALL SUPER(name, location)
         SET TARGET_TEMPERATURE TO target
         SET HEATING_COOLING_LEVEL TO level
     END CONSTRUCTOR
+
     METHODS
         REPORT_POWER_USAGE()
-        RETURN HEATING_COOLING_LEVEL
-     END METHOD
-  END METHODS
+            RETURN HEATING_COOLING_LEVEL * 10
+        END METHOD
+    END METHODS
 END CLASS
-
 
 
 CLASS SMART_CAMERA INHERITS DEVICE
     ATTRIBUTES
         IS_RECORDING: BOOLEAN
         STORAGE: STORAGE_UNIT
+
     CONSTRUCTOR(name: TEXT, location: TEXT, storage: STORAGE_UNIT)
-        CALL DEVICE.CONSTRUCTOR(name, location)
+        CALL SUPER(name, location)
         SET IS_RECORDING TO FALSE
         SET STORAGE TO storage
     END CONSTRUCTOR
+
     METHODS
-        REPORT_POWER_USAGE()
-        IF IS_RECORDING EQUALS TRUE
-        RETURN 100
-ELSE
-        RETURN 0
-      END IF
-    END METHOD
         START_RECORDING()
-        IF STORAGE.CHECK_SPACE() EQUALS TRUE
-        SET IS_RECORDING TO TRUE
-      END IF
-    END METHOD
-  END METHODS
+            IF STORAGE.CHECK_SPACE() THEN
+                SET IS_RECORDING TO TRUE
+                CALL STORAGE.ADD_DATA(1)
+            END IF
+        END METHOD
+
+        REPORT_POWER_USAGE()
+            IF IS_RECORDING THEN
+                RETURN 15
+            ELSE
+                RETURN 2
+            END IF
+        END METHOD
+    END METHODS
 END CLASS
 
 
