@@ -1,32 +1,32 @@
 
-
-
-Task 308: Insurance Claims Processing  
-
+Task 308: Insurance Claims Processing
 
 
 
 CLASS POLICY
     ATTRIBUTES
         CLAIMS: LIST<CLAIM>
+
     CONSTRUCTOR()
         SET CLAIMS TO EMPTY LIST
     END CONSTRUCTOR
+
     METHODS
         ADD_CLAIM(claim: CLAIM)
         ADD claim TO CLAIMS
       END METHOD
-  END METHODS
+   END METHODS
 END CLASS
-
 
 
 CLASS DOCUMENTATION_FOLDER
     ATTRIBUTES
         DOCUMENTS: LIST<TEXT>
+
     CONSTRUCTOR()
         SET DOCUMENTS TO EMPTY LIST
     END CONSTRUCTOR
+
     METHODS
         ADD_DOCUMENT(document: TEXT)
         ADD document TO DOCUMENTS
@@ -35,215 +35,276 @@ CLASS DOCUMENTATION_FOLDER
 END CLASS
 
 
-
 CLASS CLAIM
     ATTRIBUTES
         CLAIM_NUMBER: TEXT
         DATE_FILED: DATE
         STATUS: TEXT
         FOLDER: DOCUMENTATION_FOLDER
+
     CONSTRUCTOR(claimNumber: TEXT, dateFiled: DATE, status: TEXT)
         SET CLAIM_NUMBER TO claimNumber
         SET DATE_FILED TO dateFiled
         SET STATUS TO status
         SET FOLDER TO NEW DOCUMENTATION_FOLDER()
     END CONSTRUCTOR
+
     METHODS
+        GET_CLAIM_NUMBER()
+        RETURN CLAIM_NUMBER
+       END METHOD
+
+        GET_DATE_FILED()
+        RETURN DATE_FILED
+       END METHOD
+
+        GET_STATUS()
+        RETURN STATUS
+       END METHOD
+
         CALCULATE_PAYOUT()
-                REPEAT 0
+        RETURN 0
      END METHOD
   END METHODS
 END CLASS
 
 
-
-CLASS VEHICLE_CLAIM EXTENDS CLAIM
+CLASS VEHICLE_CLAIM INHERITS CLAIM
     ATTRIBUTES
         REPAIR_ESTIMATE: NUMBER
         EXCESS: NUMBER
-    CONSTRUCTOR(claimNumber: TEXT, dateFiled: DATE, status: TEXT, repairEstimate: NUMBER, excess: NUMBER)
-        CALL CLAIM.CONSTRUCTOR(claimNumber, dateFiled, status)
+
+    CONSTRUCTOR(claimNumber: TEXT, dateFiled: DATE, status: TEXT,
+                repairEstimate: NUMBER, excess: NUMBER)
+        CALL SUPER(claimNumber, dateFiled, status)
         SET REPAIR_ESTIMATE TO repairEstimate
         SET EXCESS TO excess
     END CONSTRUCTOR
+
     METHODS
         CALCULATE_PAYOUT()
-        REPEAT REPAIR_ESTIMATE - EXCESS
-      END METHOD
-   END METHODS
-END CLASS
-
-
-
-CLASS MEDICAL_CLAIM EXTENDS CLAIM
-    ATTRIBUTES
-        TREATMENT_COST: NUMBER
-        COVERAGE_LIMIT: NUMBER
-    CONSTRUCTOR(claimNumber: TEXT, dateFiled: DATE, status: TEXT, treatmentCost: NUMBER, coverageLimit: NUMBER)
-        CALL CLAIM.CONSTRUCTOR(claimNumber, dateFiled, status)
-        SET TREATMENT_COST TO treatmentCost
-        SET COVERAGE_LIMIT TO coverageLimit
-    END CONSTRUCTOR
-    METHODS
-        CALCULATE_PAYOUT()
-            IF TREATMENT_COST LESS THAN COVERAGE_LIMIT THEN
-            REPEAT COVERAGE_LIMIT
-ELSE
-            REPEAT TREATMENT_COST
-         END IF
-    END METHOD
+        RETURN REPAIR_ESTIMATE - EXCESS
+     END METHOD
   END METHODS
 END CLASS
 
 
-
-CLASS PROPERTY_CLAIM EXTENDS CLAIM
+CLASS MEDICAL_CLAIM INHERITS CLAIM
     ATTRIBUTES
-        DAMAGE_VALUE: NUMBER
-        MAINTENANCE_REDUCTION: NUMBER
-    CONSTRUCTOR(claimNumber: TEXT, dateFiled: DATE, status: TEXT, damageValue: NUMBER, maintenanceReduction:  
-       NUMBER)
-        CALL CLAIM.CONSTRUCTOR(claimNumber, dateFiled, status)
-        SET DAMAGE_VALUE TO damageValue
-        SET MAINTENANCE_REDUCTION TO maintenanceReduction
+        TREATMENT_COST: NUMBER
+        COVERAGE_LIMIT: NUMBER
+
+    CONSTRUCTOR(claimNumber: TEXT, dateFiled: DATE, status: TEXT,
+                treatmentCost: NUMBER, coverageLimit: NUMBER)
+        CALL SUPER(claimNumber, dateFiled, status)
+        SET TREATMENT_COST TO treatmentCost
+        SET COVERAGE_LIMIT TO coverageLimit
     END CONSTRUCTOR
+
     METHODS
         CALCULATE_PAYOUT()
-        REPEAT DAMAGE_VALUE - (DAMAGE_VALUE * MAINTENANCE_REDUCTION / 100)
-      END METHOD
-   END METHODS
+            IF TREATMENT_COST LESS THAN OR EQUAL TO COVERAGE_LIMIT THEN
+            RETURN TREATMENT_COST
+ELSE
+            RETURN COVERAGE_LIMIT
+       END IF
+    END METHODS
 END CLASS
 
 
+CLASS PROPERTY_CLAIM INHERITS CLAIM
+    ATTRIBUTES
+        DAMAGE_VALUE: NUMBER
+        MAINTENANCE_REDUCTION: NUMBER
 
-Task 309: University Library Loans (Medium) 
+    CONSTRUCTOR(claimNumber: TEXT, dateFiled: DATE, status: TEXT,
+                damageValue: NUMBER, maintenanceReduction: NUMBER)
+        CALL SUPER(claimNumber, dateFiled, status)
+        SET DAMAGE_VALUE TO damageValue
+        SET MAINTENANCE_REDUCTION TO maintenanceReduction
+    END CONSTRUCTOR
 
+    METHODS
+        CALCULATE_PAYOUT()
+        RETURN DAMAGE_VALUE - (DAMAGE_VALUE * MAINTENANCE_REDUCTION / 100)
+     END METHOD
+  END METHODS
+END CLASS
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Task 309: University Library Loans
 
 
 
 CLASS STUDENT_ACCOUNT
     ATTRIBUTES
         LOAN_ITEMS: LIST<LOAN_ITEM>
+
     CONSTRUCTOR()
         SET LOAN_ITEMS TO EMPTY LIST
     END CONSTRUCTOR
+
     METHODS
         ADD_LOAN_ITEM(item: LOAN_ITEM)
         ADD item TO LOAN_ITEMS
-      END METHOD
-  END METHODS
+     END METHOD
+   END METHODS
 END CLASS
-
 
 
 CLASS CONDITION_REPORT
     ATTRIBUTES
         DAMAGE_NOTES: TEXT
-        CONSTRUCTOR(damageNotes: TEXT)
+
+    CONSTRUCTOR(damageNotes: TEXT)
         SET DAMAGE_NOTES TO damageNotes
     END CONSTRUCTOR
-END CLASS
 
-
-
-CLASS LOAN_ITEM
-    ATTRIBUTES
-        TITLE: TEXT
-        BARCODE: TEXT
-        LOAN_DURATION: NUMBER
-        REPORT: CONDITION_REPORT
-    CONSTRUCTOR(title: TEXT, barcode: TEXT, loanDuration: NUMBER, damageNotes: TEXT)
-        SET TITLE TO title
-        SET BARCODE TO barcode
-        SET LOAN_DURATION TO loanDuration
-        SET REPORT TO NEW CONDITION_REPORT(damageNotes)
-    END CONSTRUCTOR
     METHODS
-        CALCULATE_LATE_FEE(daysOverdue: NUMBER)
-                REPEAT 0
-      END METHOD
-   END METHODS
-END CLASS
-
-
-
-CLASS STANDARD_BOOK EXTENDS LOAN_ITEM
-    ATTRIBUTES
-        FEE_PER_DAY: NUMBER
-    CONSTRUCTOR(title: TEXT, barcode: TEXT, loanDuration: NUMBER, damageNotes: TEXT, feePerDay: NUMBER)
-        CALL LOAN_ITEM.CONSTRUCTOR(title, barcode, loanDuration, damageNotes)
-        SET FEE_PER_DAY TO feePerDay
-    END CONSTRUCTOR
-    METHODS
-        CALCULATE_LATE_FEE(daysOverdue: NUMBER)
-        REPEAT daysOverdue * FEE_PER_DAY
+        GET_DAMAGE_NOTES()
+        RETURN DAMAGE_NOTES
      END METHOD
   END METHODS
 END CLASS
 
 
-
-CLASS REFERENCE_TEXTBOOK EXTENDS LOAN_ITEM
+CLASS LOAN_ITEM
     ATTRIBUTES
-        HIGH_FEE_PER_DAY: NUMBER
-    CONSTRUCTOR(title: TEXT, barcode: TEXT, loanDuration: NUMBER, damageNotes: TEXT, highFeePerDay: NUMBER)
-        CALL LOAN_ITEM.CONSTRUCTOR(title, barcode, loanDuration, damageNotes)
-        SET HIGH_FEE_PER_DAY TO highFeePerDay
+        ITEM_ID: TEXT
+        TITLE: TEXT
+        BARCODE: TEXT
+        LOAN_DURATION: NUMBER
+        REPORT: CONDITION_REPORT
+        ON_LOAN: BOOLEAN
+
+    CONSTRUCTOR(itemId: TEXT, title: TEXT, barcode: TEXT,loanDuration: NUMBER, damageNotes: TEXT)
+        SET ITEM_ID TO itemId
+        SET TITLE TO title
+        SET BARCODE TO barcode
+        SET LOAN_DURATION TO loanDuration
+        SET REPORT TO NEW CONDITION_REPORT(damageNotes)
+        SET ON_LOAN TO FALSE
     END CONSTRUCTOR
+
+    METHODS
+        GET_ITEM_ID()
+        RETURN ITEM_ID
+       END METHOD
+
+        GET_TITLE()
+        RETURN TITLE
+       END METHOD
+
+        GET_BARCODE()
+        RETURN BARCODE
+       END METHOD
+
+        GET_LOAN_DURATION()
+        RETURN LOAN_DURATION
+       END METHOD
+
+        IS_ON_LOAN()
+        RETURN ON_LOAN
+       END METHOD
+
+        CALCULATE_LATE_FEE(daysOverdue: NUMBER)
+        RETURN 0
+     END METHOD
+  END METHODS
+END CLASS
+
+
+CLASS STANDARD_BOOK INHERITS LOAN_ITEM
+    ATTRIBUTES
+        FEE_PER_DAY: NUMBER
+
+    CONSTRUCTOR(itemId: TEXT, title: TEXT, barcode: TEXT,loanDuration: NUMBER, damageNotes: TEXT,feePerDay: NUMBER)
+        CALL SUPER(itemId, title, barcode, loanDuration, damageNotes)
+        SET FEE_PER_DAY TO feePerDay
+    END CONSTRUCTOR
+
     METHODS
         CALCULATE_LATE_FEE(daysOverdue: NUMBER)
-        REPEAT daysOverdue * HIGH_FEE_PER_DAY
-      END METHOD
+        RETURN daysOverdue * FEE_PER_DAY
+     END METHOD
+  END METHODS
+END CLASS
+
+
+CLASS REFERENCE_TEXTBOOK INHERITS LOAN_ITEM
+    ATTRIBUTES
+        HIGH_FEE_PER_DAY: NUMBER
+
+    CONSTRUCTOR(itemId: TEXT, title: TEXT, barcode: TEXT,loanDuration: NUMBER, damageNotes: TEXT,highFeePerDay: NUMBER)
+        CALL SUPER(itemId, title, barcode, loanDuration, damageNotes)
+        SET HIGH_FEE_PER_DAY TO highFeePerDay
+    END CONSTRUCTOR
+
+    METHODS
+        CALCULATE_LATE_FEE(daysOverdue: NUMBER)
+        RETURN daysOverdue * HIGH_FEE_PER_DAY
+     END METHOD
    END METHODS
 END CLASS
 
 
-
-CLASS JOURNAL_ISSUE EXTENDS REFERENCE_TEXTBOOK
+CLASS JOURNAL_ISSUE INHERITS REFERENCE_TEXTBOOK
     ATTRIBUTES
         RENEWABLE: BOOLEAN
-    CONSTRUCTOR(title: TEXT, barcode: TEXT, loanDuration: NUMBER, damageNotes: TEXT, highFeePerDay: NUMBER)
-        CALL REFERENCE_TEXTBOOK.CONSTRUCTOR(title, barcode, loanDuration, damageNotes, highFeePerDay)
-        SET RENEWABLE TO TRUE
+
+    CONSTRUCTOR(itemId: TEXT, title: TEXT, barcode: TEXT,loanDuration: NUMBER, damageNotes: TEXT,highFeePerDay: NUMBER, renewable: BOOLEAN)
+        CALL SUPER(itemId, title, barcode, loanDuration,damageNotes, highFeePerDay)
+        SET RENEWABLE TO renewable
     END CONSTRUCTOR
+
     METHODS
         CALCULATE_LATE_FEE(daysOverdue: NUMBER)
-        REPEAT daysOverdue * HIGH_FEE_PER_DAY
+        RETURN daysOverdue * HIGH_FEE_PER_DAY
        END METHOD
+
         CHECK_RENEWAL(daysOverdue: NUMBER)
-           IF daysOverdue LESS THAN 0 THEN
-           SET RENEWABLE TO FALSE
-        END IF
-      END METHOD
-    END METHODS
+        IF daysOverdue GREATER THAN 0 THEN
+        SET RENEWABLE TO FALSE
+       END IF
+    END METHOD
+  END METHODS
 END CLASS
 
 
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-Task 310: Theme Park Ride Queues (Medium) 
+
+
+
+Task 310: Theme Park Ride Queues
 
 
 
 CLASS THEME_PARK
     ATTRIBUTES
         RIDES: LIST<RIDE>
+
     CONSTRUCTOR()
         SET RIDES TO EMPTY LIST
     END CONSTRUCTOR
+
     METHODS
         ADD_RIDE(ride: RIDE)
         ADD ride TO RIDES
-      END METHOD
+     END METHOD
    END METHODS
 END CLASS
-
 
 
 CLASS SAFETY_INSPECTION_LOG
     ATTRIBUTES
         INSPECTION_DATE: DATE
         OUTCOME: TEXT
+
     CONSTRUCTOR(inspectionDate: DATE, outcome: TEXT)
         SET INSPECTION_DATE TO inspectionDate
         SET OUTCOME TO outcome
@@ -251,91 +312,107 @@ CLASS SAFETY_INSPECTION_LOG
 END CLASS
 
 
-
 CLASS RIDE
     ATTRIBUTES
+        RIDE_ID: TEXT
         NAME: TEXT
         LOCATION: TEXT
         INSPECTION_LOG: SAFETY_INSPECTION_LOG
-    CONSTRUCTOR(name: TEXT, location: TEXT, inspectionDate: DATE, outcome: TEXT)
+
+    CONSTRUCTOR(rideId: TEXT, name: TEXT, location: TEXT,inspectionDate: DATE, outcome: TEXT)
+        SET RIDE_ID TO rideId
         SET NAME TO name
         SET LOCATION TO location
         SET INSPECTION_LOG TO NEW SAFETY_INSPECTION_LOG(inspectionDate, outcome)
     END CONSTRUCTOR
+
     METHODS
+        GET_RIDE_ID()
+        RETURN RIDE_ID
+       END METHOD
+
+        GET_NAME()
+        RETURN NAME
+       END METHOD
+
+        GET_LOCATION()
+        RETURN LOCATION
+       END METHOD
+
         CALCULATE_WAIT_TIME()
-                 REPEAT 0
-      END METHOD
+        RETURN 0
+     END METHOD
    END METHODS
 END CLASS
 
 
-
-CLASS ROLLER_COASTER EXTENDS RIDE
+CLASS ROLLER_COASTER INHERITS RIDE
     ATTRIBUTES
         PEOPLE_IN_LINE: NUMBER
         CAR_CAPACITY: NUMBER
         RIDE_CYCLE_TIME: NUMBER
-    CONSTRUCTOR(name: TEXT, location: TEXT, inspectionDate: DATE, outcome: TEXT, peopleInLine: NUMBER, carCapacity: 
-    NUMBER, rideCycleTime: NUMBER)
-        CALL RIDE.CONSTRUCTOR(name, location, inspectionDate, outcome)
+
+    CONSTRUCTOR(rideId: TEXT, name: TEXT, location: TEXT, inspectionDate: DATE, outcome: TEXT,peopleInLine: NUMBER, carCapacity: NUMBER,rideCycleTime: NUMBER)
+        CALL SUPER(rideId, name, location, inspectionDate, outcome)
         SET PEOPLE_IN_LINE TO peopleInLine
         SET CAR_CAPACITY TO carCapacity
         SET RIDE_CYCLE_TIME TO rideCycleTime
     END CONSTRUCTOR
+
     METHODS
         CALCULATE_WAIT_TIME()
-        REPEAT (PEOPLE_IN_LINE / CAR_CAPACITY) * RIDE_CYCLE_TIME
-      END METHOD
+        RETURN (PEOPLE_IN_LINE / CAR_CAPACITY) * RIDE_CYCLE_TIME
+     END METHOD
    END METHODS
 END CLASS
 
 
-
-CLASS WATER_RIDE EXTENDS RIDE
+CLASS WATER_RIDE INHERITS RIDE
     ATTRIBUTES
         PEOPLE_IN_LINE: NUMBER
         BOAT_CAPACITY: NUMBER
         RIDE_CYCLE_TIME: NUMBER
         LOADING_TIME: NUMBER
-    CONSTRUCTOR(name: TEXT, location: TEXT, inspectionDate: DATE, outcome: TEXT, peopleInLine: NUMBER, 
-    boatCapacity: NUMBER, rideCycleTime: NUMBER, loadingTime: NUMBER)
-        CALL RIDE.CONSTRUCTOR(name, location, inspectionDate, outcome)
+
+    CONSTRUCTOR(rideId: TEXT, name: TEXT, location: TEXT,inspectionDate: DATE, outcome: TEXT,peopleInLine: NUMBER, boatCapacity: NUMBER,rideCycleTime: NUMBER, loadingTime: NUMBER)
+        CALL SUPER(rideId, name, location, inspectionDate, outcome)
         SET PEOPLE_IN_LINE TO peopleInLine
         SET BOAT_CAPACITY TO boatCapacity
         SET RIDE_CYCLE_TIME TO rideCycleTime
         SET LOADING_TIME TO loadingTime
     END CONSTRUCTOR
+
     METHODS
         CALCULATE_WAIT_TIME()
-            REPEAT (PEOPLE_IN_LINE / BOAT_CAPACITY) * RIDE_CYCLE_TIME + LOADING_TIME
-        END METHOD
-    END METHODS
+        RETURN (PEOPLE_IN_LINE / BOAT_CAPACITY) * RIDE_CYCLE_TIME + LOADING_TIME
+     END METHOD
+   END METHODS
 END CLASS
 
 
-
-CLASS VIP_ACCESS_RIDE EXTENDS ROLLER_COASTER
+CLASS VIP_ACCESS_RIDE INHERITS ROLLER_COASTER
     ATTRIBUTES
         VIP_GUESTS: NUMBER
-        STANDARD_GUESTS: NUMBER
-    CONSTRUCTOR(name: TEXT, location: TEXT, inspectionDate: DATE, outcome: TEXT, peopleInLine: NUMBER, carCapacity: 
-      NUMBER, rideCycleTime: NUMBER, vipGuests: NUMBER, standardGuests: NUMBER)
-        CALL ROLLER_COASTER.CONSTRUCTOR(name, location, inspectionDate, outcome, peopleInLine, carCapacity, 
-             rideCycleTime)
+
+    CONSTRUCTOR(rideId: TEXT, name: TEXT, location: TEXT,inspectionDate: DATE, outcome: TEXT,peopleInLine: NUMBER, carCapacity: NUMBER,rideCycleTime: NUMBER, vipGuests: NUMBER)
+        CALL SUPER(rideId, name, location, inspectionDate, outcome,peopleInLine, carCapacity, rideCycleTime)
         SET VIP_GUESTS TO vipGuests
-        SET STANDARD_GUESTS TO standardGuests
     END CONSTRUCTOR
+
     METHODS
         CALCULATE_WAIT_TIME()
-        RETURN (STANDARD_GUESTS / CAR_CAPACITY) * RIDE_CYCLE_TIME
-      END METHOD
+         RETURN ((PEOPLE_IN_LINE - VIP_GUESTS) / CAR_CAPACITY) * RIDE_CYCLE_TIME
+       END METHOD
+
         CALCULATE_VIP_WAIT_TIME()
-        REPEAT (VIP_GUESTS / CAR_CAPACITY) * RIDE_CYCLE_TIME
-      END METHOD
-    END METHODS
+        RETURN (VIP_GUESTS / CAR_CAPACITY) * (RIDE_CYCLE_TIME)
+     END METHOD
+   END METHODS
 END CLASS
 
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
@@ -343,127 +420,150 @@ Task 311: Freelancer Invoicing Platform (Medium)
 
 
 
-
-
-
 CLASS FREELANCER_ACCOUNT
     ATTRIBUTES
         INVOICES: LIST<INVOICE>
+
     CONSTRUCTOR()
         SET INVOICES TO EMPTY LIST
     END CONSTRUCTOR
+
     METHODS
         ADD_INVOICE(invoice: INVOICE)
         ADD invoice TO INVOICES
-      END METHOD
+     END METHOD
    END METHODS
 END CLASS
-
 
 
 CLASS PAYMENT_TERMS
     ATTRIBUTES
         DUE_DATE: DATE
         LATE_PAYMENT_INTEREST_RATE: NUMBER
+
     CONSTRUCTOR(dueDate: DATE, interestRate: NUMBER)
         SET DUE_DATE TO dueDate
         SET LATE_PAYMENT_INTEREST_RATE TO interestRate
     END CONSTRUCTOR
-END CLASS
 
+    METHODS
+        GET_INTEREST_RATE()
+        RETURN LATE_PAYMENT_INTEREST_RATE
+     END METHOD
+   END METHODS
+END CLASS
 
 
 CLASS INVOICE
     ATTRIBUTES
+        INVOICE_ID: TEXT
         INVOICE_NUMBER: TEXT
         DATE_ISSUED: DATE
         CLIENT_NAME: TEXT
         TERMS: PAYMENT_TERMS
-    CONSTRUCTOR(invoiceNumber: TEXT, dateIssued: DATE, clientName: TEXT, dueDate: DATE, interestRate: NUMBER)
+        PAID: BOOLEAN
+
+    CONSTRUCTOR(invoiceId: TEXT, invoiceNumber: TEXT,dateIssued: DATE, clientName: TEXT,dueDate: DATE, interestRate: NUMBER)
+        SET INVOICE_ID TO invoiceId
         SET INVOICE_NUMBER TO invoiceNumber
         SET DATE_ISSUED TO dateIssued
         SET CLIENT_NAME TO clientName
         SET TERMS TO NEW PAYMENT_TERMS(dueDate, interestRate)
+        SET PAID TO FALSE
     END CONSTRUCTOR
+
     METHODS
+        GET_INVOICE_ID()
+        RETURN INVOICE_ID
+       END METHOD
+
+        GET_INVOICE_NUMBER()
+        RETURN INVOICE_NUMBER
+       END METHOD
+
+        IS_PAID()
+        RETURN PAID
+       END METHOD
+
         CALCULATE_TOTAL_AMOUNT()
-                REPEAT 0
-      END METHOD
+        RETURN 0
+     END METHOD
    END METHODS
 END CLASS
 
 
-
-CLASS FIXED_PRICE_INVOICE EXTENDS INVOICE
+CLASS FIXED_PRICE_INVOICE INHERITS INVOICE
     ATTRIBUTES
         PROJECT_FEE: NUMBER
-    CONSTRUCTOR(invoiceNumber: TEXT, dateIssued: DATE, clientName: TEXT, dueDate: DATE, interestRate: NUMBER, 
-    projectFee: NUMBER)
-        CALL INVOICE.CONSTRUCTOR(invoiceNumber, dateIssued, clientName, dueDate, interestRate)
+
+    CONSTRUCTOR(invoiceId: TEXT, invoiceNumber: TEXT,dateIssued: DATE, clientName: TEXT,dueDate: DATE, interestRate: NUMBER,projectFee: NUMBER)
+        CALL SUPER(invoiceId, invoiceNumber, dateIssued,clientName, dueDate, interestRate)
         SET PROJECT_FEE TO projectFee
     END CONSTRUCTOR
+
     METHODS
         CALCULATE_TOTAL_AMOUNT()
-        REPEAT PROJECT_FEE
-      END METHOD
+        RETURN PROJECT_FEE + (PROJECT_FEE * TERMS.GET_INTEREST_RATE() / 100)
+     END METHOD
    END METHODS
 END CLASS
 
 
-
-CLASS HOURLY_INVOICE EXTENDS INVOICE
+CLASS HOURLY_INVOICE INHERITS INVOICE
     ATTRIBUTES
         APPROVED_HOURS: NUMBER
         HOURLY_RATE: NUMBER
-    CONSTRUCTOR(invoiceNumber: TEXT, dateIssued: DATE, clientName: TEXT, dueDate: DATE, interestRate: NUMBER, 
-    approvedHours: NUMBER, hourlyRate: NUMBER)
-        CALL INVOICE.CONSTRUCTOR(invoiceNumber, dateIssued, clientName, dueDate, interestRate)
+
+    CONSTRUCTOR(invoiceId: TEXT, invoiceNumber: TEXT,dateIssued: DATE, clientName: TEXT,dueDate: DATE, interestRate: NUMBER,approvedHours: NUMBER, hourlyRate: NUMBER)
+        CALL SUPER(invoiceId, invoiceNumber, dateIssued,clientName, dueDate, interestRate)
         SET APPROVED_HOURS TO approvedHours
         SET HOURLY_RATE TO hourlyRate
     END CONSTRUCTOR
+
     METHODS
         CALCULATE_TOTAL_AMOUNT()
-        REPEAT APPROVED_HOURS * HOURLY_RATE
-      END METHOD
-   END METHODS
+         RETURN (APPROVED_HOURS * HOURLY_RATE) +((APPROVED_HOURS * HOURLY_RATE) *TERMS.GET_INTEREST_RATE() / 100))
+     END METHOD
+   END METHOD
 END CLASS
 
 
-
-CLASS RETAINER_INVOICE EXTENDS FIXED_PRICE_INVOICE
+CLASS RETAINER_INVOICE INHERITS FIXED_PRICE_INVOICE
     ATTRIBUTES
         INCLUDED_HOURS: NUMBER
         EXTRA_HOURS: NUMBER
         HOURLY_RATE: NUMBER
-    CONSTRUCTOR(invoiceNumber: TEXT, dateIssued: DATE, clientName: TEXT, dueDate: DATE, interestRate: NUMBER, 
-    projectFee: NUMBER, includedHours: NUMBER, extraHours: NUMBER, hourlyRate: NUMBER)
-        CALL FIXED_PRICE_INVOICE.CONSTRUCTOR(invoiceNumber, dateIssued, clientName, dueDate, interestRate, 
-        projectFee)
+
+    CONSTRUCTOR(invoiceId: TEXT, invoiceNumber: TEX,dateIssued: DATE, clientName: TEXT,dueDate: DATE, interestRate: NUMBER,projectFee: NUMBER, includedHours: NUMBER,extraHours: NUMBER, hourlyRate: NUMBER)
+        CALL SUPER(invoiceId, invoiceNumber, dateIssued,clientName, dueDate, interestRate,projectFee)
         SET INCLUDED_HOURS TO includedHours
         SET EXTRA_HOURS TO extraHours
         SET HOURLY_RATE TO hourlyRate
     END CONSTRUCTOR
+
     METHODS
         CALCULATE_TOTAL_AMOUNT()
-        REPEAT PROJECT_FEE + (EXTRA_HOURS * HOURLY_RATE)
-      END METHOD
+        RETURN (PROJECT_FEE + (EXTRA_HOURS * HOURLY_RATE)) +((PROJECT_FEE + (EXTRA_HOURS * HOURLY_RATE) *TERMS.GET_INTEREST_RATE() / 100))
+     END METHOD
    END METHODS
 END CLASS
 
 
-
-
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Task 312: Data Center Server Management (Medium) 
+
 
 
 
 CLASS RACK
     ATTRIBUTES
         SERVERS: LIST<SERVER>
+
     CONSTRUCTOR()
         SET SERVERS TO EMPTY LIST
     END CONSTRUCTOR
+
     METHODS
         ADD_SERVER(server: SERVER)
         ADD server TO SERVERS
@@ -478,6 +578,7 @@ CLASS HARDWARE_SPECIFICATION
         CPU: TEXT
         RAM: TEXT
         STORAGE: TEXT
+
     CONSTRUCTOR(cpu: TEXT, ram: TEXT, storage: TEXT)
         SET CPU TO cpu
         SET RAM TO ram
@@ -489,88 +590,101 @@ END CLASS
 
 CLASS SERVER
     ATTRIBUTES
+        SERVER_ID: TEXT
         SERIAL_NUMBER: TEXT
         UPTIME: NUMBER
         HARDWARE: HARDWARE_SPECIFICATION
-    CONSTRUCTOR(serialNumber: TEXT, uptime: NUMBER, cpu: TEXT, ram: TEXT, storage: TEXT)
+
+    CONSTRUCTOR(serverId: TEXT, serialNumber: TEXT,uptime: NUMBER, cpu: TEXT,ram: TEXT, storage: TEXT)
+
+        SET SERVER_ID TO serverId
         SET SERIAL_NUMBER TO serialNumber
         SET UPTIME TO uptime
         SET HARDWARE TO NEW HARDWARE_SPECIFICATION(cpu, ram, storage)
+
     END CONSTRUCTOR
+
     METHODS
         CALCULATE_LOAD()
-        RETURN 0
-     END METHOD
-   END METHODS
+            RETURN 0
+        END METHOD
+    END METHODS
 END CLASS
 
 
 
-CLASS WEB_SERVER EXTENDS SERVER
+CLASS WEB_SERVER INHERITS SERVER
     ATTRIBUTES
         ACTIVE_CONNECTIONS: NUMBER
         MAX_CONNECTIONS: NUMBER
-    CONSTRUCTOR(serialNumber: TEXT, uptime: NUMBER, cpu: TEXT, ram: TEXT, storage: TEXT, activeConnections: NUMBER, 
-    maxConnections: NUMBER)
-        CALL SERVER.CONSTRUCTOR(serialNumber, uptime, cpu, ram, storage)
+
+    CONSTRUCTOR(serverId: TEXT, serialNumber: TEXT,uptime: NUMBER, cpu: TEXT,ram: TEXT, storage: TEXT,activeConnections: NUMBER,maxConnections: NUMBER)
+
+        CALL SUPER(serverId, serialNumber, uptime,cpu, ram, storage)
         SET ACTIVE_CONNECTIONS TO activeConnections
         SET MAX_CONNECTIONS TO maxConnections
+
     END CONSTRUCTOR
+
     METHODS
         CALCULATE_LOAD()
         RETURN (ACTIVE_CONNECTIONS / MAX_CONNECTIONS) * 100
-      END METHOD
+     END METHOD
    END METHODS
 END CLASS
 
 
 
-CLASS DATABASE_SERVER EXTENDS SERVER
+CLASS DATABASE_SERVER INHERITS SERVER
     ATTRIBUTES
         QUERY_THROUGHPUT: NUMBER
         MAX_QUERIES_PER_SECOND: NUMBER
-    CONSTRUCTOR(serialNumber: TEXT, uptime: NUMBER, cpu: TEXT, ram: TEXT, storage: TEXT, queryThroughput: NUMBER, 
-    11:25 AM 7/12/20266777777777777777777777777777777777777777777777777777777777777777777777777777777779999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777maxQueriesPerSecond: NUMBER)
-        CALL SERVER.CONSTRUCTOR(serialNumber, uptime, cpu, ram, storage)
+
+    CONSTRUCTOR(serverId: TEXT, serialNumber: TEXT,uptime: NUMBER, cpu: TEXT,ram: TEXT, storage: TEXT,queryThroughput: NUMBER,maxQueriesPerSecond: NUMBER)
+
+        CALL SUPER(serverId, serialNumber, uptime,cpu, ram, storage)
         SET QUERY_THROUGHPUT TO queryThroughput
         SET MAX_QUERIES_PER_SECOND TO maxQueriesPerSecond
+
     END CONSTRUCTOR
+
     METHODS
         CALCULATE_LOAD()
-            RETURN (QUERY_THROUGHPUT / MAX_QUERIES_PER_SECOND) * 100
-        END METHOD
+        RETURN (QUERY_THROUGHPUT / MAX_QUERIES_PER_SECOND) * 100
+       END METHOD
+
         ACCEPT_CONNECTION()
-            IF QUERY_THROUGHPUT < MAX_QUERIES_PER_SECOND THEN
-            REPEAT "Connection Accepted"
+            IF QUERY_THROUGHPUT LESS THAN MAX_QUERIES_PER_SECOND THEN
+            RETURN "Connection Accepted"
 ELSE
-            REPEAT "Connection Refused"
-        END IF
+           RETURN "Connection Refused"
+       END IF
      END METHOD
-  END METHODS
-END CLASS
-
-
-
-CLASS CACHE_SERVER EXTENDS DATABASE_SERVER
-    ATTRIBUTES
-        CACHE_HIT_RATIO: NUMBER
-        CONSTRUCTOR(serialNumber: TEXT, uptime: NUMBER, cpu: TEXT, ram: TEXT, storage: TEXT, queryThroughput:   \
-        NUMBER, 
-        maxQueriesPerSecond: NUMBER, cacheHitRatio: NUMBER)
-        CALL DATABASE_SERVER.CONSTRUCTOR(serialNumber, uptime, cpu, ram, storage, queryThroughput, 
-        maxQueriesPerSecond)
-        SET CACHE_HIT_RATIO TO cacheHitRatio
-    END CONSTRUCTOR
-    METHODS
-        CALCULATE_LOAD()
-        REPEAT ((QUERY_THROUGHPUT / MAX_QUERIES_PER_SECOND) * 100) - CACHE_HIT_RATIO
-      END METHOD
    END METHODS
 END CLASS
 
 
 
+CLASS CACHE_SERVER INHERITS DATABASE_SERVER
+    ATTRIBUTES
+        CACHE_HIT_RATIO: NUMBER
 
+    CONSTRUCTOR(serverId: TEXT, serialNumber: TEXT,uptime: NUMBER, cpu: TEXT, ram: TEXT, storage: NUMBER,queryThroughput: NUMBER,maxQueriesPerSecond: NUMBER, cacheHitRatio: NUMBER)
+
+        CALL SUPER(serverId, serialNumber, uptime,cpu, ram, storage,queryThroughput,maxQueriesPerSecond)
+        SET CACHE_HIT_RATIO TO cacheHitRatio
+
+    END CONSTRUCTOR
+
+    METHODS
+        CALCULATE_LOAD()
+        RETURN ((QUERY_THROUGHPUT / MAX_QUERIES_PER_SECOND) * 100)- CACHE_HIT_RATIO)
+     END METHOD
+   END METHODS
+END CLASS
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------
 
 
 
