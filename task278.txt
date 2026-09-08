@@ -16,7 +16,7 @@ CLASS VETERINARY_CLINIC
 
     METHODS
         ADD_OWNER(owner: OWNER)
-            ADD owner TO OWNERS
+            APPEND owner TO OWNERS
         END METHOD
 
         ADD_VET(vet: VET)
