@@ -642,7 +642,7 @@ CLASS RIDE
 
     CONSTRUCTOR(pickupLocation: TEXT, dropOffLocation: TEXT, route: ROUTE)
         STORE PICKUP_LOCATION TO pickupLocation
-        SET DROP_OFF_LOCATION TO dropOffLocation
+        STORE DROP_OFF_LOCATION TO dropOffLocation
         SET ROUTE TO route
     END CONSTRUCTOR
 
