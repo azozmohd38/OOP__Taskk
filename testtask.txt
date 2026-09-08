@@ -29,7 +29,7 @@ CLASS PET
         MEDICAL_HISTORY: MEDICAL_HISTORY
 
     CONSTRUCTOR(id, name, dob, species)
-        SET PET_ID TO id
+        STORE PET_ID TO id
         SET NAME TO name
         SET DATE_OF_BIRTH TO dob
         SET SPECIES TO species
