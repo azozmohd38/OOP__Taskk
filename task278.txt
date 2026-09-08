@@ -1492,7 +1492,7 @@ CLASS TICKETING_PLATFORM
 
         ADD_VENUE(venue: VENUE)
 
-            ADD venue TO VENUES
+            APPEND venue TO VENUES
 
         END METHOD
 
