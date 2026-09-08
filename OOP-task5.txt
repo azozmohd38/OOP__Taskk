@@ -247,7 +247,7 @@ CLASS EMPLOYEE
 
     CONSTRUCTOR(name: TEXT, id: NUMBER, hireDate: TEXT)
 
-        SET THIS.NAME TO name
+        ASSIGN THIS.NAME TO name
         STORE THIS.EMPLOYEE_ID TO id
         SET THIS.HIRE_DATE TO hireDate
 
