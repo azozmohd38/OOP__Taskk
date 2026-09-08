@@ -499,7 +499,7 @@ CLASS FISH INHERITS ANIMAL
 
         CALL SUPER(name, age, dietType)
 
-        SET THIS.CAN_SWIM TO canSwim
+        ASSIGN THIS.CAN_SWIM TO canSwim
         SET THIS.HAS_GILLS TO hasGills
 
     END CONSTRUCTOR
