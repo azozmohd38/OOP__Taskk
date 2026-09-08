@@ -244,7 +244,7 @@ CLASS CINEMA
         END METHOD
 
         ADD_SCREEN(screen: SCREEN)
-            ADD screen TO SCREENS
+            APPEND screen TO SCREENS
         END METHOD
 
         ADD_SHOWTIME(showtime: SHOWTIME)
