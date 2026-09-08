@@ -477,7 +477,7 @@ CLASS BIRD INHERITS ANIMAL
 
         DESCRIBE_MOVEMENT()
 
-            RETURN "FLIES"
+            GIVE BACK "FLIES"
 
         END METHOD
 
