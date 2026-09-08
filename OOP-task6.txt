@@ -285,7 +285,7 @@ CLASS ITEM
 
     METHODS
         GET_NAME()
-            RETURN ITEM_NAME
+            GIVE BACK ITEM_NAME
         END METHOD
     END METHODS
 END CLASS
