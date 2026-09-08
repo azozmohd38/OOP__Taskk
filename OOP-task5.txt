@@ -610,7 +610,7 @@ CLASS ORDER
 
         CALCULATE_TOTAL()
 
-            SET TOTAL TO 0
+            ASSIGN TOTAL TO 0
             SET i TO 0
 
             REPEAT
