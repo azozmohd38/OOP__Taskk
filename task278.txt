@@ -438,7 +438,7 @@ CLASS VENDOR
         RELIABILITY: NUMBER
 
     CONSTRUCTOR(id: NUMBER, name: TEXT, phone: TEXT)
-        SET VENDOR_ID TO id
+        STORE VENDOR_ID TO id
         SET NAME TO name
         SET PHONE TO phone
         SET RELIABILITY TO 100
