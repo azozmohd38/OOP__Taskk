@@ -413,7 +413,7 @@ CLASS WAREHOUSE
 
     METHODS
         ADD_PRODUCT(product: PRODUCT)
-            ADD product TO PRODUCTS
+            APPEND product TO PRODUCTS
         END METHOD
 
 
