@@ -183,7 +183,7 @@ CLASS LOAN_ITEM
     CONSTRUCTOR(itemId: TEXT, title: TEXT, barcode: TEXT,loanDuration: NUMBER, damageNotes: TEXT)
         STORE ITEM_ID TO itemId
         STORE TITLE TO title
-        SET BARCODE TO barcode
+        STORE BARCODE TO barcode
         SET LOAN_DURATION TO loanDuration
         SET REPORT TO NEW CONDITION_REPORT(damageNotes)
         SET ON_LOAN TO FALSE
