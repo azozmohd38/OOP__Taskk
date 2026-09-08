@@ -1210,7 +1210,7 @@ CLASS WEDDING_COMPANY
 
 
         ADD_VENDOR(vendor: VENDOR)
-            ADD vendor TO VENDORS
+            APPEND vendor TO VENDORS
         END METHOD
 
     END METHODS
