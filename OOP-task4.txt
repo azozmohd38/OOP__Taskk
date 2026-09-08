@@ -775,7 +775,7 @@ CLASS FITNESS_CENTER
 
         ADD_TRAINER(trainer: TRAINER)
 
-            ADD trainer TO THIS.TRAINERS
+            ADD trainer INTO THIS.TRAINERS
 
         END METHOD
 
