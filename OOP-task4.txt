@@ -177,7 +177,7 @@ CLASS EXAM
 
     CONSTRUCTOR(id: NUMBER, title: TEXT, timeLimit: NUMBER)
 
-        SET THIS.EXAM_ID TO id
+        STORE id IN THIS.EXAM_ID
         SET THIS.TITLE TO title
         SET THIS.TIME_LIMIT TO timeLimit
         SET THIS.QUESTIONS TO EMPTY LIST
