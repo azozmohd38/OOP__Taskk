@@ -7,7 +7,7 @@ CLASS OWNER
         PETS: LIST<PET>
 
     CONSTRUCTOR(id, name, phone, address)
-        SET OWNER_ID TO id
+        STORE OWNER_ID TO id
         SET NAME TO name
         SET PHONE_NUMBER TO phone
         SET ADDRESS TO address
