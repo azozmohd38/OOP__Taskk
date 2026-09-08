@@ -1530,7 +1530,7 @@ CLASS SHIFT
         WARD: WARD
 
     CONSTRUCTOR(startTime: TEXT, endTime: TEXT, ward: WARD)
-        SET START_TIME TO startTime
+        STORE startTime IN START_TIME
         SET END_TIME TO endTime
         SET WARD TO ward
     END CONSTRUCTOR
