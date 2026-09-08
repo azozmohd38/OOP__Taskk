@@ -1674,7 +1674,7 @@ CLASS PUBLICATION
     CONSTRUCTOR(title: TEXT, author: TEXT, cover: COVER_IMAGE)
         STORE title IN TITLE
         STORE author IN AUTHOR
-        SET COVER_IMAGE TO cover
+        STORE cover IN COVER_IMAGE
     END CONSTRUCTOR
 
     METHODS
