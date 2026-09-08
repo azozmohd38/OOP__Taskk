@@ -610,7 +610,7 @@ CLASS ROUTE
 
     METHODS
         ADD_WAYPOINT(waypoint: WAYPOINT)
-            ADD waypoint TO WAYPOINTS
+            APPEND waypoint TO WAYPOINTS
         END METHOD
     END METHODS
 END CLASS
