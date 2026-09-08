@@ -654,7 +654,7 @@ CLASS CLASS_ROOM
 
     CONSTRUCTOR(id: NUMBER, teacher: TEACHER, subject: SUBJECT, maxSize: NUMBER, time: TIME)
         STORE CLASS_ID TO id
-        SET TEACHER TO teacher
+        STORE TEACHER TO teacher
         SET SUBJECT TO subject
         SET MAX_SIZE TO maxSize
         SET SCHEDULE_TIME TO time
