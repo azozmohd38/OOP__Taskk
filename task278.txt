@@ -248,7 +248,7 @@ CLASS CINEMA
         END METHOD
 
         ADD_SHOWTIME(showtime: SHOWTIME)
-            ADD showtime TO SHOWTIMES
+            APPEND showtime TO SHOWTIMES
         END METHOD
     END METHODS
 END CLASS
