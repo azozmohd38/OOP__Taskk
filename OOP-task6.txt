@@ -299,7 +299,7 @@ CLASS CHARACTER
 
     CONSTRUCTOR(name: TEXT, health: NUMBER)
         STORE NAME TO name
-        SET HEALTH TO health
+        STORE HEALTH TO health
         SET INVENTORY TO NEW INVENTORY()
     END CONSTRUCTOR
 
