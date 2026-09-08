@@ -306,7 +306,7 @@ CLASS SAFETY_INSPECTION_LOG
         OUTCOME: TEXT
 
     CONSTRUCTOR(inspectionDate: DATE, outcome: TEXT)
-        SET INSPECTION_DATE TO inspectionDate
+        STORE INSPECTION_DATE TO inspectionDate
         SET OUTCOME TO outcome
     END CONSTRUCTOR
 END CLASS
