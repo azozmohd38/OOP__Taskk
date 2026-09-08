@@ -624,7 +624,7 @@ CLASS SCHOOL
     METHODS
 
         ADD_CLASS(classRoom: CLASS_ROOM)
-            ADD classRoom TO CLASSES
+            APPEND classRoom TO CLASSES
         END METHOD
 
 
