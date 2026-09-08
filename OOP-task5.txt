@@ -17,7 +17,7 @@ CLASS CANVAS
 
         ADD_SHAPE(shape: SHAPE)
 
-            ADD shape TO THIS.SHAPES
+            ADD shape INTO THIS.SHAPES
 
         END METHOD
 
