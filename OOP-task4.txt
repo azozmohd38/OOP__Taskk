@@ -370,7 +370,7 @@ CLASS VEHICLE
 
     CONSTRUCTOR(id: NUMBER, model: TEXT, plate: TEXT)
 
-        SET THIS.VEHICLE_ID TO id
+        STORE id IN THIS.VEHICLE_ID
         SET THIS.MODEL TO model
         SET THIS.PLATE_NUMBER TO plate
 
