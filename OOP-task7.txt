@@ -464,7 +464,7 @@ CLASS INVOICE
         PAID: BOOLEAN
 
     CONSTRUCTOR(invoiceId: TEXT, invoiceNumber: TEXT,dateIssued: DATE, clientName: TEXT,dueDate: DATE, interestRate: NUMBER)
-        SET INVOICE_ID TO invoiceId
+        STORE INVOICE_ID TO invoiceId
         SET INVOICE_NUMBER TO invoiceNumber
         SET DATE_ISSUED TO dateIssued
         SET CLIENT_NAME TO clientName
