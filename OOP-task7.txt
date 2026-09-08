@@ -566,7 +566,7 @@ CLASS RACK
 
     METHODS
         ADD_SERVER(server: SERVER)
-        ADD server TO SERVERS
+        APPEND server TO SERVERS
       END METHOD
    END METHODS
 END CLASS
