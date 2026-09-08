@@ -1828,7 +1828,7 @@ CLASS DEVICE
         STATUS: TEXT
 
     CONSTRUCTOR(name: TEXT, location: TEXT)
-        SET NAME TO name
+        STORE name IN NAME
         SET ROOM_LOCATION TO location
         SET STATUS TO "OFF"
     END CONSTRUCTOR
