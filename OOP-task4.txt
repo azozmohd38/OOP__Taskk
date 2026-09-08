@@ -534,7 +534,7 @@ CLASS CO_WORKING_SPACE
 
         ADD_ROOM(room: ROOM)
 
-            ADD room TO THIS.ROOMS
+            ADD room INTO THIS.ROOMS
 
         END METHOD
 
