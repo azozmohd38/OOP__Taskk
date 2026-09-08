@@ -1246,7 +1246,7 @@ CLASS GUEST
 
     CONSTRUCTOR(id: NUMBER, name: TEXT)
 
-        SET GUEST_ID TO id
+        STORE GUEST_ID TO id
         SET NAME TO name
 
     END CONSTRUCTOR
