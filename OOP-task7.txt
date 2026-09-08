@@ -597,7 +597,7 @@ CLASS SERVER
 
     CONSTRUCTOR(serverId: TEXT, serialNumber: TEXT,uptime: NUMBER, cpu: TEXT,ram: TEXT, storage: TEXT)
 
-        SET SERVER_ID TO serverId
+        STORE SERVER_ID TO serverId
         SET SERIAL_NUMBER TO serialNumber
         SET UPTIME TO uptime
         SET HARDWARE TO NEW HARDWARE_SPECIFICATION(cpu, ram, storage)
