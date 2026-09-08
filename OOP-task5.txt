@@ -1855,7 +1855,7 @@ CLASS SMART_LIGHT INHERITS DEVICE
 
     CONSTRUCTOR(name: TEXT, location: TEXT, brightness: NUMBER)
         CALL SUPER(name, location)
-        SET BRIGHTNESS_LEVEL TO brightness
+        STORE brightness IN BRIGHTNESS_LEVEL
     END CONSTRUCTOR
 
     METHODS
