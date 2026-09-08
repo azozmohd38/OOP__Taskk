@@ -581,7 +581,7 @@ CLASS HARDWARE_SPECIFICATION
 
     CONSTRUCTOR(cpu: TEXT, ram: TEXT, storage: TEXT)
         STORE CPU TO cpu
-        SET RAM TO ram
+        STORE RAM TO ram
         SET STORAGE TO storage
     END CONSTRUCTOR
 END CLASS
