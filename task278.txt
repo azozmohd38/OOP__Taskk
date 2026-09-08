@@ -39,7 +39,7 @@ CLASS OWNER
 
     CONSTRUCTOR(id: NUMBER, name: TEXT, phone: TEXT, address: TEXT)
         STORE OWNER_ID TO id
-        SET NAME TO name
+        STORE NAME TO name
         SET PHONE_NUMBER TO phone
         SET ADDRESS TO address
         SET PETS TO EMPTY LIST
