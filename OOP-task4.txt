@@ -23,7 +23,7 @@ CLASS BOOKSHOP
         END METHOD
 
         ADD_CUSTOMER(customer: CUSTOMER)
-            ADD customer TO THIS.CUSTOMERS
+            ADD customer INTO THIS.CUSTOMERS
         END METHOD
 
         ADD_SALE(sale: SALE)
