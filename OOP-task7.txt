@@ -323,7 +323,7 @@ CLASS RIDE
         STORE RIDE_ID TO rideId
         STORE NAME TO name
         STORE LOCATION TO location
-        SET INSPECTION_LOG TO NEW SAFETY_INSPECTION_LOG(inspectionDate, outcome)
+        STORE INSPECTION_LOG TO NEW SAFETY_INSPECTION_LOG(inspectionDate, outcome)
     END CONSTRUCTOR
 
     METHODS
