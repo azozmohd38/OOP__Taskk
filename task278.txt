@@ -1033,7 +1033,7 @@ CLASS MODEL
 
 
     CONSTRUCTOR(name: TEXT, basePrice: NUMBER)
-        SET NAME TO name
+        STORE NAME TO name
         SET BASE_PRICE TO basePrice
     END CONSTRUCTOR
 
