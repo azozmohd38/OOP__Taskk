@@ -782,7 +782,7 @@ CLASS FITNESS_CENTER
 
         ADD_CLIENT(client: CLIENT)
 
-            ADD client TO THIS.CLIENTS
+            ADD client INTO THIS.CLIENTS
 
         END METHOD
 
