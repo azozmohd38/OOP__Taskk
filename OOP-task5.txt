@@ -1558,7 +1558,7 @@ CLASS STAFF_MEMBER
                 END IF
             END FOR
 
-            ADD shift TO ASSIGNED_SHIFTS
+            ADD shift INTO ASSIGNED_SHIFTS
         END METHOD
 
         ABSTRACT METHOD
