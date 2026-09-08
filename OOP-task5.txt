@@ -216,7 +216,7 @@ CLASS PAYROLL
         CALCULATE_TOTAL_PAYROLL()
 
             SET TOTAL TO 0
-            SET i TO 0
+            ASSIGN i TO 0
 
             REPEAT
 
