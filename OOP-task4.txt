@@ -790,7 +790,7 @@ CLASS FITNESS_CENTER
 
         ADD_SESSION(session: SESSION)
 
-            ADD session TO THIS.SESSIONS
+            ADD session INTO THIS.SESSIONS
 
         END METHOD
 
