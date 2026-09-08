@@ -39,7 +39,7 @@ CLASS INSTRUMENT
 
     METHODS
         PLAY_DESCRIPTION()
-            RETURN "Instrument is played."
+            GIVE BACK "Instrument is played."
      END METHOD
   END METHODS
 END CLASS
