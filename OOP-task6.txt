@@ -263,7 +263,7 @@ CLASS INVENTORY
 
     METHODS
         ADD_ITEM(item: ITEM)
-            ADD item TO ITEMS
+            APPEND item TO ITEMS
         END METHOD
 
         DISPLAY_ITEMS()
