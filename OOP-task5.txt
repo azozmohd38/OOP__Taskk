@@ -1375,7 +1375,7 @@ CLASS DEBIT_CARD INHERITS CARD
 
         CALL SUPER(cardNumber, expiryDate, chip)
 
-        SET THIS.LINKED_ACCOUNT TO account
+        STORE account IN THIS.LINKED_ACCOUNT
 
     END CONSTRUCTOR
 
