@@ -1007,7 +1007,7 @@ CLASS DEALERSHIP
     METHODS
 
         ADD_VEHICLE(vehicle: VEHICLE)
-            ADD vehicle TO VEHICLES
+            APPEND vehicle TO VEHICLES
         END METHOD
 
 
