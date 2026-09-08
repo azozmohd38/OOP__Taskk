@@ -342,7 +342,7 @@ CLASS TAXI_COMPANY
     METHODS
 
         ADD_DRIVER(driver: DRIVER)
-            ADD driver TO THIS.DRIVERS
+            ADD driver INTO THIS.DRIVERS
         END METHOD
 
 
