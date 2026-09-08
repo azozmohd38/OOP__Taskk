@@ -634,7 +634,7 @@ CLASS SCHOOL
 
 
         ADD_TEACHER(teacher: TEACHER)
-            ADD teacher TO TEACHERS
+            APPEND teacher TO TEACHERS
         END METHOD
 
     END METHODS
