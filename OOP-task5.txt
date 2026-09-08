@@ -1185,7 +1185,7 @@ CLASS VAN INHERITS VEHICLE
 
         CALL SUPER(plate, fuel, engine)
 
-        SET THIS.CARGO_CAPACITY TO capacity
+        ASSIGN THIS.CARGO_CAPACITY TO capacity
 
     END CONSTRUCTOR
 
