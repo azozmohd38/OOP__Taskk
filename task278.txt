@@ -1935,7 +1935,7 @@ CLASS FARM
 
         ADD_FIELD(field: FIELD)
 
-            ADD field TO FIELDS
+            APPEND field TO FIELDS
 
         END METHOD
 
