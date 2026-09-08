@@ -240,7 +240,7 @@ CLASS CINEMA
 
     METHODS
         ADD_FILM(film: FILM)
-            ADD film TO FILMS
+            APPEND film TO FILMS
         END METHOD
 
         ADD_SCREEN(screen: SCREEN)
