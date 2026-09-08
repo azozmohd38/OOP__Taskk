@@ -74,7 +74,7 @@ CLASS CIRCLE INHERITS SHAPE
 
         CALL SUPER(color, position)
 
-        SET THIS.RADIUS TO radius
+        STORE radius IN THIS.RADIUS
 
     END CONSTRUCTOR
 
