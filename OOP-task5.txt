@@ -1064,7 +1064,7 @@ CLASS DELIVERY_ROUTE
 
         ADD_STOP(stop: STOP)
 
-            ADD stop TO THIS.STOPS
+            APPEND stop TO THIS.STOPS
 
         END METHOD
 
