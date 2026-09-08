@@ -1520,7 +1520,7 @@ CLASS ARTIST
     CONSTRUCTOR(id: NUMBER, name: TEXT)
 
         STORE ARTIST_ID TO id
-        SET NAME TO name
+        STORE NAME TO name
 
     END CONSTRUCTOR
 
