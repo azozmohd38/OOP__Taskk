@@ -33,7 +33,7 @@ CLASS INSTRUMENT
         PRICE: NUMBER
 
     CONSTRUCTOR(brand: TEXT, price: NUMBER)
-        SET BRAND TO brand
+        STORE BRAND TO brand
         SET PRICE TO price
     END CONSTRUCTOR
 
