@@ -207,7 +207,7 @@ CLASS PAYROLL
 
         ADD_EMPLOYEE(employee: EMPLOYEE)
 
-            ADD employee TO THIS.EMPLOYEES
+            APPEND employee TO THIS.EMPLOYEES
 
         END METHOD
 
