@@ -56,7 +56,7 @@ CLASS GUITAR INHERITS INSTRUMENT
 
     METHODS
         PLAY_DESCRIPTION()
-        RETURN "Strummed or plucked."
+        GIVE BACK "Strummed or plucked."
      END METHOD
    END METHODS
 END CLASS
