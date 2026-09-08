@@ -160,7 +160,7 @@ CLASS ONLINE_PLATFORM
         END METHOD
 
         ADD_ATTEMPT(attempt: ATTEMPT)
-            ADD attempt TO THIS.ATTEMPTS
+            ADD attempt INTO THIS.ATTEMPTS
         END METHOD
 
     END METHODS
