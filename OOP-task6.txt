@@ -13,7 +13,7 @@ CLASS MUSIC_STORE
 
     METHODS
         ADD_INSTRUMENT(instrument: INSTRUMENT)
-        ADD instrument TO INSTRUMENTS
+        APPEND instrument TO INSTRUMENTS
       END METHOD
 
         DISPLAY_INVENTORY()
