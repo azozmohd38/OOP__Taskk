@@ -132,7 +132,7 @@ CLASS FITNESS_LOG
 
     METHODS
         ADD_WORKOUT(workout: WORKOUT)
-        ADD workout TO WORKOUTS
+        APPEND workout TO WORKOUTS
       END METHOD
 
         DISPLAY_TOTAL_CALORIES()
