@@ -642,7 +642,7 @@ CLASS ITEM
     CONSTRUCTOR(name: TEXT, price: NUMBER)
 
         SET THIS.ITEM_NAME TO name
-        SET THIS.PRICE TO price
+        ASSIGN THIS.PRICE TO price
 
     END CONSTRUCTOR
 
