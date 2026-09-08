@@ -1093,7 +1093,7 @@ CLASS STOP
 
     CONSTRUCTOR(address: TEXT, package: PACKAGE)
 
-        SET THIS.ADDRESS TO address
+        ASSIGN THIS.ADDRESS TO address
         SET THIS.PACKAGE TO package
 
     END CONSTRUCTOR
