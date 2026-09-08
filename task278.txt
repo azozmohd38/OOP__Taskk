@@ -1205,7 +1205,7 @@ CLASS WEDDING_COMPANY
     METHODS
 
         ADD_EVENT(event: EVENT)
-            ADD event TO EVENTS
+            APPEND event TO EVENTS
         END METHOD
 
 
