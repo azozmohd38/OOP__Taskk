@@ -280,7 +280,7 @@ CLASS ITEM
         ITEM_NAME: TEXT
 
     CONSTRUCTOR(itemName: TEXT)
-        SET ITEM_NAME TO itemName
+        STORE ITEM_NAME TO itemName
     END CONSTRUCTOR
 
     METHODS
