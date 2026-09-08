@@ -868,7 +868,7 @@ CLASS WATCH_RECORD
 
     CONSTRUCTOR(title: TEXT, date: TEXT)
 
-        SET THIS.TITLE TO title
+        ASSIGN THIS.TITLE TO title
         SET THIS.WATCH_DATE TO date
 
     END CONSTRUCTOR
