@@ -184,7 +184,7 @@ CLASS LOAN_ITEM
         STORE ITEM_ID TO itemId
         STORE TITLE TO title
         STORE BARCODE TO barcode
-        SET LOAN_DURATION TO loanDuration
+        STORE LOAN_DURATION TO loanDuration
         SET REPORT TO NEW CONDITION_REPORT(damageNotes)
         SET ON_LOAN TO FALSE
     END CONSTRUCTOR
