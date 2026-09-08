@@ -352,7 +352,7 @@ CLASS TAXI_COMPANY
 
 
         ADD_TRIP(trip: TRIP)
-            ADD trip TO THIS.TRIPS
+            ADD trip INTO THIS.TRIPS
         END METHOD
 
     END METHODS
