@@ -155,7 +155,7 @@ CLASS WORKOUT
 
     CONSTRUCTOR(date: DATE, duration: NUMBER)
         STORE DATE TO date
-        SET DURATION TO duration
+        STORE DURATION TO duration
     END CONSTRUCTOR
 
     METHODS
