@@ -1309,7 +1309,7 @@ CLASS CARD
 
         BLOCK_CARD()
 
-            SET THIS.STATUS TO "BLOCKED"
+            ASSIGN THIS.STATUS TO "BLOCKED"
 
         END METHOD
 
