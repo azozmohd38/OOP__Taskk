@@ -594,7 +594,7 @@ CLASS ORDER
 
         ADD_ITEM(item: ITEM)
 
-            ADD item TO THIS.ITEMS
+            APPEND item TO THIS.ITEMS
 
         END METHOD
 
