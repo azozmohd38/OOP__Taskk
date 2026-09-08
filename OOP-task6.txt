@@ -137,7 +137,7 @@ CLASS FITNESS_LOG
 
         DISPLAY_TOTAL_CALORIES()
             DECLARE TOTAL AS NUMBER
-            SET TOTAL TO 0
+            STORE TOTAL TO 0
 
             FOR EACH workout IN WORKOUTS
             SET TOTAL TO TOTAL + workout.CALCULATE_CALORIES()
