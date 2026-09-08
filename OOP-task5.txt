@@ -152,7 +152,7 @@ CLASS TRIANGLE INHERITS SHAPE
 
         CALL SUPER(color, position)
 
-        SET THIS.SIDE1 TO side1
+        STORE side1 IN THIS.SIDE1
         SET THIS.SIDE2 TO side2
         SET THIS.SIDE3 TO side3
 
