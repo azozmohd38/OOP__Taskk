@@ -1287,7 +1287,7 @@ CLASS CARD
 
     CONSTRUCTOR(cardNumber: TEXT, expiryDate: TEXT, chip: CHIP)
 
-        SET THIS.CARD_NUMBER TO cardNumber
+        ASSIGN THIS.CARD_NUMBER TO cardNumber
         SET THIS.EXPIRY_DATE TO expiryDate
         SET THIS.STATUS TO "ACTIVE"
         SET THIS.CHIP TO chip
