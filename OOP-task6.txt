@@ -450,7 +450,7 @@ CLASS METER_READING
 
     CONSTRUCTOR(startReading: NUMBER, endReading: NUMBER)
         STORE START_READING TO startReading
-        SET END_READING TO endReading
+        STORE END_READING TO endReading
     END CONSTRUCTOR
 
     METHODS
