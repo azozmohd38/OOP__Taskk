@@ -37,7 +37,7 @@ CLASS SHAPE
     CONSTRUCTOR(color: TEXT, position: TEXT)
 
         STORE color IN THIS.COLOR
-        SET THIS.POSITION TO position
+        STORE position IN THIS.POSITION
 
     END CONSTRUCTOR
 
