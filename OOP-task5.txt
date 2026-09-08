@@ -1355,7 +1355,7 @@ CLASS ACCOUNT
 
     CONSTRUCTOR(accountNumber: NUMBER, balance: NUMBER)
 
-        SET THIS.ACCOUNT_NUMBER TO accountNumber
+        STORE accountNumber IN THIS.ACCOUNT_NUMBER
         SET THIS.BALANCE TO balance
 
     END CONSTRUCTOR
