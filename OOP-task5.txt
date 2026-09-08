@@ -419,7 +419,7 @@ CLASS ANIMAL
     CONSTRUCTOR(name: TEXT, age: NUMBER, dietType: TEXT)
 
         SET THIS.NAME TO name
-        SET THIS.AGE TO age
+        ASSIGN THIS.AGE TO age
         SET THIS.DIET_TYPE TO dietType
 
     END CONSTRUCTOR
