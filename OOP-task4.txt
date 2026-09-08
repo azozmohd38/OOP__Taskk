@@ -541,7 +541,7 @@ CLASS CO_WORKING_SPACE
 
         ADD_BOOKING(booking: BOOKING)
 
-            ADD booking TO THIS.BOOKINGS
+            ADD booking INTO THIS.BOOKINGS
 
         END METHOD
 
