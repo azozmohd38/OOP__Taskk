@@ -1751,7 +1751,7 @@ CLASS DEVELOPER
 
             ELSE
 
-                RETURN FALSE
+                GIVE BACK FALSE
 
             END IF
 
