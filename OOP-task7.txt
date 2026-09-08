@@ -320,7 +320,7 @@ CLASS RIDE
         INSPECTION_LOG: SAFETY_INSPECTION_LOG
 
     CONSTRUCTOR(rideId: TEXT, name: TEXT, location: TEXT,inspectionDate: DATE, outcome: TEXT)
-        SET RIDE_ID TO rideId
+        STORE RIDE_ID TO rideId
         SET NAME TO name
         SET LOCATION TO location
         SET INSPECTION_LOG TO NEW SAFETY_INSPECTION_LOG(inspectionDate, outcome)
