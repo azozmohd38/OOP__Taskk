@@ -599,7 +599,7 @@ CLASS SERVER
 
         STORE SERVER_ID TO serverId
         STORE SERIAL_NUMBER TO serialNumber
-        SET UPTIME TO uptime
+        STORE UPTIME TO uptime
         SET HARDWARE TO NEW HARDWARE_SPECIFICATION(cpu, ram, storage)
 
     END CONSTRUCTOR
