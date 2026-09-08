@@ -1356,7 +1356,7 @@ CLASS ACCOUNT
     CONSTRUCTOR(accountNumber: NUMBER, balance: NUMBER)
 
         STORE accountNumber IN THIS.ACCOUNT_NUMBER
-        SET THIS.BALANCE TO balance
+        STORE balance IN THIS.BALANCE
 
     END CONSTRUCTOR
 
