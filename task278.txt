@@ -629,7 +629,7 @@ CLASS SCHOOL
 
 
         ADD_STUDENT(student: STUDENT)
-            ADD student TO STUDENTS
+            APPEND student TO STUDENTS
         END METHOD
 
 
