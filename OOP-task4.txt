@@ -347,7 +347,7 @@ CLASS TAXI_COMPANY
 
 
         ADD_PASSENGER(passenger: PASSENGER)
-            ADD passenger TO THIS.PASSENGERS
+            ADD passenger INTO THIS.PASSENGERS
         END METHOD
 
 
