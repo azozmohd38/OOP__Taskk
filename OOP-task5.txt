@@ -221,7 +221,7 @@ CLASS PAYROLL
             REPEAT
 
                 SET TOTAL TO TOTAL + THIS.EMPLOYEES[i].CALCULATE_MONTHLY_PAY()
-                SET i TO i + 1
+                ASSIGN i TO i + 1
 
             UNTIL i = LENGTH(THIS.EMPLOYEES)
 
