@@ -68,7 +68,7 @@ CLASS DRUM_KIT INHERITS INSTRUMENT
 
     CONSTRUCTOR(brand: TEXT, price: NUMBER, drumPieces: NUMBER)
         SUPER(brand, price)
-        SET DRUM_PIECES TO drumPieces
+        STORE DRUM_PIECES TO drumPieces
     END CONSTRUCTOR
 
     METHODS
