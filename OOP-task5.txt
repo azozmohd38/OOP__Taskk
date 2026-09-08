@@ -615,7 +615,7 @@ CLASS ORDER
 
             REPEAT
 
-                SET TOTAL TO TOTAL + THIS.ITEMS[i].PRICE
+                ASSIGN TOTAL TO TOTAL + THIS.ITEMS[i].PRICE
                 SET i TO i + 1
 
             UNTIL i = LENGTH(THIS.ITEMS)
