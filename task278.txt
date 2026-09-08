@@ -1017,7 +1017,7 @@ CLASS DEALERSHIP
 
 
         ADD_SALE(sale: SALE)
-            ADD sale TO SALES
+            APPEND sale TO SALES
         END METHOD
 
     END METHODS
