@@ -19,7 +19,7 @@ CLASS BOOKSHOP
     METHODS
 
         ADD_BOOK(book: BOOK)
-            ADD book TO THIS.BOOKS
+            ADD book INTO THIS.BOOKS
         END METHOD
 
         ADD_CUSTOMER(customer: CUSTOMER)
