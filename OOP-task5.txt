@@ -1645,7 +1645,7 @@ CLASS LIBRARY
 
     METHODS
         ADD_PUBLICATION(publication: PUBLICATION)
-            ADD publication TO PUBLICATIONS
+            ADD publication INTO PUBLICATIONS
         END METHOD
     END METHODS
 END CLASS
