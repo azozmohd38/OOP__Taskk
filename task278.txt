@@ -1500,7 +1500,7 @@ CLASS TICKETING_PLATFORM
 
         ADD_ARTIST(artist: ARTIST)
 
-            ADD artist TO ARTISTS
+            APPEND artist TO ARTISTS
 
         END METHOD
 
