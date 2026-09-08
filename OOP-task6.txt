@@ -432,7 +432,7 @@ CLASS CUSTOMER_ACCOUNT
 
         DISPLAY_TOTAL_AMOUNT()
             DECLARE TOTAL AS NUMBER
-            SET TOTAL TO 0
+            STORE TOTAL TO 0
 
             FOR EACH bill IN BILLS
             SET TOTAL TO TOTAL + bill.CALCULATE_AMOUNT()
