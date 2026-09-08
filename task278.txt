@@ -264,7 +264,7 @@ CLASS FILM
 
     CONSTRUCTOR(id: NUMBER, title: TEXT, duration: NUMBER, genre: TEXT)
         STORE FILM_ID TO id
-        SET TITLE TO title
+        STORE TITLE TO title
         SET DURATION TO duration
         SET GENRE TO genre
         SET SHOWTIMES TO EMPTY LIST
