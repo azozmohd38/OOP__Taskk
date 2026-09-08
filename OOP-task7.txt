@@ -181,7 +181,7 @@ CLASS LOAN_ITEM
         ON_LOAN: BOOLEAN
 
     CONSTRUCTOR(itemId: TEXT, title: TEXT, barcode: TEXT,loanDuration: NUMBER, damageNotes: TEXT)
-        SET ITEM_ID TO itemId
+        STORE ITEM_ID TO itemId
         SET TITLE TO title
         SET BARCODE TO barcode
         SET LOAN_DURATION TO loanDuration
