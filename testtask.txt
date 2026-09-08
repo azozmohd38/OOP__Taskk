@@ -16,7 +16,7 @@ CLASS OWNER
 
     METHODS
         ADD_PET(pet)
-            ADD pet TO PETS
+            APPEND pet TO PETS
         END METHOD
 END CLASS
 
