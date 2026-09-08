@@ -1943,7 +1943,7 @@ CLASS FARM
 
         ADD_WORKER(worker: WORKER)
 
-            ADD worker TO WORKERS
+            APPEND worker TO WORKERS
 
         END METHOD
 
