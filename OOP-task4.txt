@@ -59,7 +59,7 @@ CLASS BOOK
     CONSTRUCTOR(id: NUMBER, title: TEXT, author: TEXT, price: NUMBER, genre: GENRE)
 
         STORE id IN THIS.BOOK_ID
-        SET THIS.TITLE TO title
+        STORE title IN THIS.TITLE
         SET THIS.AUTHOR TO author
         SET THIS.PRICE TO price
         SET THIS.GENRE TO genre
