@@ -263,7 +263,7 @@ CLASS FILM
         SHOWTIMES: LIST<SHOWTIME>
 
     CONSTRUCTOR(id: NUMBER, title: TEXT, duration: NUMBER, genre: TEXT)
-        SET FILM_ID TO id
+        STORE FILM_ID TO id
         SET TITLE TO title
         SET DURATION TO duration
         SET GENRE TO genre
