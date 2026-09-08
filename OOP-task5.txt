@@ -1531,7 +1531,7 @@ CLASS SHIFT
 
     CONSTRUCTOR(startTime: TEXT, endTime: TEXT, ward: WARD)
         STORE startTime IN START_TIME
-        SET END_TIME TO endTime
+        STORE endTime IN END_TIME
         SET WARD TO ward
     END CONSTRUCTOR
 END CLASS
