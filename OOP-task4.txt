@@ -156,7 +156,7 @@ CLASS ONLINE_PLATFORM
         END METHOD
 
         ADD_STUDENT(student: STUDENT)
-            ADD student TO THIS.STUDENTS
+            ADD student INTO THIS.STUDENTS
         END METHOD
 
         ADD_ATTEMPT(attempt: ATTEMPT)
