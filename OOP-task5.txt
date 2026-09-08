@@ -259,7 +259,7 @@ CLASS EMPLOYEE
 
         CALCULATE_MONTHLY_PAY()
 
-            RETURN 0
+            GIVE BACK 0
 
         END METHOD
 
