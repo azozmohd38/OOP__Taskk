@@ -1484,7 +1484,7 @@ CLASS TICKETING_PLATFORM
 
         ADD_CONCERT(concert: CONCERT)
 
-            ADD concert TO CONCERTS
+            APPEND concert TO CONCERTS
 
         END METHOD
 
