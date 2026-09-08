@@ -1702,7 +1702,7 @@ CLASS BACKLOG
 
         ADD_TASK(task: TASK)
 
-            ADD task TO TASKS
+            APPEND task TO TASKS
 
         END METHOD
 
