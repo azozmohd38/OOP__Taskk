@@ -279,7 +279,7 @@ CLASS SALARIED_EMPLOYEE INHERITS EMPLOYEE
 
     CONSTRUCTOR(name: TEXT, id: NUMBER, hireDate: TEXT, salary: NUMBER)
 
-        CALL SUPER(name, id, hireDate)
+        INVOKE SUPER(name, id, hireDate)
 
         STORE THIS.MONTHLY_SALARY TO salary
 
