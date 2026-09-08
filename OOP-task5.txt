@@ -620,7 +620,7 @@ CLASS ORDER
 
             UNTIL i = LENGTH(THIS.ITEMS)
 
-            RETURN TOTAL
+            GIVE BACK TOTAL
 
         END METHOD
 
