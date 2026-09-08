@@ -24,7 +24,7 @@ CLASS VETERINARY_CLINIC
         END METHOD
 
         ADD_VISIT(visit: VISIT)
-            ADD visit TO VISITS
+            APPEND visit TO VISITS
         END METHOD
 END CLASS
 
