@@ -294,7 +294,7 @@ CLASS THEME_PARK
 
     METHODS
         ADD_RIDE(ride: RIDE)
-        ADD ride TO RIDES
+        APPEND ride TO RIDES
      END METHOD
    END METHODS
 END CLASS
