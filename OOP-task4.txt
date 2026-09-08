@@ -527,7 +527,7 @@ CLASS CO_WORKING_SPACE
 
         ADD_MEMBER(member: MEMBER)
 
-            ADD member TO THIS.MEMBERS
+            ADD member INTO THIS.MEMBERS
 
         END METHOD
 
