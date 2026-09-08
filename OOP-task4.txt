@@ -152,7 +152,7 @@ CLASS ONLINE_PLATFORM
     METHODS
 
         ADD_EXAM(exam: EXAM)
-            ADD exam TO THIS.EXAMS
+            ADD exam INTO THIS.EXAMS
         END METHOD
 
         ADD_STUDENT(student: STUDENT)
