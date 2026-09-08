@@ -1517,7 +1517,7 @@ CLASS WARD
 
     METHODS
         ADD_SHIFT(shift: SHIFT)
-            ADD shift TO SHIFTS
+            ADD shift INTO SHIFTS
         END METHOD
     END METHODS
 END CLASS
