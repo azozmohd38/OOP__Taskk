@@ -1732,7 +1732,7 @@ CLASS DEVELOPER
     CONSTRUCTOR(id: NUMBER, name: TEXT, capacity: NUMBER)
 
         STORE DEVELOPER_ID TO id
-        SET NAME TO name
+        STORE NAME TO name
         SET CAPACITY TO capacity
         SET ASSIGNED_TASKS TO EMPTY LIST
 
