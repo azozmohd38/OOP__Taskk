@@ -1131,7 +1131,7 @@ CLASS ENGINE
 
     CONSTRUCTOR(horsepower: NUMBER, efficiency: NUMBER)
 
-        SET THIS.HORSEPOWER TO horsepower
+        ASSIGN THIS.HORSEPOWER TO horsepower
         SET THIS.FUEL_EFFICIENCY TO efficiency
 
     END CONSTRUCTOR
