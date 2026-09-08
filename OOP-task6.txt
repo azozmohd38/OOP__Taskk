@@ -427,7 +427,7 @@ CLASS CUSTOMER_ACCOUNT
 
     METHODS
         ADD_BILL(bill: BILL)
-        ADD bill TO BILLS
+        APPEND bill TO BILLS
      END METHOD
 
         DISPLAY_TOTAL_AMOUNT()
