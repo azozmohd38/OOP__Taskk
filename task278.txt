@@ -423,7 +423,7 @@ CLASS WAREHOUSE
 
 
         ADD_MOVEMENT(movement: STOCK_MOVEMENT)
-            ADD movement TO MOVEMENTS
+            APPEND movement TO MOVEMENTS
         END METHOD
 
     END METHODS
