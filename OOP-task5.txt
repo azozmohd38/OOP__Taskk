@@ -1829,7 +1829,7 @@ CLASS DEVICE
 
     CONSTRUCTOR(name: TEXT, location: TEXT)
         STORE name IN NAME
-        SET ROOM_LOCATION TO location
+        STORE location IN ROOM_LOCATION
         SET STATUS TO "OFF"
     END CONSTRUCTOR
 
