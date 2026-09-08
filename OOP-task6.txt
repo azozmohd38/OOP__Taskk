@@ -173,7 +173,7 @@ CLASS RUNNING_WORKOUT INHERITS WORKOUT
 
     CONSTRUCTOR(date: DATE, duration: NUMBER, distance: NUMBER, pace: NUMBER)
         SUPER(date, duration)
-        SET DISTANCE TO distance
+        STORE DISTANCE TO distance
         SET PACE TO pace
     END CONSTRUCTOR
 
