@@ -468,7 +468,7 @@ CLASS BILL
         METER_READING: METER_READING
 
     CONSTRUCTOR(billingPeriod: TEXT, dueDate: DATE, meterReading: METER_READING)
-        SET BILLING_PERIOD TO billingPeriod
+        STORE BILLING_PERIOD TO billingPeriod
         SET DUE_DATE TO dueDate
         SET METER_READING TO meterReading
     END CONSTRUCTOR
