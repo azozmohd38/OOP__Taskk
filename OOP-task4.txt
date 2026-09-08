@@ -27,7 +27,7 @@ CLASS BOOKSHOP
         END METHOD
 
         ADD_SALE(sale: SALE)
-            ADD sale TO THIS.SALES
+            ADD sale INTO THIS.SALES
         END METHOD
 
     END METHODS
