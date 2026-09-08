@@ -430,7 +430,7 @@ CLASS ANIMAL
 
         MAKE_SOUND()
 
-            RETURN "UNKNOWN SOUND"
+            GIVE BACK "UNKNOWN SOUND"
 
         END METHOD
 
