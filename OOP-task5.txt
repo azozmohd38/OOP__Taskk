@@ -938,7 +938,7 @@ CLASS BASIC_PLAN INHERITS SUBSCRIPTION
 
             ELSE
 
-                RETURN FALSE
+                GIVE BACK FALSE
 
             END IF
 
