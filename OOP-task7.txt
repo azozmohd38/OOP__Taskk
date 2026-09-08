@@ -45,7 +45,7 @@ CLASS CLAIM
     CONSTRUCTOR(claimNumber: TEXT, dateFiled: DATE, status: TEXT)
         STORE CLAIM_NUMBER TO claimNumber
         STORE DATE_FILED TO dateFiled
-        SET STATUS TO status
+        STORE STATUS TO status
         SET FOLDER TO NEW DOCUMENTATION_FOLDER()
     END CONSTRUCTOR
 
