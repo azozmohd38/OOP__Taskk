@@ -1791,7 +1791,7 @@ CLASS ROOM
 
     METHODS
         ADD_DEVICE(device: DEVICE)
-            ADD device TO DEVICES
+            ADD device INTO DEVICES
         END METHOD
     END METHODS
 END CLASS
