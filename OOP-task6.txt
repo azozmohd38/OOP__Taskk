@@ -435,7 +435,7 @@ CLASS CUSTOMER_ACCOUNT
             STORE TOTAL TO 0
 
             FOR EACH bill IN BILLS
-            SET TOTAL TO TOTAL + bill.CALCULATE_AMOUNT()
+            STORE TOTAL TO TOTAL + bill.CALCULATE_AMOUNT()
           END FOR
             DISPLAY "Total Amount Due: ", TOTAL
       END METHOD
