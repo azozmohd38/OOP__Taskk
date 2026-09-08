@@ -457,7 +457,7 @@ CLASS BIRD INHERITS ANIMAL
 
     CONSTRUCTOR(name: TEXT, age: NUMBER, dietType: TEXT, canFly: BOOLEAN, laysEggs: BOOLEAN)
 
-        CALL SUPER(name, age, dietType)
+        INVOKE SUPER(name, age, dietType)
 
         SET THIS.CAN_FLY TO canFly
         SET THIS.LAYS_EGGS TO laysEggs
