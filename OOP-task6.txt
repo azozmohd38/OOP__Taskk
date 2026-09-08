@@ -34,7 +34,7 @@ CLASS INSTRUMENT
 
     CONSTRUCTOR(brand: TEXT, price: NUMBER)
         STORE BRAND TO brand
-        SET PRICE TO price
+        STORE PRICE TO price
     END CONSTRUCTOR
 
     METHODS
