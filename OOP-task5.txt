@@ -1658,7 +1658,7 @@ CLASS COVER_IMAGE
         HEIGHT: NUMBER
 
     CONSTRUCTOR(path: TEXT, width: NUMBER, height: NUMBER)
-        SET FILE_PATH TO path
+        STORE path IN FILE_PATH
         SET WIDTH TO width
         SET HEIGHT TO height
     END CONSTRUCTOR
