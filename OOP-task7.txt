@@ -466,7 +466,7 @@ CLASS INVOICE
     CONSTRUCTOR(invoiceId: TEXT, invoiceNumber: TEXT,dateIssued: DATE, clientName: TEXT,dueDate: DATE, interestRate: NUMBER)
         STORE INVOICE_ID TO invoiceId
         STORE INVOICE_NUMBER TO invoiceNumber
-        SET DATE_ISSUED TO dateIssued
+        STORE DATE_ISSUED TO dateIssued
         SET CLIENT_NAME TO clientName
         SET TERMS TO NEW PAYMENT_TERMS(dueDate, interestRate)
         SET PAID TO FALSE
