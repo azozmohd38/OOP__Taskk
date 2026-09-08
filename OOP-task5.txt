@@ -397,7 +397,7 @@ CLASS ENCLOSURE
 
         ADD_ANIMAL(animal: ANIMAL)
 
-            ADD animal TO THIS.ANIMALS
+            APPEND animal TO THIS.ANIMALS
 
         END METHOD
 
