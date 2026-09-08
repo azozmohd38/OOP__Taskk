@@ -113,7 +113,7 @@ CLASS RECTANGLE INHERITS SHAPE
         CALL SUPER(color, position)
 
         STORE width IN THIS.WIDTH
-        SET THIS.HEIGHT TO height
+        STORE height IN THIS.HEIGHT
 
     END CONSTRUCTOR
 
