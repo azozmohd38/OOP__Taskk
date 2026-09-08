@@ -1151,7 +1151,7 @@ CLASS VEHICLE
 
     CONSTRUCTOR(plate: TEXT, fuel: NUMBER, engine: ENGINE)
 
-        SET THIS.LICENCE_PLATE TO plate
+        ASSIGN THIS.LICENCE_PLATE TO plate
         SET THIS.FUEL_LEVEL TO fuel
         SET THIS.ENGINE TO engine
 
