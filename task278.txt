@@ -418,7 +418,7 @@ CLASS WAREHOUSE
 
 
         ADD_VENDOR(vendor: VENDOR)
-            ADD vendor TO VENDORS
+            APPEND vendor TO VENDORS
         END METHOD
 
 
