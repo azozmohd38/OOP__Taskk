@@ -1747,7 +1747,7 @@ CLASS DEVELOPER
 
             IF LENGTH(ASSIGNED_TASKS) LESS THAN CAPACITY THEN
 
-                RETURN TRUE
+                GIVE BACK TRUE
 
             ELSE
 
