@@ -51,7 +51,7 @@ CLASS GUITAR INHERITS INSTRUMENT
 
     CONSTRUCTOR(brand: TEXT, price: NUMBER, strings: NUMBER)
         SUPER(brand, price)
-        SET STRINGS TO strings
+        STORE STRINGS TO strings
     END CONSTRUCTOR
 
     METHODS
