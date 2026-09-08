@@ -851,7 +851,7 @@ CLASS POLICYHOLDER
     METHODS
 
         ADD_POLICY(policy: POLICY)
-            ADD policy TO POLICIES
+            APPEND policy TO POLICIES
         END METHOD
 
     END METHODS
