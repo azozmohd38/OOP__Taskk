@@ -839,7 +839,7 @@ CLASS USER_ACCOUNT
 
         ADD_WATCH_RECORD(record: WATCH_RECORD)
 
-            ADD record TO THIS.WATCH_HISTORY
+            APPEND record TO THIS.WATCH_HISTORY
 
         END METHOD
 
